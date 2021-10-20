@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="对 javaScript 事件冒泡与事件捕获的再学习DOM 树结构我们在浏览器上会看见一颗 dom 树，这样的树状结构决定了事件的冒泡与捕获。 1234567891011121314151617&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;  &lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对javaScript事件冒泡与事件捕获的再学习">
+<meta property="og:url" content="http://example.com/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Jealh&#39;s Blog">
+<meta property="og:description" content="对 javaScript 事件冒泡与事件捕获的再学习DOM 树结构我们在浏览器上会看见一颗 dom 树，这样的树状结构决定了事件的冒泡与捕获。 1234567891011121314151617&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;  &lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&amp;quo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/bubbling-capturing.png">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/div.png">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/output.png">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202333.png">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202341.png">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202353.png">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110210005.png">
+<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202356.png">
+<meta property="article:published_time" content="2021-10-20T16:39:16.000Z">
+<meta property="article:modified_time" content="2021-10-20T16:42:45.975Z">
+<meta property="article:author" content="Jealh">
+<meta property="article:tag" content="Event">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/bubbling-capturing.png">
+
+<link rel="canonical" href="http://example.com/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>对javaScript事件冒泡与事件捕获的再学习 | Jealh's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jealh's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jealh's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-address-card fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jealh">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jealh's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对javaScript事件冒泡与事件捕获的再学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-21 00:39:16 / 修改时间：00:42:45" itemprop="dateCreated datePublished" datetime="2021-10-21T00:39:16+08:00">2021-10-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="对-javaScript-事件冒泡与事件捕获的再学习"><a href="#对-javaScript-事件冒泡与事件捕获的再学习" class="headerlink" title="对 javaScript 事件冒泡与事件捕获的再学习"></a>对 javaScript 事件冒泡与事件捕获的再学习</h1><h2 id="DOM-树结构"><a href="#DOM-树结构" class="headerlink" title="DOM 树结构"></a>DOM 树结构</h2><p>我们在浏览器上会看见一颗 dom 树，这样的树状结构决定了事件的冒泡与捕获。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello Github Action<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;out-A&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;out-B&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;out-C&quot;</span>&gt;</span>hello, I&#x27;am C<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="事件捕获与事件冒泡流程"><a href="#事件捕获与事件冒泡流程" class="headerlink" title="事件捕获与事件冒泡流程"></a>事件捕获与事件冒泡流程</h2><p><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/bubbling-capturing.png" alt="事件冒泡与捕获"></p>
+<h4 id="首先，事件冒泡捕获建立在父子节点绑定了相同类型的事件。比如：都绑定了-onclick-点击事件。"><a href="#首先，事件冒泡捕获建立在父子节点绑定了相同类型的事件。比如：都绑定了-onclick-点击事件。" class="headerlink" title="首先，事件冒泡捕获建立在父子节点绑定了相同类型的事件。比如：都绑定了 onclick 点击事件。"></a>首先，事件冒泡捕获建立在父子节点绑定了相同类型的事件。比如：都绑定了 onclick 点击事件。</h4><h5 id="1-当我们点击最里面的-div-标签时，"><a href="#1-当我们点击最里面的-div-标签时，" class="headerlink" title="1.当我们点击最里面的 div 标签时，"></a>1.当我们点击最里面的 div 标签时，</h5><p>会先沿着 window-&gt;document-&gt;parentNodes-&gt;EventTarget 路线进行事件捕获，在捕获时会进行对每个 html 对象询问是否绑定了该事件的 listener,如果有则执行它。而事件冒泡则与上面路线相反，但询问行为相同。 ######一般我们给 html 元素添加事件时，会使用 HTMLElement.addEventListener(type, listener, useCapture)给其添加事件处理函数，这里的参数详见<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/EventTarget/addEventListener">EventTarget.addEventListener</a>。需要特别说明的是第三个参数:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">useCapture:boolean</span><br><span class="line"></span><br><span class="line">OR</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">	<span class="attr">capture</span>:boolean,</span><br><span class="line">	<span class="attr">once</span>:boolean,</span><br><span class="line">	<span class="attr">passive</span>:boolean</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的 useCapture 以及 capture 就是设置该事件 listener 是否会在捕获阶段触发，默认为 false。</p>
+<h5 id="2-我们以如下例子为例："><a href="#2-我们以如下例子为例：" class="headerlink" title="2.我们以如下例子为例："></a>2.我们以如下例子为例：</h5><h6 id="这里绘制一个三层嵌套的-div，并给它们添加点击事件。"><a href="#这里绘制一个三层嵌套的-div，并给它们添加点击事件。" class="headerlink" title="这里绘制一个三层嵌套的 div，并给它们添加点击事件。"></a>这里绘制一个三层嵌套的 div，并给它们添加点击事件。</h6><p><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/div.png" alt="div"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> diva = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.out-A&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> divb = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.out-B&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> divc = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.out-C&quot;</span>);</span><br><span class="line">diva.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">divb.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">divc.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;C&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>然后我们点击 C,出现如下结果：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/output.png" alt="output"><br>可以看见点击 C 后出现了 C-&gt;B-&gt;A 的输出顺序，为什么会出现 CBA 的输出顺序呢，因为我们在添加事件时，使用了 capture 的默认值 false,即在事件捕获阶段不会触发事件处理函数。</p>
+<h6 id="将-capture-的值设置为-true"><a href="#将-capture-的值设置为-true" class="headerlink" title="将 capture 的值设置为 true"></a>将 capture 的值设置为 true</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">diva.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line">divb.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line">divc.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;C&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202333.png"><br>这里可以看见输出结果变为了 ABC，这就是从父节点到 EventTarget 节点的捕获。同时我们也可以发现，如果只给节点添加一个事件处理，这样只会进行捕获或者冒泡。所以下面我们给一个节点添加两个 click 事件，并且把其中一个的 capture 设置为 true,另一个为 false.</p>
+<h6 id="给一个节点添加两个-click-事件，并且把其中一个的-capture-设置为-true-另一个为-false"><a href="#给一个节点添加两个-click-事件，并且把其中一个的-capture-设置为-true-另一个为-false" class="headerlink" title="给一个节点添加两个 click 事件，并且把其中一个的 capture 设置为 true,另一个为 false."></a>给一个节点添加两个 click 事件，并且把其中一个的 capture 设置为 true,另一个为 false.</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">diva.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;A:capture=true&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line">divb.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;B:capture=true&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line">divc.addEventListener(</span><br><span class="line">  <span class="string">&quot;click&quot;</span>,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;C:capture=true&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="literal">true</span></span><br><span class="line">);</span><br><span class="line"><span class="comment">//   默认false</span></span><br><span class="line">diva.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;A:capture=false&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">divb.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;B:capture=false&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line">divc.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;C:capture=false&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我们再次点击 C,输出结果如下：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202341.png"><br>看看，这里的结果表示同时出现了事件捕获与事件冒泡。<br><font color="green">到了这里，想必大家对于事件的捕获与冒泡流程有了一定的了解吧。</font>下面我们再来聊聊 Event.stopPropagation()与 Event.preventDefault()</p>
+<h2 id="Event-stopPropagation-与-Event-preventDefault"><a href="#Event-stopPropagation-与-Event-preventDefault" class="headerlink" title="Event.stopPropagation()与 Event.preventDefault()"></a>Event.stopPropagation()与 Event.preventDefault()</h2><h4 id="Event-stopPropagation"><a href="#Event-stopPropagation" class="headerlink" title="Event.stopPropagation()"></a>Event.stopPropagation()</h4><h6 id="同样是上面的例子。我们给-A-capture-true（捕获阶段）的那个事件处理加上-stopPropagation-看看下面的输出："><a href="#同样是上面的例子。我们给-A-capture-true（捕获阶段）的那个事件处理加上-stopPropagation-看看下面的输出：" class="headerlink" title="同样是上面的例子。我们给 A:capture=true（捕获阶段）的那个事件处理加上 stopPropagation().看看下面的输出："></a>同样是上面的例子。我们给 A:capture=true（捕获阶段）的那个事件处理加上 stopPropagation().看看下面的输出：</h6><p><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202353.png"></p>
+<h6 id="只输出了捕获阶段的-A-处理函数，后面子节点的事件函数都没有触发。那我们在冒泡阶段添加这一行又会发生什么呢？下面将添加-stopPropagation-到-C-的冒泡处理函数里，即在-C-capture-false-里面。下面是输出结果："><a href="#只输出了捕获阶段的-A-处理函数，后面子节点的事件函数都没有触发。那我们在冒泡阶段添加这一行又会发生什么呢？下面将添加-stopPropagation-到-C-的冒泡处理函数里，即在-C-capture-false-里面。下面是输出结果：" class="headerlink" title="只输出了捕获阶段的 A 处理函数，后面子节点的事件函数都没有触发。那我们在冒泡阶段添加这一行又会发生什么呢？下面将添加 stopPropagation 到 C 的冒泡处理函数里，即在 C:capture=false 里面。下面是输出结果："></a>只输出了捕获阶段的 A 处理函数，后面子节点的事件函数都没有触发。那我们在冒泡阶段添加这一行又会发生什么呢？下面将添加 stopPropagation 到 C 的冒泡处理函数里，即在 C:capture=false 里面。下面是输出结果：</h6><p><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110210005.png"></p>
+<h6 id="同样的，事件捕获与事件冒泡流程被截断了。"><a href="#同样的，事件捕获与事件冒泡流程被截断了。" class="headerlink" title="同样的，事件捕获与事件冒泡流程被截断了。"></a>同样的，事件捕获与事件冒泡流程被截断了。</h6><h5 id="看到这里，想必明白了吧，stopPropagation-就好比一把‘刀’，你把它添加到什么阶段，那么这个阶段后面的就会被截去。"><a href="#看到这里，想必明白了吧，stopPropagation-就好比一把‘刀’，你把它添加到什么阶段，那么这个阶段后面的就会被截去。" class="headerlink" title="看到这里，想必明白了吧，stopPropagation 就好比一把‘刀’，你把它添加到什么阶段，那么这个阶段后面的就会被截去。"></a>看到这里，想必明白了吧，stopPropagation 就好比一把‘刀’，你把它添加到什么阶段，那么这个阶段后面的就会被截去。</h5><ul>
+<li>而整个流程是：</li>
+</ul>
+<h6 id="事件捕获到事件冒泡"><a href="#事件捕获到事件冒泡" class="headerlink" title="事件捕获到事件冒泡"></a>事件捕获到事件冒泡</h6><h6 id="父节点到-EventTarget-节点再到父节点"><a href="#父节点到-EventTarget-节点再到父节点" class="headerlink" title="父节点到 EventTarget 节点再到父节点"></a>父节点到 EventTarget 节点再到父节点</h6><h4 id="Event-preventDefault"><a href="#Event-preventDefault" class="headerlink" title="Event.preventDefault()"></a>Event.preventDefault()</h4><p>那把上面的改成 preventDefault 又会是怎样的结果呢？那就试试看咯：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110202356.png"><br>没有影响！！！preventDefault 在没有对事件捕获产生影响，那冒泡阶段呢？也没有影响。所以 preventDefault 只是单纯的阻止了 html 元素的默认事件，比如一个 a 标签能够跳转链接，加上 preventDefault 后就不能跳转了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h6 id="我们可以看到，可以使用-stopPropagation-阻止事件的冒泡。通常我们在给-html-元素添加事件时，一般都会使用-capture-的默认值：false-这样就只会在冒泡阶段触发事件处理函数，这样通常我们只需要在-capture-为-false-的情况下，给-EventTarget-元素添加-stopPropagation-就行了，这样，无论在捕获阶段还是在冒泡阶段都只会触发-EventTarget-的事件处理函数，从而减少不必要的副作用。"><a href="#我们可以看到，可以使用-stopPropagation-阻止事件的冒泡。通常我们在给-html-元素添加事件时，一般都会使用-capture-的默认值：false-这样就只会在冒泡阶段触发事件处理函数，这样通常我们只需要在-capture-为-false-的情况下，给-EventTarget-元素添加-stopPropagation-就行了，这样，无论在捕获阶段还是在冒泡阶段都只会触发-EventTarget-的事件处理函数，从而减少不必要的副作用。" class="headerlink" title="我们可以看到，可以使用 stopPropagation 阻止事件的冒泡。通常我们在给 html 元素添加事件时，一般都会使用 capture 的默认值：false,这样就只会在冒泡阶段触发事件处理函数，这样通常我们只需要在 capture 为 false 的情况下，给 EventTarget 元素添加 stopPropagation 就行了，这样，无论在捕获阶段还是在冒泡阶段都只会触发 EventTarget 的事件处理函数，从而减少不必要的副作用。"></a>我们可以看到，可以使用 stopPropagation 阻止事件的冒泡。通常我们在给 html 元素添加事件时，一般都会使用 capture 的默认值：false,这样就只会在冒泡阶段触发事件处理函数，这样通常我们只需要在 capture 为 false 的情况下，给 EventTarget 元素添加 stopPropagation 就行了，这样，无论在捕获阶段还是在冒泡阶段都只会触发 EventTarget 的事件处理函数，从而减少不必要的副作用。</h6><p>参考：<a target="_blank" rel="noopener" href="https://web.dev/eventing-deepdive/">JavaScript eventing deep dive</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Event/" rel="tag"># Event</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/13/numpy%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9/" rel="prev" title="numpy条件选择">
+      <i class="fa fa-chevron-left"></i> numpy条件选择
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9-javaScript-%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">对 javaScript 事件冒泡与事件捕获的再学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM-%E6%A0%91%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">DOM 树结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E4%B8%8E%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">事件捕获与事件冒泡流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A6%96%E5%85%88%EF%BC%8C%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E6%8D%95%E8%8E%B7%E5%BB%BA%E7%AB%8B%E5%9C%A8%E7%88%B6%E5%AD%90%E8%8A%82%E7%82%B9%E7%BB%91%E5%AE%9A%E4%BA%86%E7%9B%B8%E5%90%8C%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%BA%8B%E4%BB%B6%E3%80%82%E6%AF%94%E5%A6%82%EF%BC%9A%E9%83%BD%E7%BB%91%E5%AE%9A%E4%BA%86-onclick-%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E3%80%82"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">首先，事件冒泡捕获建立在父子节点绑定了相同类型的事件。比如：都绑定了 onclick 点击事件。</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E5%BD%93%E6%88%91%E4%BB%AC%E7%82%B9%E5%87%BB%E6%9C%80%E9%87%8C%E9%9D%A2%E7%9A%84-div-%E6%A0%87%E7%AD%BE%E6%97%B6%EF%BC%8C"><span class="nav-number">1.2.0.1.1.</span> <span class="nav-text">1.当我们点击最里面的 div 标签时，</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E6%88%91%E4%BB%AC%E4%BB%A5%E5%A6%82%E4%B8%8B%E4%BE%8B%E5%AD%90%E4%B8%BA%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.2.0.1.2.</span> <span class="nav-text">2.我们以如下例子为例：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%BF%99%E9%87%8C%E7%BB%98%E5%88%B6%E4%B8%80%E4%B8%AA%E4%B8%89%E5%B1%82%E5%B5%8C%E5%A5%97%E7%9A%84-div%EF%BC%8C%E5%B9%B6%E7%BB%99%E5%AE%83%E4%BB%AC%E6%B7%BB%E5%8A%A0%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E3%80%82"><span class="nav-number">1.2.0.1.2.1.</span> <span class="nav-text">这里绘制一个三层嵌套的 div，并给它们添加点击事件。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B0%86-capture-%E7%9A%84%E5%80%BC%E8%AE%BE%E7%BD%AE%E4%B8%BA-true"><span class="nav-number">1.2.0.1.2.2.</span> <span class="nav-text">将 capture 的值设置为 true</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%99%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9%E6%B7%BB%E5%8A%A0%E4%B8%A4%E4%B8%AA-click-%E4%BA%8B%E4%BB%B6%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%8A%8A%E5%85%B6%E4%B8%AD%E4%B8%80%E4%B8%AA%E7%9A%84-capture-%E8%AE%BE%E7%BD%AE%E4%B8%BA-true-%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%BA-false"><span class="nav-number">1.2.0.1.2.3.</span> <span class="nav-text">给一个节点添加两个 click 事件，并且把其中一个的 capture 设置为 true,另一个为 false.</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event-stopPropagation-%E4%B8%8E-Event-preventDefault"><span class="nav-number">1.3.</span> <span class="nav-text">Event.stopPropagation()与 Event.preventDefault()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Event-stopPropagation"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">Event.stopPropagation()</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%90%8C%E6%A0%B7%E6%98%AF%E4%B8%8A%E9%9D%A2%E7%9A%84%E4%BE%8B%E5%AD%90%E3%80%82%E6%88%91%E4%BB%AC%E7%BB%99-A-capture-true%EF%BC%88%E6%8D%95%E8%8E%B7%E9%98%B6%E6%AE%B5%EF%BC%89%E7%9A%84%E9%82%A3%E4%B8%AA%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%8A%A0%E4%B8%8A-stopPropagation-%E7%9C%8B%E7%9C%8B%E4%B8%8B%E9%9D%A2%E7%9A%84%E8%BE%93%E5%87%BA%EF%BC%9A"><span class="nav-number">1.3.0.1.0.1.</span> <span class="nav-text">同样是上面的例子。我们给 A:capture&#x3D;true（捕获阶段）的那个事件处理加上 stopPropagation().看看下面的输出：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8F%AA%E8%BE%93%E5%87%BA%E4%BA%86%E6%8D%95%E8%8E%B7%E9%98%B6%E6%AE%B5%E7%9A%84-A-%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%8C%E5%90%8E%E9%9D%A2%E5%AD%90%E8%8A%82%E7%82%B9%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%87%BD%E6%95%B0%E9%83%BD%E6%B2%A1%E6%9C%89%E8%A7%A6%E5%8F%91%E3%80%82%E9%82%A3%E6%88%91%E4%BB%AC%E5%9C%A8%E5%86%92%E6%B3%A1%E9%98%B6%E6%AE%B5%E6%B7%BB%E5%8A%A0%E8%BF%99%E4%B8%80%E8%A1%8C%E5%8F%88%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88%E5%91%A2%EF%BC%9F%E4%B8%8B%E9%9D%A2%E5%B0%86%E6%B7%BB%E5%8A%A0-stopPropagation-%E5%88%B0-C-%E7%9A%84%E5%86%92%E6%B3%A1%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%E9%87%8C%EF%BC%8C%E5%8D%B3%E5%9C%A8-C-capture-false-%E9%87%8C%E9%9D%A2%E3%80%82%E4%B8%8B%E9%9D%A2%E6%98%AF%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%EF%BC%9A"><span class="nav-number">1.3.0.1.0.2.</span> <span class="nav-text">只输出了捕获阶段的 A 处理函数，后面子节点的事件函数都没有触发。那我们在冒泡阶段添加这一行又会发生什么呢？下面将添加 stopPropagation 到 C 的冒泡处理函数里，即在 C:capture&#x3D;false 里面。下面是输出结果：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%90%8C%E6%A0%B7%E7%9A%84%EF%BC%8C%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E4%B8%8E%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E6%B5%81%E7%A8%8B%E8%A2%AB%E6%88%AA%E6%96%AD%E4%BA%86%E3%80%82"><span class="nav-number">1.3.0.1.0.3.</span> <span class="nav-text">同样的，事件捕获与事件冒泡流程被截断了。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9C%8B%E5%88%B0%E8%BF%99%E9%87%8C%EF%BC%8C%E6%83%B3%E5%BF%85%E6%98%8E%E7%99%BD%E4%BA%86%E5%90%A7%EF%BC%8CstopPropagation-%E5%B0%B1%E5%A5%BD%E6%AF%94%E4%B8%80%E6%8A%8A%E2%80%98%E5%88%80%E2%80%99%EF%BC%8C%E4%BD%A0%E6%8A%8A%E5%AE%83%E6%B7%BB%E5%8A%A0%E5%88%B0%E4%BB%80%E4%B9%88%E9%98%B6%E6%AE%B5%EF%BC%8C%E9%82%A3%E4%B9%88%E8%BF%99%E4%B8%AA%E9%98%B6%E6%AE%B5%E5%90%8E%E9%9D%A2%E7%9A%84%E5%B0%B1%E4%BC%9A%E8%A2%AB%E6%88%AA%E5%8E%BB%E3%80%82"><span class="nav-number">1.3.0.1.1.</span> <span class="nav-text">看到这里，想必明白了吧，stopPropagation 就好比一把‘刀’，你把它添加到什么阶段，那么这个阶段后面的就会被截去。</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E5%88%B0%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="nav-number">1.3.0.1.1.1.</span> <span class="nav-text">事件捕获到事件冒泡</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%88%B6%E8%8A%82%E7%82%B9%E5%88%B0-EventTarget-%E8%8A%82%E7%82%B9%E5%86%8D%E5%88%B0%E7%88%B6%E8%8A%82%E7%82%B9"><span class="nav-number">1.3.0.1.1.2.</span> <span class="nav-text">父节点到 EventTarget 节点再到父节点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Event-preventDefault"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">Event.preventDefault()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-stopPropagation-%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%86%92%E6%B3%A1%E3%80%82%E9%80%9A%E5%B8%B8%E6%88%91%E4%BB%AC%E5%9C%A8%E7%BB%99-html-%E5%85%83%E7%B4%A0%E6%B7%BB%E5%8A%A0%E4%BA%8B%E4%BB%B6%E6%97%B6%EF%BC%8C%E4%B8%80%E8%88%AC%E9%83%BD%E4%BC%9A%E4%BD%BF%E7%94%A8-capture-%E7%9A%84%E9%BB%98%E8%AE%A4%E5%80%BC%EF%BC%9Afalse-%E8%BF%99%E6%A0%B7%E5%B0%B1%E5%8F%AA%E4%BC%9A%E5%9C%A8%E5%86%92%E6%B3%A1%E9%98%B6%E6%AE%B5%E8%A7%A6%E5%8F%91%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%8C%E8%BF%99%E6%A0%B7%E9%80%9A%E5%B8%B8%E6%88%91%E4%BB%AC%E5%8F%AA%E9%9C%80%E8%A6%81%E5%9C%A8-capture-%E4%B8%BA-false-%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E7%BB%99-EventTarget-%E5%85%83%E7%B4%A0%E6%B7%BB%E5%8A%A0-stopPropagation-%E5%B0%B1%E8%A1%8C%E4%BA%86%EF%BC%8C%E8%BF%99%E6%A0%B7%EF%BC%8C%E6%97%A0%E8%AE%BA%E5%9C%A8%E6%8D%95%E8%8E%B7%E9%98%B6%E6%AE%B5%E8%BF%98%E6%98%AF%E5%9C%A8%E5%86%92%E6%B3%A1%E9%98%B6%E6%AE%B5%E9%83%BD%E5%8F%AA%E4%BC%9A%E8%A7%A6%E5%8F%91-EventTarget-%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0%EF%BC%8C%E4%BB%8E%E8%80%8C%E5%87%8F%E5%B0%91%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E5%89%AF%E4%BD%9C%E7%94%A8%E3%80%82"><span class="nav-number">1.4.0.0.0.1.</span> <span class="nav-text">我们可以看到，可以使用 stopPropagation 阻止事件的冒泡。通常我们在给 html 元素添加事件时，一般都会使用 capture 的默认值：false,这样就只会在冒泡阶段触发事件处理函数，这样通常我们只需要在 capture 为 false 的情况下，给 EventTarget 元素添加 stopPropagation 就行了，这样，无论在捕获阶段还是在冒泡阶段都只会触发 EventTarget 的事件处理函数，从而减少不必要的副作用。</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jealh"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jealh</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jealh-h" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Jealh-h" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1620175472@qq.com" title="E-Mail → mailto:1620175472@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jealh</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '06Q5US9u81vpeARmCf4LIxPm-gzGzoHsz',
+      appKey     : 'MU9IGOYetUaGvt99dzlmgQTm',
+      placeholder: "说一句吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
