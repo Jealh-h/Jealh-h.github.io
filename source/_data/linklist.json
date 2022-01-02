@@ -1,9 +1,14 @@
 [
-    {
-      "nickname": "ZCW",
-      "avatar": "http://sherry.formeky.xyz:8090/upload/2021/09/QQ%E5%9B%BE%E7%89%8720210629151630-d1748408bc4d4d3b995abaf38440b71d.jpg",
-      "site": "http://sherry.formeky.xyz:8090/",
-      "descp":"后端工程师"
-    }
+  {
+    "nickname": "ZCW",
+    "avatar": "http://sherry.formeky.xyz:8090/upload/2021/09/QQ%E5%9B%BE%E7%89%8720210629151630-d1748408bc4d4d3b995abaf38440b71d.jpg",
+    "site": "http://sherry.formeky.xyz:8090/",
+    "descp": "后端工程师"
+  },
+  {
+    "nickname": "LJC",
+    "site": "https://lengthmin.me/",
+    "descp": "这大概就是大佬吧",
+    "avatar": "https://lengthmin.me/images/avatar.png"
+  }
 ]
-  
