@@ -3,11 +3,11 @@
   <title>Jealh&#39;s Blog</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://jealh.xyz/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2021-12-07T14:24:14.843Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://jealh.xyz/"/>
+  <updated>2022-01-02T17:47:00.343Z</updated>
+  <id>https://jealh.xyz/</id>
   
   <author>
     <name>Jealh</name>
@@ -17,9 +17,31 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>2021年终总结</title>
+    <link href="https://jealh.xyz/2022/01/03/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    <id>https://jealh.xyz/2022/01/03/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</id>
+    <published>2022-01-02T17:44:31.000Z</published>
+    <updated>2022-01-02T17:47:00.343Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>感想： 时间过得真的很快，而需要学习的东西一直在变多，从大二到大三的，慢慢地就觉得自己接触的领域所渺小。而这一年里感受最深的总还是时间不够的样子。</p></blockquote><hr><span id="more"></span><h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>在学习上，尽管不是所有课程安排得很妥当，但也有一些课程让我受益良多。记忆比较深刻得还是暑假前的 flutter 课程吧。那一次面临得挑战是未知、课程时间短。而最终的任务是使用 flutter 完成一个 APP。而我做的就是一个记笔记的 APP 了<a href="https://github.com/Jealh-h/lightNote">(https://github.com/Jealh-h/lightNote)</a>，尽管功能不是那么完善，但这次让我体验到了全栈开发的一些困难吧，得益于 eggjs 框架能让我一个不太懂后端的轻松一点…….。数据分析这门课也挺好的，至少让我在机器学习方面能够调库了，能训练模型了。特别是在最后的房价预测的项目上，从数据获取到数据分析再到模型预测，这一套下来让我觉得 python 更加强大了。其次就是数据可视化了，虽然说理论课着实有一点无聊，好在实验课还比较有趣，这次让我体验了一把 d3js,给我的感觉就是 jquery 的一个兄弟一样，只不过更加适合于绘制图形。最后说说编译原理吧，这门课就感觉比较神奇吧？！从词法分析到语法分析，再到语义分析等等。都感觉有很强的理论支撑。单就对于给定的 test 来说，做一个词法分析、语法分析的工作量就挺大的（求 NFA、DFA,改写 LL(1)文法等等），可见哪些语言之父是有多 🐂 了。</p><h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><p>在技术栈上，对于 react 的使用更加熟悉了，尽管自己想用 vue 写一个个人博客，但写到一半还是放弃了（可能那时候还不知道一些强大的 nodejs 框架吧）。所以还是 hexo 香啊，就这样发现了写博客是一件强化记忆的事情。在这一年里，虽然在知识广度上有了提升，但在深度上感觉还学提升。比较纠结的还是对于一些工具不知到是要会到什么层度吧，比如 webpack,vite 是会按照官方文档配置，还是能熟练地写出来。暑期在实验室期间，把原有的 oj3 由 webpack 构建改成了 vite,只能说 vite 真快。使用 react 重写了一个会议室管理系统端。而对于微信小程序那边，虽然没有获得奖，但也收获了一些开发经验吧。而对于一些其他知识，比如 rust、electron、wasm、以及游戏开发都是很想学的，但都会感觉自由的时间太少，而学习又需要耗费大量时间。所以还需要控制自己、让自己珍惜时间啊。</p><h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><p>希望自己记忆力好一点。<br>每一天都要崭新的一点。<br>对渴望的事情执着一点。<br>让自己的想法丰富一点。</p><p><strong>就上面那么亿点就够了</strong></p>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;感想： 时间过得真的很快，而需要学习的东西一直在变多，从大二到大三的，慢慢地就觉得自己接触的领域所渺小。而这一年里感受最深的总还是时间不够的样子。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;</summary>
+    
+    
+    
+    <category term="年终总结" scheme="https://jealh.xyz/categories/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>谈谈cookie、session与token(jwt)</title>
-    <link href="http://example.com/2021/12/07/%E8%B0%88%E8%B0%88cookie%E3%80%81session%E4%B8%8Etoken-jwt/"/>
-    <id>http://example.com/2021/12/07/%E8%B0%88%E8%B0%88cookie%E3%80%81session%E4%B8%8Etoken-jwt/</id>
+    <link href="https://jealh.xyz/2021/12/07/%E8%B0%88%E8%B0%88cookie%E3%80%81session%E4%B8%8Etoken-jwt/"/>
+    <id>https://jealh.xyz/2021/12/07/%E8%B0%88%E8%B0%88cookie%E3%80%81session%E4%B8%8Etoken-jwt/</id>
     <published>2021-12-07T14:04:05.000Z</published>
     <updated>2021-12-07T14:24:14.843Z</updated>
     
@@ -33,15 +55,15 @@
     
     
     
-    <category term="web" scheme="http://example.com/categories/web/"/>
+    <category term="web" scheme="https://jealh.xyz/categories/web/"/>
     
     
   </entry>
   
   <entry>
     <title>一次base64指令的powershell</title>
-    <link href="http://example.com/2021/11/18/%E4%B8%80%E6%AC%A1base64%E6%8C%87%E4%BB%A4%E7%9A%84powershell/"/>
-    <id>http://example.com/2021/11/18/%E4%B8%80%E6%AC%A1base64%E6%8C%87%E4%BB%A4%E7%9A%84powershell/</id>
+    <link href="https://jealh.xyz/2021/11/18/%E4%B8%80%E6%AC%A1base64%E6%8C%87%E4%BB%A4%E7%9A%84powershell/"/>
+    <id>https://jealh.xyz/2021/11/18/%E4%B8%80%E6%AC%A1base64%E6%8C%87%E4%BB%A4%E7%9A%84powershell/</id>
     <published>2021-11-18T14:33:12.000Z</published>
     <updated>2021-11-19T03:59:19.972Z</updated>
     
@@ -52,15 +74,15 @@
     
     
     
-    <category term="一些趣事的🌟" scheme="http://example.com/categories/%E4%B8%80%E4%BA%9B%E8%B6%A3%E4%BA%8B%E7%9A%84%F0%9F%8C%9F/"/>
+    <category term="一些趣事的🌟" scheme="https://jealh.xyz/categories/%E4%B8%80%E4%BA%9B%E8%B6%A3%E4%BA%8B%E7%9A%84%F0%9F%8C%9F/"/>
     
     
   </entry>
   
   <entry>
     <title>使用github actions进行轻服务的页面部署</title>
-    <link href="http://example.com/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/"/>
-    <id>http://example.com/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/</id>
+    <link href="https://jealh.xyz/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/"/>
+    <id>https://jealh.xyz/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/</id>
     <published>2021-10-22T02:22:14.000Z</published>
     <updated>2021-10-22T02:26:13.156Z</updated>
     
@@ -76,14 +98,14 @@
     
     
     
-    <category term="deploy qingfuwu" scheme="http://example.com/tags/deploy-qingfuwu/"/>
+    <category term="deploy qingfuwu" scheme="https://jealh.xyz/tags/deploy-qingfuwu/"/>
     
   </entry>
   
   <entry>
     <title>对javaScript事件冒泡与事件捕获的再学习</title>
-    <link href="http://example.com/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/"/>
-    <id>http://example.com/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/</id>
+    <link href="https://jealh.xyz/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://jealh.xyz/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/</id>
     <published>2021-10-20T16:39:16.000Z</published>
     <updated>2021-10-20T16:42:45.975Z</updated>
     
@@ -95,17 +117,17 @@
     
     
     
-    <category term="javascript" scheme="http://example.com/categories/javascript/"/>
+    <category term="javascript" scheme="https://jealh.xyz/categories/javascript/"/>
     
     
-    <category term="Event" scheme="http://example.com/tags/Event/"/>
+    <category term="Event" scheme="https://jealh.xyz/tags/Event/"/>
     
   </entry>
   
   <entry>
     <title>numpy条件选择</title>
-    <link href="http://example.com/2021/10/13/numpy%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9/"/>
-    <id>http://example.com/2021/10/13/numpy%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9/</id>
+    <link href="https://jealh.xyz/2021/10/13/numpy%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9/"/>
+    <id>https://jealh.xyz/2021/10/13/numpy%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9/</id>
     <published>2021-10-12T16:38:35.000Z</published>
     <updated>2021-10-12T16:47:23.125Z</updated>
     
@@ -117,17 +139,17 @@
     
     
     
-    <category term="python" scheme="http://example.com/categories/python/"/>
+    <category term="python" scheme="https://jealh.xyz/categories/python/"/>
     
     
-    <category term="numpy" scheme="http://example.com/tags/numpy/"/>
+    <category term="numpy" scheme="https://jealh.xyz/tags/numpy/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://example.com/2021/09/24/hello-world/"/>
-    <id>http://example.com/2021/09/24/hello-world/</id>
+    <link href="https://jealh.xyz/2021/09/24/hello-world/"/>
+    <id>https://jealh.xyz/2021/09/24/hello-world/</id>
     <published>2021-09-24T11:42:41.093Z</published>
     <updated>2021-10-01T13:08:05.434Z</updated>
     
