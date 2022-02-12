@@ -14,10 +14,12 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css">
+  <script src="//cdn.jsdelivr.net/npm/pace-js@1/pace.min.js"></script>
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"jealh.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"jealh.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":280},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="使用 github actions 进行轻服务的页面托管首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。看看效果 1.github 创建仓库，配置.github&#x2F;workflow&#x2F;*.yml,同时设置 secrets 变量 ACCESS_TOKEN 与 SER">
@@ -196,6 +198,7 @@
     <span>0%</span>
   </div>
   <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -274,14 +277,24 @@
 <li><h4 id="配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID"><a href="#配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID" class="headerlink" title="配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID"></a>配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID</h4></li>
 </ul>
 <ol>
-<li>ACCESS_TOKEN<br>官方已经写得很详细了<a target="_blank" rel="noopener" href="https://qingfuwu.cn/docs/openapi/personaltoken.html#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81">创建和管理访问凭证</a><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221004.png"><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221006.png"></li>
-<li>SERVICE_ID<br>登录轻服务后<a target="_blank" rel="noopener" href="https://qingfuwu.cn/dashboard">https://qingfuwu.cn/dashboard</a>，在首页就能看见你创建的所有服务。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220950.png"><br>这里就选择 hello world 这个服务，点击进去，再进入到设置里面就可以看见 SERVICE_ID.当然这里你也可以直接点击页面托管，上传压缩文件手动部署。<img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220952.png"></li>
-<li>添加变量到 secrets 里面，这里我已经添加上了。这里要注意的是设置 respository secret，因为最开始设置成 environment secret 而失败几次 😭<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220955.png"></li>
+<li>ACCESS_TOKEN<br>官方已经写得很详细了<a target="_blank" rel="noopener" href="https://qingfuwu.cn/docs/openapi/personaltoken.html#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81">创建和管理访问凭证</a><br><img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221004.png"><br><img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221006.png"></li>
+<li>SERVICE_ID<br>登录轻服务后<a target="_blank" rel="noopener" href="https://qingfuwu.cn/dashboard">https://qingfuwu.cn/dashboard</a>，在首页就能看见你创建的所有服务。<br><img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220950.png"><br>这里就选择 hello world 这个服务，点击进去，再进入到设置里面就可以看见 SERVICE_ID.当然这里你也可以直接点击页面托管，上传压缩文件手动部署。<img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220952.png"></li>
+<li>添加变量到 secrets 里面，这里我已经添加上了。这里要注意的是设置 respository secret，因为最开始设置成 environment secret 而失败几次 😭<br><img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220955.png"></li>
 </ol>
-<h3 id="2-经过上面的步骤，大致就可以完成了。"><a href="#2-经过上面的步骤，大致就可以完成了。" class="headerlink" title="2. 经过上面的步骤，大致就可以完成了。"></a>2. 经过上面的步骤，大致就可以完成了。</h3><p>#####看看 actions 吧，忽略前几次 environment secret 的锅 😂<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221013.png"><br>进入页面托管，点击网站域名，就可以看见部署后的页面了。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221016.png"><br>最终效果：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221025.png"></p>
+<h3 id="2-经过上面的步骤，大致就可以完成了。"><a href="#2-经过上面的步骤，大致就可以完成了。" class="headerlink" title="2. 经过上面的步骤，大致就可以完成了。"></a>2. 经过上面的步骤，大致就可以完成了。</h3><p>#####看看 actions 吧，忽略前几次 environment secret 的锅 😂<br><img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221013.png"><br>进入页面托管，点击网站域名，就可以看见部署后的页面了。<br><img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221016.png"><br>最终效果：<br><img data-src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221025.png"></p>
 
     </div>
 
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
     
     
     
@@ -299,6 +312,16 @@
             </span>
 
             <span class="label">RSS</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/Jealh-h">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">github</span>
           </a>
         </div>
     </div>
@@ -472,9 +495,11 @@
   </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+  <script size="200" alpha="0.6" zIndex="-1" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lozad.js/1.14.0/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js"></script>
 
 <script src="/js/utils.js"></script>
 
@@ -486,9 +511,9 @@
 
 <script src="/js/next-boot.js"></script>
 
+<script src="/js/bookmark.js"></script>
 
-  <script defer src="/lib/three/three.min.js"></script>
-    <script defer src="/lib/three/three-waves.min.js"></script>
+
 
 
   
@@ -509,6 +534,19 @@
 
 
 
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
 
 
   
@@ -544,5 +582,9 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
 });
 </script>
 
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
 </body>
 </html>

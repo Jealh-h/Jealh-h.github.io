@@ -18,6 +18,34 @@
   --btn-default-hover-color: #222;
   --btn-default-hover-border-color: #222;
 }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-bg-color: #282828;
+    --content-bg-color: #333;
+    --card-bg-color: #555;
+    --text-color: #ccc;
+    --blockquote-color: #bbb;
+    --link-color: #ccc;
+    --link-hover-color: #eee;
+    --brand-color: #ddd;
+    --brand-hover-color: #ddd;
+    --table-row-odd-bg-color: #282828;
+    --table-row-hover-bg-color: #363636;
+    --menu-item-bg-color: #555;
+    --btn-default-bg: #222;
+    --btn-default-color: #ccc;
+    --btn-default-border-color: #555;
+    --btn-default-hover-bg: #666;
+    --btn-default-hover-color: #ccc;
+    --btn-default-hover-border-color: #666;
+  }
+  img {
+    opacity: 0.75;
+  }
+  img:hover {
+    opacity: 0.9;
+  }
+}
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -180,6 +208,7 @@ body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1em;
   line-height: 2;
+  cursor: url("https://qc9c5f.file.qingfuwucdn.com/file/964f73fbc2d00402_1644650462911.cur"), default;
 }
 @media (max-width: 991px) {
   body {
@@ -222,6 +251,7 @@ p {
 a,
 span.exturl {
   border-bottom: 1px solid #999;
+  cursor: url("https://qc9c5f.file.qingfuwucdn.com/file/1a235e6b0aef50a5_1644652113970.cur"), pointer !important;
   color: var(--link-color);
   outline: 0;
   text-decoration: none;
@@ -680,6 +710,9 @@ pre .javascript .function {
   flex-grow: 1;
   list-style-type: none;
   border-radius: 0 0 0 0;
+  transition-delay: 0s;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
 }
 @media (max-width: 413px) {
   .post-body .tabs ul.nav-tabs li.tab,
@@ -1020,14 +1053,10 @@ pre .javascript .function {
 }
 .brand {
   border-bottom: none;
-  color: var(--brand-color);
   display: inline-block;
   line-height: 1.375em;
   padding: 0 40px;
   position: relative;
-}
-.brand:hover {
-  color: var(--brand-hover-color);
 }
 .site-title {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -1149,6 +1178,31 @@ pre .javascript .function {
 .use-motion .menu-item {
   opacity: 0;
 }
+.book-mark-link {
+  border-bottom: none;
+  display: inline-block;
+  position: fixed;
+  right: 30px;
+  top: -10px;
+  transition: 0.3s;
+}
+@media (max-width: 991px) {
+  .book-mark-link {
+    display: none;
+  }
+}
+.book-mark-link::before {
+  color: #222;
+  content: '\f02e';
+  font-size: 32px;
+  line-height: 1;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
+.book-mark-link:hover,
+.book-mark-link-fixed {
+  top: -2px;
+}
 .sidebar {
   background: #222;
   bottom: 0;
@@ -1219,7 +1273,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #a18b6a;
+  background: #d7ffff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1600,6 +1654,13 @@ pre .javascript .function {
 .post-button {
   margin-top: 40px;
   text-align: center;
+}
+.post-block {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  border-radius: 6px;
+  box-shadow: rgba(60,64,67,0.3) 0px 1px 2px 0px, rgba(60,64,67,0.15) 0px 1px 3px 1px;
 }
 .use-motion .post-block,
 .use-motion .pagination,
@@ -2385,7 +2446,8 @@ embed {
   padding: 5px;
 }
 .brand {
-  background: var(--btn-default-bg);
+  border: 2px dashed;
+  border-radius: 5px;
 }
 @media (max-width: 767px) {
   .site-nav {
@@ -2452,13 +2514,13 @@ embed {
   display: inline-block;
 }
 .sidebar {
-  left: -320px;
+  left: -280px;
 }
 .sidebar.sidebar-active {
   left: 0;
 }
 .sidebar {
-  width: 320px;
+  width: 280px;
   z-index: 1200;
   transition-delay: 0s;
   transition-duration: 0.2s;
