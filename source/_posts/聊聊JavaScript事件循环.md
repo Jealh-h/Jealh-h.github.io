@@ -39,11 +39,17 @@ console.log("end");
 - 一段新程序或子程序被直接执行时（比如从一个控制台，或在一个 &lt;script&gt; 元素中运行代码）。
 - 触发了一个事件，将其**回调函数**添加到任务队列时。
 - 执行到一个由 setTimeout() 或 setInterval() 创建的 timeout 或 interval，以致相应的**回调函数**被添加到任务队列时。
+- setImmediate()回调（nodejs）
+- I/O
+- UI
+- postMessage
 
 ### 微任务
 
 - promise.then(callback)中的**callback**。
 - MutationObserver
+- process.nextTick(Node.js)
+- Object.observe
 
 ### 执行栈
 
