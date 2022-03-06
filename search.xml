@@ -1,31 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>使用github actions进行轻服务的页面部署</title>
-    <url>/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<h1 id="使用-github-actions-进行轻服务的页面托管"><a href="#使用-github-actions-进行轻服务的页面托管" class="headerlink" title="使用 github actions 进行轻服务的页面托管"></a>使用 github actions 进行<a href="https://qingfuwu.cn/">轻服务</a>的页面托管</h1><h3 id="首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用-github-actions-的自动部署。只要会一点-github-actions-实现起来也比较简单。"><a href="#首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用-github-actions-的自动部署。只要会一点-github-actions-实现起来也比较简单。" class="headerlink" title="首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。"></a>首先，轻服务官方文档给出了手动部署页面的教程<a href="https://qingfuwu.cn/docs/openapi/sdk/hosting.html#%E8%8E%B7%E5%8F%96%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1%E4%BF%A1%E6%81%AF">页面托管</a>。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。</h3><p><a href="https://qcjtoy.web.cloudendpoint.cn/">看看效果</a></p>
-<h3 id="1-github-创建仓库，配置-github-workflow-yml-同时设置-secrets-变量-ACCESS-TOKEN-与-SERVICE-ID"><a href="#1-github-创建仓库，配置-github-workflow-yml-同时设置-secrets-变量-ACCESS-TOKEN-与-SERVICE-ID" class="headerlink" title="1.github 创建仓库，配置.github/workflow/*.yml,同时设置 secrets 变量 ACCESS_TOKEN 与 SERVICE_ID."></a>1.github 创建仓库，配置.github/workflow/*.yml,同时设置 secrets 变量 ACCESS_TOKEN 与 SERVICE_ID.</h3><ul>
-<li><h4 id="配置-workflow-的-yml-文件。"><a href="#配置-workflow-的-yml-文件。" class="headerlink" title="配置 workflow 的 yml 文件。"></a>配置 workflow 的 yml 文件。</h4>直接复制里面的 Usage,<a href="https://github.com/marketplace/actions/deploy-to-byteinspire-hosting">Deploy to ByteInspire Hosting</a></li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">Hosting</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span> <span class="string">push</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build_and_deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="comment"># Add any build steps here. For example:</span></span><br><span class="line">      <span class="comment"># - run: npm ci &amp;&amp; npm run build</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">byteinspire/hosting-deployer-action@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">service-id:</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; secrets.SERVICE_ID &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; secrets.ACCESS_TOKEN &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="comment"># Or you can use file param to directly specify the ziped file path</span></span><br><span class="line">          <span class="attr">directory:</span> <span class="string">./</span></span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<ul>
-<li><h4 id="配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID"><a href="#配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID" class="headerlink" title="配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID"></a>配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID</h4></li>
-</ul>
-<ol>
-<li>ACCESS_TOKEN<br>官方已经写得很详细了<a href="https://qingfuwu.cn/docs/openapi/personaltoken.html#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81">创建和管理访问凭证</a><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221004.png"><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221006.png"></li>
-<li>SERVICE_ID<br>登录轻服务后<a href="https://qingfuwu.cn/dashboard">https://qingfuwu.cn/dashboard</a>，在首页就能看见你创建的所有服务。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220950.png"><br>这里就选择 hello world 这个服务，点击进去，再进入到设置里面就可以看见 SERVICE_ID.当然这里你也可以直接点击页面托管，上传压缩文件手动部署。<img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220952.png"></li>
-<li>添加变量到 secrets 里面，这里我已经添加上了。这里要注意的是设置 respository secret，因为最开始设置成 environment secret 而失败几次 😭<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220955.png"></li>
-</ol>
-<h3 id="2-经过上面的步骤，大致就可以完成了。"><a href="#2-经过上面的步骤，大致就可以完成了。" class="headerlink" title="2. 经过上面的步骤，大致就可以完成了。"></a>2. 经过上面的步骤，大致就可以完成了。</h3><p>#####看看 actions 吧，忽略前几次 environment secret 的锅 😂<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221013.png"><br>进入页面托管，点击网站域名，就可以看见部署后的页面了。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221016.png"><br>最终效果：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221025.png"></p>
-]]></content>
-      <tags>
-        <tag>deploy qingfuwu</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2021年终总结</title>
     <url>/2022/01/03/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<blockquote>
@@ -64,6 +39,31 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>使用github actions进行轻服务的页面部署</title>
+    <url>/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h1 id="使用-github-actions-进行轻服务的页面托管"><a href="#使用-github-actions-进行轻服务的页面托管" class="headerlink" title="使用 github actions 进行轻服务的页面托管"></a>使用 github actions 进行<a href="https://qingfuwu.cn/">轻服务</a>的页面托管</h1><h3 id="首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用-github-actions-的自动部署。只要会一点-github-actions-实现起来也比较简单。"><a href="#首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用-github-actions-的自动部署。只要会一点-github-actions-实现起来也比较简单。" class="headerlink" title="首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。"></a>首先，轻服务官方文档给出了手动部署页面的教程<a href="https://qingfuwu.cn/docs/openapi/sdk/hosting.html#%E8%8E%B7%E5%8F%96%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1%E4%BF%A1%E6%81%AF">页面托管</a>。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。</h3><p><a href="https://qcjtoy.web.cloudendpoint.cn/">看看效果</a></p>
+<h3 id="1-github-创建仓库，配置-github-workflow-yml-同时设置-secrets-变量-ACCESS-TOKEN-与-SERVICE-ID"><a href="#1-github-创建仓库，配置-github-workflow-yml-同时设置-secrets-变量-ACCESS-TOKEN-与-SERVICE-ID" class="headerlink" title="1.github 创建仓库，配置.github/workflow/*.yml,同时设置 secrets 变量 ACCESS_TOKEN 与 SERVICE_ID."></a>1.github 创建仓库，配置.github/workflow/*.yml,同时设置 secrets 变量 ACCESS_TOKEN 与 SERVICE_ID.</h3><ul>
+<li><h4 id="配置-workflow-的-yml-文件。"><a href="#配置-workflow-的-yml-文件。" class="headerlink" title="配置 workflow 的 yml 文件。"></a>配置 workflow 的 yml 文件。</h4>直接复制里面的 Usage,<a href="https://github.com/marketplace/actions/deploy-to-byteinspire-hosting">Deploy to ByteInspire Hosting</a></li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">Hosting</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span> <span class="string">push</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build_and_deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="comment"># Add any build steps here. For example:</span></span><br><span class="line">      <span class="comment"># - run: npm ci &amp;&amp; npm run build</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">byteinspire/hosting-deployer-action@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">service-id:</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; secrets.SERVICE_ID &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="attr">token:</span> <span class="string">&quot;$<span class="template-variable">&#123;&#123; secrets.ACCESS_TOKEN &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="comment"># Or you can use file param to directly specify the ziped file path</span></span><br><span class="line">          <span class="attr">directory:</span> <span class="string">./</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<ul>
+<li><h4 id="配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID"><a href="#配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID" class="headerlink" title="配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID"></a>配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID</h4></li>
+</ul>
+<ol>
+<li>ACCESS_TOKEN<br>官方已经写得很详细了<a href="https://qingfuwu.cn/docs/openapi/personaltoken.html#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81">创建和管理访问凭证</a><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221004.png"><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221006.png"></li>
+<li>SERVICE_ID<br>登录轻服务后<a href="https://qingfuwu.cn/dashboard">https://qingfuwu.cn/dashboard</a>，在首页就能看见你创建的所有服务。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220950.png"><br>这里就选择 hello world 这个服务，点击进去，再进入到设置里面就可以看见 SERVICE_ID.当然这里你也可以直接点击页面托管，上传压缩文件手动部署。<img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220952.png"></li>
+<li>添加变量到 secrets 里面，这里我已经添加上了。这里要注意的是设置 respository secret，因为最开始设置成 environment secret 而失败几次 😭<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220955.png"></li>
+</ol>
+<h3 id="2-经过上面的步骤，大致就可以完成了。"><a href="#2-经过上面的步骤，大致就可以完成了。" class="headerlink" title="2. 经过上面的步骤，大致就可以完成了。"></a>2. 经过上面的步骤，大致就可以完成了。</h3><p>#####看看 actions 吧，忽略前几次 environment secret 的锅 😂<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221013.png"><br>进入页面托管，点击网站域名，就可以看见部署后的页面了。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221016.png"><br>最终效果：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221025.png"></p>
+]]></content>
+      <tags>
+        <tag>deploy qingfuwu</tag>
+      </tags>
   </entry>
   <entry>
     <title>numpy条件选择</title>
@@ -252,7 +252,6 @@
 <li>promise.then(callback)中的<strong>callback</strong>。</li>
 <li>MutationObserver</li>
 <li>process.nextTick(Node.js)</li>
-<li>Object.observe</li>
 </ul>
 <h3 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h3><p>函数的互相调用会让函数树形成一个调用栈，而函数的执行会按照这个栈来执行，即后进先执行。执行栈会占用 JavaScript 的 run time。</p>
 <h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><p>JavaScript 在运行时，是运行在执行上下文中的，每一个上下文拥有自己的变量、对象，执行上下文有如下几类：</p>
