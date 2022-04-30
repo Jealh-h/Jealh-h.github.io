@@ -101,7 +101,7 @@ scheme: Muse
 # scheme: Gemini
 
 # Dark Mode
-darkmode: true
+darkmode: false
 
 # ---------------------------------------------------------------
 # Menu Settings
@@ -517,7 +517,7 @@ mediumzoom: false
 
 # Vanilla JavaScript plugin for lazyloading images.
 # For more information: https://github.com/ApoorvSaxena/lozad.js
-lazyload: true
+lazyload: false
 
 # Pangu Support
 # For more information: https://github.com/vinta/pangu.js
@@ -829,7 +829,7 @@ motion:
 # Dependencies: https://github.com/theme-next/theme-next-pace
 # For more information: https://github.com/HubSpot/pace
 pace:
-  enable: true
+  enable: false
   # Themes list:
   # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple
   # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal
@@ -904,7 +904,7 @@ vendors:
 
   # Lazyload
   # lazyload: //cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js
-  lazyload: //cdnjs.cloudflare.com/ajax/libs/lozad.js/1.14.0/lozad.min.js
+  # lazyload: //cdnjs.cloudflare.com/ajax/libs/lozad.js/1.14.0/lozad.min.js
 
   # Pangu
   # pangu: //cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js
@@ -945,14 +945,14 @@ vendors:
   # Internal version: 1.2.1
   velocity: //cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js
   # velocity: //cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.min.js
-  # velocity_ui: //cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js
-  velocity_ui: //cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js
+  velocity_ui: //cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js
+  # velocity_ui: //cdnjs.cloudflare.com/ajax/libs/velocity/1.2.1/velocity.ui.min.js
 
   # Internal version: 1.0.2
-  pace: //cdn.jsdelivr.net/npm/pace-js@1/pace.min.js
+  # pace: //cdn.jsdelivr.net/npm/pace-js@1/pace.min.js
   # pace: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js
   # pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css
-  pace_css: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css
+  # pace_css: //cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-minimal.min.css
 
   Internal version: 1.0.0
   three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js

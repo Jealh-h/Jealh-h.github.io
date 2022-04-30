@@ -7,7 +7,7 @@ categories: 一些趣事的🌟
 
 **事情发生是在一个月黑风高的晚上。。。。不好意思搞错了 😬。**
 **事情是这样的，今天在使用 webpack-dev-middleware 构建开发环境的时候，想要使用 node 启动浏览器并自动打开相关的本地网址。于是就发生了下面的一幕。**
-![](https://gitee.com/gitme-H/images-bed/raw/master/img/u=1178727920,923148390&fm=26&fmt=auto.webp)
+![](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/u=1178727920,923148390&fm=26&fmt=auto.webp)
 
 <!--more-->
 
@@ -59,7 +59,7 @@ target = Buffer.from(encodedArguments.join(" "), "utf16le").to;
 
 **果不其然，在微软的文档里确实查到了 😃,不过需要注意的是需要 utf-16le 的编码。**
 **_铛铛铛铛！！_**
-![](https://gitee.com/gitme-H/images-bed/raw/master/img/encodedCommand.png)
+![](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/encodedCommand.png)
 
 # 实际测试
 
@@ -82,5 +82,5 @@ let subprocess = cp.spawn(`${process.env.SYSTEMROOT}\\System32\\WindowsPowerShel
 ```
 
 **下面是效果图**
-![](https://gitee.com/gitme-H/images-bed/raw/master/img/20211191146.gif)
+![](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/20211191146.gif)
 **奇怪的知识又增加了 🌟**

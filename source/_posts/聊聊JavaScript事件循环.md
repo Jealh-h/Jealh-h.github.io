@@ -43,13 +43,13 @@ console.log("end");
 - I/O
 - UI
 - postMessage
+- requestAnimationFrame
 
 ### 微任务
 
 - promise.then(callback)中的**callback**。
 - MutationObserver
 - process.nextTick(Node.js)
-- Object.observe
 
 ### 执行栈
 
@@ -106,7 +106,7 @@ console.log("end");
 ```
 
 **最开始：**将整体代码（一段新程序）加入任务队列。此时的 JavaScript RunTime 的情况如下图：
-![1](https://gitee.com/gitme-H/images-bed/raw/master/img/202201122218.png)
+![1](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122218.png)
 
 此时任务队列里面仅有整体程序，而微任务队列里面什么也没有。整体程序将进入执行栈中执行。
 **创建 promise 对象：**在创建 promise 对象时，传入了可选参数即：
@@ -120,7 +120,7 @@ console.log("end");
 **打印 end:**在执行 console.log('end')后，现在执行栈为空了，整体程序弹出任务队列。此时任务队列是**不为空的**（包含定时器的回调()=>{console.log('setTime')}）
 
 此时的 JavaScript RunTime 的情况如下图：
-![2](https://gitee.com/gitme-H/images-bed/raw/master/img/202201122230.png)
+![2](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122230.png)
 这时的任务队列包括定时器的回调，而微任务队列依然为空（这道题就没涉及到微任务。。。）。随后定时器回调将进入执行栈，打印出 setTime。所以最终的打印结果为：
 
 > p
@@ -150,14 +150,14 @@ console.log("end");
 
 上面新增的是在创建 Promise 对象时增加了一个定时器，以及增加了对 then 的回调。
 依旧从整体程序开始，进入任务队列，当整体程序执行完时，这时的 RunTime 情况如下：
-![3](https://gitee.com/gitme-H/images-bed/raw/master/img/202201122252.png)
+![3](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122252.png)
 此时输出为：
 
 > p_2
 > end
 
 按照队列先进先出，定时器 1 先进入队列，所以其先于定时器 2 执行。此时定时器 1 的回调进入执行栈执行，执行 res('定时器 1')改变 promise 的状态为 resolve,将 then 的回调加入微任务队列，此时 RunTime 的情况如下：
-![4](https://gitee.com/gitme-H/images-bed/raw/master/img/202201122258.png)
+![4](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122258.png)
 
 定时器 1 执行完毕弹出任务队列，一个任务执行完后，检索微任务队列，这时微任务队列存在一个 then 回调，所以将其加入执行栈。
 
@@ -212,7 +212,7 @@ console.log("end");
 > 定时器 2
 
 在 chrome 里面试一下吧：）
-![5](https://gitee.com/gitme-H/images-bed/raw/master/img/202201122327.png)
+![5](https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122327.png)
 
 可以看见，结论正确。
 
