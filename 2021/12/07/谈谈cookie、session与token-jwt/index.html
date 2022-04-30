@@ -27,12 +27,12 @@
 <meta property="og:site_name" content="Jealh&#39;s Blog">
 <meta property="og:description" content="首先呢，网上关于它们的文章已经很多了，在这里我就只是来记录以下我的理解，其实也是看其他网上内容的一个总结吧。  前言：由于 HTTP 协议无状态的缺陷。WEB 的设计者们提出了 Cookie 和 Session 两种解决机制。而 token,通常是 jwt(json web token)作为一种用户身份令牌，也常常用于记录 http 的状态存储，通常是在用户登录后，伴随每一次请求发送给给后端。下面">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202112161949.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202112161949.png">
 <meta property="article:published_time" content="2021-12-07T14:04:05.000Z">
-<meta property="article:modified_time" content="2021-12-07T14:24:14.843Z">
+<meta property="article:modified_time" content="2022-04-30T02:34:44.175Z">
 <meta property="article:author" content="Jealh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202112161949.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202112161949.png">
 
 <link rel="canonical" href="https://jealh.xyz/2021/12/07/%E8%B0%88%E8%B0%88cookie%E3%80%81session%E4%B8%8Etoken-jwt/">
 
@@ -225,10 +225,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-07 22:04:05 / 修改时间：22:24:14" itemprop="dateCreated datePublished" datetime="2021-12-07T22:04:05+08:00">2021-12-07</time>
+              <time title="创建时间：2021-12-07 22:04:05" itemprop="dateCreated datePublished" datetime="2021-12-07T22:04:05+08:00">2021-12-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-30 10:34:44" itemprop="dateModified" datetime="2022-04-30T10:34:44+08:00">2022-04-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -279,7 +285,7 @@
 <li>Path 属性：定义了 Web 站点上可以访问该 Cookie 的目录。</li>
 <li>HTTPOnly 属性 ：用于防止客户端脚本通过 document.cookie 属性访问 Cookie，有助于保护 Cookie 不被跨站脚本攻击窃取或篡改。但是，HTTPOnly 的应用仍存在局限性，一些浏览器可以阻止客户端脚本对 Cookie 的读操作，但允许写操作；此外大多数浏览器仍允许通过 XMLHTTP 对象读取 HTTP 响应中的 Set-Cookie 头。<br><strong>好了，以上内容是来自百度百科。简单地做个总结：cookie 是一种存储在客户端的小型文本数据，里面的类容有键值对、生存周期、访问域、是否使用 http,web 站点可访问 cookie 的目录以及是否允许客户端读取 cookie。</strong></li>
 </ol>
-<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p><strong>XSRF/CSRF（跨站请求伪造）</strong>：利用的是 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器,却不能保证请求本身是用户自愿发出的。这里有一些如 Firefox、Opera 等浏览器使用单进程机制，<strong>多个窗口或标签使用同一个进程，共享 Cookie 等会话数据</strong>。IE 则混合使用单进程与多进程模式，一个窗口中的多个标签，以及使用“CTRL+N” 或单击网页中的链接打开的新窗口使用同一进程，共享会话数据；只有直接运行 IE 可执行程序打开窗口时，才会创建新的进程。<strong>Chrome 虽然使用多进程机制，然而经测试发现，其不同的窗口或标签之间仍会共享会话数据，除非使用隐身访问方式。</strong>因而，用户同时打开多个浏览器窗口或标签访问互联网资源时，就为 CSRF 攻击篡夺用户的会话 Cookie 创造了条件。却不能保证请求本身是用户自愿发出的。其最典型的例子<strong>就是当 cookie 还没过期时，用户浏览的网站有与其没过期的网站的一些 api 请求，那么当用户浏览这个恶意网站时就可能会受到危害</strong>。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202112161949.png"><br><strong>会话定置(Session Fixation)攻击</strong>是指，攻击者向受害者主机注入自己控制的认证 Cookie 等信息，使得受害者以攻击者的身份登录网站，从而窃取受害者的会话信息。注入 Cookie 的方法包括：使用跨站脚本或木马等恶意程序；或伪造与合法网站同域的站点，并利用各种方法欺骗用户访问该仿冒网站，从而通过 HTTP 响应中的 Set-Cookie 头将攻击者拥有的该域 Cookie 发送给用户等。因为 sessionID 一般都会放在 cookie 中存储，所以会容易受到会话定制攻击。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p><strong>XSRF/CSRF（跨站请求伪造）</strong>：利用的是 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器,却不能保证请求本身是用户自愿发出的。这里有一些如 Firefox、Opera 等浏览器使用单进程机制，<strong>多个窗口或标签使用同一个进程，共享 Cookie 等会话数据</strong>。IE 则混合使用单进程与多进程模式，一个窗口中的多个标签，以及使用“CTRL+N” 或单击网页中的链接打开的新窗口使用同一进程，共享会话数据；只有直接运行 IE 可执行程序打开窗口时，才会创建新的进程。<strong>Chrome 虽然使用多进程机制，然而经测试发现，其不同的窗口或标签之间仍会共享会话数据，除非使用隐身访问方式。</strong>因而，用户同时打开多个浏览器窗口或标签访问互联网资源时，就为 CSRF 攻击篡夺用户的会话 Cookie 创造了条件。却不能保证请求本身是用户自愿发出的。其最典型的例子<strong>就是当 cookie 还没过期时，用户浏览的网站有与其没过期的网站的一些 api 请求，那么当用户浏览这个恶意网站时就可能会受到危害</strong>。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202112161949.png"><br><strong>会话定置(Session Fixation)攻击</strong>是指，攻击者向受害者主机注入自己控制的认证 Cookie 等信息，使得受害者以攻击者的身份登录网站，从而窃取受害者的会话信息。注入 Cookie 的方法包括：使用跨站脚本或木马等恶意程序；或伪造与合法网站同域的站点，并利用各种方法欺骗用户访问该仿冒网站，从而通过 HTTP 响应中的 Set-Cookie 头将攻击者拥有的该域 Cookie 发送给用户等。因为 sessionID 一般都会放在 cookie 中存储，所以会容易受到会话定制攻击。</p>
 <h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>与 cookie 相比，session 就是存放在服务端了，它表示在客户端登录时，服务端会发放一个 sessionid 到客户端，它一般存在 cookie 中，所以客户端以后的请求就会在请求头的 cookies 字段中携带这个信息。这样服务端就可以通过这个数据判断客户端的登录状态。这就好比我们去点菜，点好了后商家给我们一个号码牌，等菜好了，就送往相应号码牌的位置。</p>
 <h4 id="安全性-1"><a href="#安全性-1" class="headerlink" title="安全性"></a>安全性</h4><p>因为 session 是放在服务器上的，所以一般的安全性就考虑 sessionid 的伪造与截获。如果 sessionid 是放在 cookie 中的，那么 cookie 的时效就决定了 sessionid 即登录状态的时效。<br>需要注意的就是会话固定（session fixation)：意思是攻击者先自己获取一个 sessionid,然后假冒一个网站并将连接发给被攻击的人，当受害者登录后，攻击者就可以劫持受害人的会话。因为在攻击者登录获取 sessionid 后，网络服务器看到会话已经建立，无需创建新的会话。所以攻击者就成功地冒充了受害者，从而获取了受害者的信息。</p>
 <h3 id="Token（JWT）"><a href="#Token（JWT）" class="headerlink" title="Token（JWT）"></a>Token（JWT）</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>JSON Web Token (JWT) 是一种开放标准 (RFC 7519)，它定义了一种紧凑且自包含的方式，用于在各方之间作为 JSON 对象安全地传输信息。由于此信息经过数字签名，因此可以验证和信任。 JWT 可以使用秘密（使用 HMAC 算法）或使用 RSA 或 ECDSA 的公钥/私钥对进行签名。尽管 JWTs 可以被加密，以便在各方之间提供保密性，但我们将专注于签名的令牌。签名的令牌可以验证其中包含的索赔的完整性，而加密的令牌则对其他各方隐藏这些索赔。当令牌使用公钥/私钥对签名时，签名也证明了只有持有私钥的一方才是签名者。 - - - - <a target="_blank" rel="noopener" href="https://jwt.io/introduction">https://jwt.io/introduction</a></p>

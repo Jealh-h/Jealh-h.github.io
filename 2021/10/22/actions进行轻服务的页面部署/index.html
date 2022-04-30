@@ -27,20 +27,20 @@
 <meta property="og:site_name" content="Jealh&#39;s Blog">
 <meta property="og:description" content="使用 github actions 进行轻服务的页面托管首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。看看效果 1.github 创建仓库，配置.github&#x2F;workflow&#x2F;*.yml,同时设置 secrets 变量 ACCESS_TOKEN 与 SER">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221004.png">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221006.png">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220950.png">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220952.png">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220955.png">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221013.png">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221016.png">
-<meta property="og:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221025.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221004.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221006.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110220950.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110220952.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110220955.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221013.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221016.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221025.png">
 <meta property="article:published_time" content="2021-10-22T02:22:14.000Z">
-<meta property="article:modified_time" content="2021-10-22T02:26:13.156Z">
+<meta property="article:modified_time" content="2022-04-30T02:34:43.685Z">
 <meta property="article:author" content="Jealh">
 <meta property="article:tag" content="deploy qingfuwu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221004.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221004.png">
 
 <link rel="canonical" href="https://jealh.xyz/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/">
 
@@ -233,10 +233,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-10-22 10:22:14 / 修改时间：10:26:13" itemprop="dateCreated datePublished" datetime="2021-10-22T10:22:14+08:00">2021-10-22</time>
+              <time title="创建时间：2021-10-22 10:22:14" itemprop="dateCreated datePublished" datetime="2021-10-22T10:22:14+08:00">2021-10-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-30 10:34:43" itemprop="dateModified" datetime="2022-04-30T10:34:43+08:00">2022-04-30</time>
+              </span>
 
           
   
@@ -275,11 +281,11 @@
 <li><h4 id="配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID"><a href="#配置-secrets-的变量-ACCESS-TOKEN-与-SERVICE-ID" class="headerlink" title="配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID"></a>配置 secrets 的变量 ACCESS_TOKEN 与 SERVICE_ID</h4></li>
 </ul>
 <ol>
-<li>ACCESS_TOKEN<br>官方已经写得很详细了<a target="_blank" rel="noopener" href="https://qingfuwu.cn/docs/openapi/personaltoken.html#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81">创建和管理访问凭证</a><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221004.png"><br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221006.png"></li>
-<li>SERVICE_ID<br>登录轻服务后<a target="_blank" rel="noopener" href="https://qingfuwu.cn/dashboard">https://qingfuwu.cn/dashboard</a>，在首页就能看见你创建的所有服务。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220950.png"><br>这里就选择 hello world 这个服务，点击进去，再进入到设置里面就可以看见 SERVICE_ID.当然这里你也可以直接点击页面托管，上传压缩文件手动部署。<img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220952.png"></li>
-<li>添加变量到 secrets 里面，这里我已经添加上了。这里要注意的是设置 respository secret，因为最开始设置成 environment secret 而失败几次 😭<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110220955.png"></li>
+<li>ACCESS_TOKEN<br>官方已经写得很详细了<a target="_blank" rel="noopener" href="https://qingfuwu.cn/docs/openapi/personaltoken.html#%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E8%AE%BF%E9%97%AE%E5%87%AD%E8%AF%81">创建和管理访问凭证</a><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221004.png"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221006.png"></li>
+<li>SERVICE_ID<br>登录轻服务后<a target="_blank" rel="noopener" href="https://qingfuwu.cn/dashboard">https://qingfuwu.cn/dashboard</a>，在首页就能看见你创建的所有服务。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110220950.png"><br>这里就选择 hello world 这个服务，点击进去，再进入到设置里面就可以看见 SERVICE_ID.当然这里你也可以直接点击页面托管，上传压缩文件手动部署。<img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110220952.png"></li>
+<li>添加变量到 secrets 里面，这里我已经添加上了。这里要注意的是设置 respository secret，因为最开始设置成 environment secret 而失败几次 😭<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110220955.png"></li>
 </ol>
-<h3 id="2-经过上面的步骤，大致就可以完成了。"><a href="#2-经过上面的步骤，大致就可以完成了。" class="headerlink" title="2. 经过上面的步骤，大致就可以完成了。"></a>2. 经过上面的步骤，大致就可以完成了。</h3><p>#####看看 actions 吧，忽略前几次 environment secret 的锅 😂<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221013.png"><br>进入页面托管，点击网站域名，就可以看见部署后的页面了。<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221016.png"><br>最终效果：<br><img src="https://gitee.com/gitme-H/images-bed/raw/master/img/202110221025.png"></p>
+<h3 id="2-经过上面的步骤，大致就可以完成了。"><a href="#2-经过上面的步骤，大致就可以完成了。" class="headerlink" title="2. 经过上面的步骤，大致就可以完成了。"></a>2. 经过上面的步骤，大致就可以完成了。</h3><p>#####看看 actions 吧，忽略前几次 environment secret 的锅 😂<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221013.png"><br>进入页面托管，点击网站域名，就可以看见部署后的页面了。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221016.png"><br>最终效果：<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202110221025.png"></p>
 
     </div>
 
