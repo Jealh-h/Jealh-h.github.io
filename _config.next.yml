@@ -183,6 +183,7 @@ social:
   #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
   #YouTube: https://youtube.com/yourname || fab fa-youtube
   Instagram: https://instagram.com/hu.supreme || fab fa-instagram
+  BiliBili: https://bilibili.com/ || fa fa-bilibili
   #Skype: skype:yourname?call|chat || fab fa-skype
 
 social_icons:
