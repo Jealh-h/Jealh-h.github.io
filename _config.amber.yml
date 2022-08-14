@@ -101,7 +101,7 @@ scheme: Muse
 # scheme: Gemini
 
 # Dark Mode
-darkmode: false
+darkmode: true
 
 # ---------------------------------------------------------------
 # Menu Settings
@@ -183,7 +183,7 @@ social:
   #StackOverflow: https://stackoverflow.com/yourname || fab fa-stack-overflow
   #YouTube: https://youtube.com/yourname || fab fa-youtube
   Instagram: https://instagram.com/hu.supreme || fab fa-instagram
-  BiliBili: https://bilibili.com/ || fa fa-bilibili
+  BiliBili: https://space.bilibili.com/438345456 || fa-brands fa-bilibili
   #Skype: skype:yourname?call|chat || fab fa-skype
 
 social_icons:
@@ -384,7 +384,7 @@ reading_progress:
 
 # Bookmark Support
 bookmark:
-  enable: true
+  enable: false
   # Customize the color of the bookmark.
   color: "#222"
   # If auto, save the reading progress when closing the page or clicking the bookmark-icon.
@@ -972,7 +972,7 @@ vendors:
   # canvas_sphere: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js
 
   # Internal version: 1.0.0
-  # canvas_ribbon: //cdnjs.cloudflare.com/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js
+  canvas_ribbon: https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js
 
 # Assets
 css: css

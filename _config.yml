@@ -4,7 +4,7 @@
 
 # Site
 title: Jealh's Blog
-subtitle: ""
+subtitle: "𝓣𝓱𝓲𝓼 𝓲𝓼 𝓪 𝓫𝓮𝓪𝓾𝓽𝓲𝓯𝓾𝓵 𝓼𝓾𝓫𝓽𝓲𝓽𝓵𝓮"
 description: ""
 keywords:
 author: Jealh
@@ -106,7 +106,7 @@ search:
   limit: 10000
 
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: amber
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
