@@ -877,7 +877,7 @@ vendors:
   symbols-count-time:
 
   # Internal version: 3.1.0
-  anime: //cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js
+  anime:
 
   # Internal version: 5.13.0
   # fontawesome: //cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css
