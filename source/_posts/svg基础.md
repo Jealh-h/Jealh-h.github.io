@@ -27,15 +27,13 @@ svg（Scalable Vector Graphics）可缩放的矢量图形，是 W3C XML 的分�
 ## 三、SVG 元素
 
 See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element#svg_%E5%85%83%E7%B4%A0%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%86%E7%B1%BB%EF%BC%89)
-
-![image.png](https://p-bytetech.bytedance.net/tos-cn-i-vz0z6vmpra/7dfd2742543f46309944295368f166e2~tplv-vz0z6vmpra-image.image)
 > 上面列出了一些常见以及常用的svg元素，下面我们可以来看看它们是什么样子的以及怎么改变它们的属性。
 
 ## 四、图形元素
 
 ### 基础图形元素
 
-{% oembed https://codepen.io/l-jour/pen/RwMVwNE %}
+{% iframe https://codepen.io/l-jour/pen/RwMVwNE %}
 
 ### 线段属性
 
@@ -49,19 +47,19 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
 
 > stroke-dasharray结合animate的例子
 
-{% oembed https://codepen.io/l-jour/pen/ZExoMmN %}
+{% iframe https://codepen.io/l-jour/pen/ZExoMmN %}
 
 > 使用stroke-dashoffset与animateTransform、animate绘制加载动画
 
 用animate控制stroke-dashoffset虚线部分的偏移，同时animateTransform控制整个圆环的自转。
 
-{% oembed https://codepen.io/l-jour/pen/ExELqMa %}
+{% iframe https://codepen.io/l-jour/pen/ExELqMa %}
 
 > 心电图
 
 这里主要思路就是使用polyline绘制折线图，使用stroke-dasharray绘制虚线，stroke-dashoffset控制虚线空白处的偏移，然后用animate控制stroke-dashoffset的值，就能看见这种线段移动的效果了🫥
 
-{% oembed https://codepen.io/l-jour/pen/qBoYyxL %}
+{% iframe https://codepen.io/l-jour/pen/qBoYyxL %}
 
 ### 强大的path元素
 
@@ -88,7 +86,7 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
 
 3.  Z or z：闭合路径
 
-{% oembed https://codepen.io/l-jour/pen/NWYjyxL %}
+{% iframe https://codepen.io/l-jour/pen/NWYjyxL %}
 
 #### 曲线命令
 
@@ -108,7 +106,7 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
 
 > C、S命令例子
 
-{% oembed https://codepen.io/l-jour/pen/rNdmJma %}
+{% iframe https://codepen.io/l-jour/pen/rNdmJma %}
 
 3.  Quadratic Bézier curveto
 
@@ -122,7 +120,7 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
 
 > Q、T命令例子
 
-{% oembed https://codepen.io/l-jour/pen/PoRJaqN %}
+{% iframe https://codepen.io/l-jour/pen/PoRJaqN %}
 
 5.  Arc
 
@@ -147,7 +145,7 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
     -   mpath：配合animateMotion，可代替animateMotion的path属性，用于引用一个外部的path
     -   set：可以用来设定一个属性值，并为该值赋予一个持续时间。它支持所有的属性类型， 包括那些原理上不能插值的， 例如值为字符串和布尔类型的属性。 set 元素是非叠加的。无法在其上使用 additive 属性或 accumulate 属性，即使声明了这些属性也会自动被忽略。
 
-{% oembed https://codepen.io/l-jour/pen/wvmrYLy %}
+{% iframe https://codepen.io/l-jour/pen/wvmrYLy %}
 
 #### 动画属性
 
@@ -175,7 +173,7 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
 
 > 取值属性例子
 
-{% oembed https://codepen.io/l-jour/pen/WNzdXNZ %}
+{% iframe https://codepen.io/l-jour/pen/WNzdXNZ %}
 
 2.  时间属性：控制动画如何开始，何时开始、重复次数等
 
@@ -218,7 +216,7 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
 
 > additive、accumulate例子
 
-{% oembed https://codepen.io/l-jour/pen/PoREOjj %}
+{% iframe https://codepen.io/l-jour/pen/PoREOjj %}
 
 ## 六、结构元素
 
@@ -252,7 +250,7 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
 
 -   mask
 
-{% oembed https://codepen.io/l-jour/pen/GRxmgEN %}
+{% iframe https://codepen.io/l-jour/pen/GRxmgEN %}
 
 ## 七、滤镜元素
 
@@ -286,19 +284,19 @@ See more：[mdn-svg元素参考](https://developer.mozilla.org/zh-CN/docs/Web/SV
  0 0 0 1 0 // A = 0*R + 0*G + 0*B + 1*A + 0
 ```
 
-{% oembed https://codepen.io/l-jour/pen/xxWzjde %}
+{% iframe https://codepen.io/l-jour/pen/xxWzjde %}
 
 
 > 使用feGaussianBlur、feColorMatrix、feBlend实现粘稠效果
 
-{% oembed https://codepen.io/l-jour/pen/JjLZbQO %}
+{% iframe https://codepen.io/l-jour/pen/JjLZbQO %}
 
 
 > 使用feComposite并设置operator为in，控制显示图像的一部分。
 
 关于feComposite，更多可以看这里：[feComposite](https://apike.ca/prog_svg_filter_feComposite.html)
 
-{% oembed https://codepen.io/l-jour/pen/wvmXOwZ %}
+{% iframe https://codepen.io/l-jour/pen/wvmXOwZ %}
 
 
 
@@ -312,7 +310,7 @@ feTurbulence推荐看这篇：[说说SVG的feTurbulence滤镜](https://zhuanlan.
 
 `P'(x,y) ← P(x + scale * (XC(x,y) - 0.5), y + scale * (YC(x,y) - 0.5))`
 
-{% oembed https://codepen.io/l-jour/pen/OJvwJqV %}
+{% iframe https://codepen.io/l-jour/pen/OJvwJqV %}
 
 ## 八、渐变元素
 -   -   ###   linearGradient：线性渐变-   gradientUnits: 控制渐变坐标的单位-   gradientTransform: 对渐变坐标系进行变换（translate、skew、rotate。。。）-   x1：线性渐变起点x坐标-   y1：线性渐变起点y坐标-   x2：线性渐变终点x坐标-   y2：线性渐变终点y坐标-   spreadMethod：定义如何在渐变之外填充
@@ -320,14 +318,14 @@ feTurbulence推荐看这篇：[说说SVG的feTurbulence滤镜](https://zhuanlan.
             -   pad：用渐变终点颜色去填充额外区域
             -   repeat：按照开始的渐变顺序重复
             -   reflect：按照开始的渐变相反顺序重复
-{% oembed https://codepen.io/l-jour/pen/JjLMMjR %}
+{% iframe https://codepen.io/l-jour/pen/JjLMMjR %}
     -   ###   radialGradient：径向渐变-   gradientUnits：控制渐变坐标的单位-   gradientTransform：对渐变坐标系进行变换（translate、skew、rotate。。。）-   cx: 用来定义径向渐变终止圆的 x 轴坐标(默认50%)。-   cy：用来定义径向渐变终止圆的 y 轴坐标。-   r：用来定义径向渐变终止圆的半径。-   fx：用来定义径向渐变的焦点的 x 轴坐标-   fy：用来定义径向渐变的焦点的 y 轴坐标-   spreadMethod：确定如何在渐变的定义边缘之外填充形状。
 
             -   pad：用渐变终点颜色去填充额外区域
             -   repeat：按照开始的渐变顺序重复
             -   reflect：按照开始的渐变相反顺序重复
     -   stop：渐变的颜色坡度
-{% oembed https://codepen.io/l-jour/pen/OJvwJqV %}
+{% iframe https://codepen.io/l-jour/pen/OJvwJqV %}
 
 ## 九、关于svg与canvas
 
