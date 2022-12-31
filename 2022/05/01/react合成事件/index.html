@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jealh.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":280},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="开始注册事件 这里只是简单的设置一些变量值，见下面代码  1234567&#x2F;&#x2F; 注册事件&#x2F;&#x2F; DOMPluginEventSystem.tsSimpleEventPlugin.registerEvents();EnterLeaveEventPlugin.registerEvents();ChangeEventPlugin.registerEvents();SelectEventPlugin.regi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react事件系统">
+<meta property="og:url" content="https://jealh.xyz/2022/05/01/react%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Jealh&#39;s Blog">
+<meta property="og:description" content="开始注册事件 这里只是简单的设置一些变量值，见下面代码  1234567&#x2F;&#x2F; 注册事件&#x2F;&#x2F; DOMPluginEventSystem.tsSimpleEventPlugin.registerEvents();EnterLeaveEventPlugin.registerEvents();ChangeEventPlugin.registerEvents();SelectEventPlugin.regi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202205062357.png">
+<meta property="article:published_time" content="2022-05-01T15:06:13.000Z">
+<meta property="article:modified_time" content="2022-10-09T16:02:43.650Z">
+<meta property="article:author" content="Jealh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202205062357.png">
+
+<link rel="canonical" href="https://jealh.xyz/2022/05/01/react%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>react事件系统 | Jealh's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jealh's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+  <div class="theme-toggle"></div>
+  
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jealh's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">𝓣𝓱𝓲𝓼 𝓲𝓼 𝓪 𝓫𝓮𝓪𝓾𝓽𝓲𝓯𝓾𝓵 𝓼𝓾𝓫𝓽𝓲𝓽𝓵𝓮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-address-card fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/friendsLinks/" rel="section"><i class="fa fa-address-book fa-fw"></i>links</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jealh.xyz/2022/05/01/react%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jealh">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jealh's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          react事件系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-05-01 23:06:13" itemprop="dateCreated datePublished" datetime="2022-05-01T23:06:13+08:00">2022-05-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-10 00:02:43" itemprop="dateModified" datetime="2022-10-10T00:02:43+08:00">2022-10-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/05/01/react%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/05/01/react%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="开始注册事件"><a href="#开始注册事件" class="headerlink" title="开始注册事件"></a>开始注册事件</h2><ul>
+<li>这里只是简单的设置一些变量值，见下面代码</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注册事件</span></span><br><span class="line"><span class="comment">// DOMPluginEventSystem.ts</span></span><br><span class="line">SimpleEventPlugin.registerEvents();</span><br><span class="line">EnterLeaveEventPlugin.registerEvents();</span><br><span class="line">ChangeEventPlugin.registerEvents();</span><br><span class="line">SelectEventPlugin.registerEvents();</span><br><span class="line">BeforeInputEventPlugin.registerEvents();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">allNativeEvent</span>:<span class="built_in">Set</span>&lt;DOMEventName&gt; = &#123;<span class="string">&#x27;click&#x27;</span>,<span class="string">&#x27;keyup&#x27;</span>,<span class="string">&#x27;keydown&#x27;</span>,...&#125;;</span><br><span class="line"></span><br><span class="line">registrationNameDependencies[<span class="string">&quot;onClick&quot;</span>] = [<span class="string">&quot;click&quot;</span>];</span><br><span class="line">registrationNameDependencies[<span class="string">&#x27;onMouseEnter&#x27;</span>] = [<span class="string">&#x27;mouseout&#x27;</span>, <span class="string">&#x27;mouseover&#x27;</span>]; <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">topLevelEventsToReactNames:<span class="built_in">Map</span>&lt;DOMEventName,<span class="built_in">string</span>|<span class="literal">null</span>&gt; = &#123;<span class="string">&quot;click&quot;</span>:<span class="string">&quot;onClick&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h2><p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202205062357.png" alt="flowchart"></p>
+<h2 id="listenToAllSupportedEvent"><a href="#listenToAllSupportedEvent" class="headerlink" title="listenToAllSupportedEvent"></a>listenToAllSupportedEvent</h2><ul>
+<li>接下来是让root容器监听所有支持的事件</li>
+</ul>
+<p>非委托事件只有捕获阶段。<br>而委托事件捕获冒泡都会绑定。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">allNativeEvents.forEach(<span class="function"><span class="params">domEventName</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 我们单独处理selectionchange更改，因为它不会冒泡，需要出现在document上</span></span><br><span class="line">  <span class="keyword">if</span> (domEventName !== <span class="string">&#x27;selectionchange&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!nonDelegatedEvents.has(domEventName)) &#123;</span><br><span class="line">      <span class="comment">// 不捕获</span></span><br><span class="line">      listenToNativeEvent(domEventName, <span class="literal">false</span>, rootContainerElement);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// nonDelegatedEvents事件是是捕获阶段监听器</span></span><br><span class="line">    <span class="comment">// delegatedEvents是冒泡捕获都有</span></span><br><span class="line">    listenToNativeEvent(domEventName, <span class="literal">true</span>, rootContainerElement);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>**<em>注意：</em>**selectionChange事件是监听在document上的，因为它不会冒泡。</p>
+<h2 id="绑定react的listener到root-document上"><a href="#绑定react的listener到root-document上" class="headerlink" title="绑定react的listener到root || document上"></a>绑定react的listener到root || document上</h2><p>listenToNativeEvent <strong>–&gt;</strong> addTrappedEventListener <strong>–&gt;</strong> listener = createEventListenerWrapperWithPriority</p>
+<h2 id="createEventListenerWrapperWithPriority"><a href="#createEventListenerWrapperWithPriority" class="headerlink" title="createEventListenerWrapperWithPriority"></a>createEventListenerWrapperWithPriority</h2><p>这里进行创建listener,listener有如下几种：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createEventListenerWrapperWithPriority</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  targetContainer: EventTarget,</span></span></span><br><span class="line"><span class="params"><span class="function">  domEventName: DOMEventName,</span></span></span><br><span class="line"><span class="params"><span class="function">  eventSystemFlags: EventSystemFlags,</span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">Function</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> eventPriority = getEventPriority(domEventName);</span><br><span class="line">  <span class="keyword">let</span> listenerWrapper;</span><br><span class="line">  <span class="keyword">switch</span> (eventPriority) &#123;</span><br><span class="line">    <span class="comment">// 一般事件都是DiscreteEventPriority</span></span><br><span class="line">    <span class="keyword">case</span> DiscreteEventPriority:</span><br><span class="line">      listenerWrapper = dispatchDiscreteEvent;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> ContinuousEventPriority:</span><br><span class="line">      listenerWrapper = dispatchContinuousEvent;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> DefaultEventPriority:</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      listenerWrapper = dispatchEvent;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> listenerWrapper.bind(</span><br><span class="line">    <span class="literal">null</span>,</span><br><span class="line">    domEventName,</span><br><span class="line">    eventSystemFlags,</span><br><span class="line">    targetContainer,</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这三种listener存在一个优先级的差别。<br>最终都会调用dispatchEvent.</p>
+<h2 id="dispatchEvent"><a href="#dispatchEvent" class="headerlink" title="dispatchEvent"></a>dispatchEvent</h2><ul>
+<li>这是react进行触发事件监听函数的地方，这里的listener是绑定到组件props上的事件处理函数。</li>
+</ul>
+<p>首先判断是否是allowReplay事件：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> allowReplay = (eventSystemFlags &amp; IS_CAPTURE_PHASE) === <span class="number">0</span>;</span><br><span class="line"><span class="comment">// eventSystemFlags capture时等于4,bubble时等于0</span></span><br><span class="line"><span class="comment">// capture &amp; 4 = 4; bubble &amp; 4 = 0</span></span><br><span class="line"><span class="comment">// IS_CAPTURE_PHASE = 4</span></span><br></pre></td></tr></table></figure>
+
+<p>然后是先去尝试调度事件,判定是否会blockOn：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> blockedOn = attemptToDispatchEvent(</span><br><span class="line">  domEventName,</span><br><span class="line">  eventSystemFlags,</span><br><span class="line">  targetContainer,</span><br><span class="line">  nativeEvent,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="attemptToDispatchEvent"><a href="#attemptToDispatchEvent" class="headerlink" title="attemptToDispatchEvent"></a>attemptToDispatchEvent</h2><ol>
+<li>先是获取真正的事件触发元素：e.targe，这里称为nativeEventTarget</li>
+<li>获取nativeEventTarget上的Fiber,即”__reactFiber${Random…}”属性。这里是targetInst.</li>
+<li>处理让targetInst为null的情况。<ol>
+<li>节点被unmounted,即不能通过return属性到达根节点。</li>
+<li>如果最近的mounted是SuspenseCompnent | HostRoot | 最近的mountedFiber  !== targetInst</li>
+</ol>
+</li>
+</ol>
+<p>接下来进入真正的事件调度函数。</p>
+<h2 id="dispatchEventForPluginEventSystem"><a href="#dispatchEventForPluginEventSystem" class="headerlink" title="dispatchEventForPluginEventSystem"></a>dispatchEventForPluginEventSystem</h2><ul>
+<li>在这里面，会有一个mainLoop,去寻找一个root节点，因为在root节点上，会绑定一些事件。</li>
+<li>遍历的方式是从当前节点一直往上（return）.</li>
+<li>最后batchedEventUpdates —&gt; dispatchEventsForPlugins</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DOMPluginEventSystem</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dispatchEventForPluginEventSystem</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  domEventName: DOMEventName,</span></span></span><br><span class="line"><span class="params"><span class="function">  eventSystemFlags: EventSystemFlags,</span></span></span><br><span class="line"><span class="params"><span class="function">  nativeEvent: AnyNativeEvent,</span></span></span><br><span class="line"><span class="params"><span class="function">  targetInst: <span class="literal">null</span> | Fiber, <span class="comment">// 触发事件的Fiber</span></span></span></span><br><span class="line"><span class="params"><span class="function">  targetContainer: EventTarget, <span class="comment">// root</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> ancestorInst = targetInst;</span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    (eventSystemFlags &amp; IS_EVENT_HANDLE_NON_MANAGED_NODE) === <span class="number">0</span> &amp;&amp;</span><br><span class="line">    (eventSystemFlags &amp; IS_NON_DELEGATED) === <span class="number">0</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">const</span> targetContainerNode = targetContainer <span class="keyword">as</span> Node;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (targetInst !== <span class="literal">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> node = targetInst;</span><br><span class="line">      mainLoop: <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="comment">// ...搜索root container</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  batchedEventUpdates(<span class="function">() =&gt;</span></span><br><span class="line">  <span class="comment">// 进入合成事件系统</span></span><br><span class="line">    dispatchEventsForPlugins(</span><br><span class="line">      domEventName,</span><br><span class="line">      eventSystemFlags,</span><br><span class="line">      nativeEvent,</span><br><span class="line">      ancestorInst,</span><br><span class="line">      targetContainer,</span><br><span class="line">    ),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="dispatchEventsForPlugins"><a href="#dispatchEventsForPlugins" class="headerlink" title="dispatchEventsForPlugins"></a>dispatchEventsForPlugins</h2><ul>
+<li>将nativeEvent转换成synthesizeEvent,并加入dispatchQueue，最终processDispatchQueue。</li>
+</ul>
+<p><em>extractEvents:</em></p>
+<blockquote>
+<p>创建DispatchEntry:{event:listeners}，并添加到dispatchQueue</p>
+</blockquote>
+<ol>
+<li>工厂模式确定SyntheticEventCtor</li>
+<li>accumulateSinglePhaseListeners从target到root遍历，获取绑定到props的事件处理函数，添加用户自己添加的事件处理函数到listeners数组里并返回。</li>
+<li>dispatchQueue.push({event,listeners})<br>这里event也就是synthesizeEvent对象，即在事件绑定后的回调函数的默认参数event.</li>
+</ol>
+<p><em>processDispatchQueue:</em></p>
+<blockquote>
+<p>遍历dispatchQueue,处理每个事件的listeners数组</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 调用processDispatchQueueItemsInOrder，执行事件处理函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Array&lt;&#123;</span></span></span></span><br><span class="line"><span class="type"><span class="doctag"><span class="comment"> * event: ReactSyntheticEvent,</span></span></span></span><br><span class="line"><span class="type"><span class="doctag"><span class="comment"> * listeners: Array&lt;&#123;</span></span></span></span><br><span class="line"><span class="type"><span class="doctag"><span class="comment"> * instance: null | Fiber,</span></span></span></span><br><span class="line"><span class="type"><span class="doctag"><span class="comment"> * listener: Function,</span></span></span></span><br><span class="line"><span class="type"><span class="doctag"><span class="comment"> * currentTarget: EventTarget,</span></span></span></span><br><span class="line"><span class="type"><span class="doctag"><span class="comment"> * &#125;</span></span>&gt;&#125;&#125; dispatchQueue</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;EventSystemFlags&#125;</span> <span class="variable">eventSystemFlags</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">processDispatchQueue</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  dispatchQueue: DispatchQueue,</span></span></span><br><span class="line"><span class="params"><span class="function">  eventSystemFlags: EventSystemFlags,</span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> inCapturePhase = (eventSystemFlags &amp; IS_CAPTURE_PHASE) !== <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; dispatchQueue.length; i++) &#123;</span><br><span class="line">    <span class="comment">// &#123; event: ReactSyntheticEvent,listeners: Array &lt; DispatchListener &gt;&#125;;</span></span><br><span class="line">    <span class="keyword">const</span> &#123; event, listeners &#125; = dispatchQueue[i];</span><br><span class="line"></span><br><span class="line">    processDispatchQueueItemsInOrder(event, listeners, inCapturePhase);</span><br><span class="line">    <span class="comment">//  event system doesn&#x27;t use pooling.</span></span><br><span class="line">    <span class="comment">// 事件系统不使用池。</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// This would be a good time to rethrow if any of the event handlers threw.</span></span><br><span class="line">  rethrowCaughtError();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>processDispatchQueueItemsInOrder</li>
+</ul>
+<blockquote>
+<p>根据inCapturePhase判定是capture还是bubble,</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 执行事件队列，根据是否捕获确定事件的执行顺序</span></span><br><span class="line"><span class="comment"> * []dispatchListeners</span></span><br><span class="line"><span class="comment"> * 捕获：重最后一个到第一个</span></span><br><span class="line"><span class="comment"> * 冒泡：重0到最后一个</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;ReactSyntheticEvent&#125;</span> <span class="variable">event</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Array&lt;DispatchListener&gt;&#125;</span> <span class="variable">dispatchListeners</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> <span class="variable">inCapturePhase</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processDispatchQueueItemsInOrder</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  event: ReactSyntheticEvent,</span></span></span><br><span class="line"><span class="params"><span class="function">  dispatchListeners: <span class="built_in">Array</span>&lt;DispatchListener&gt;,</span></span></span><br><span class="line"><span class="params"><span class="function">  inCapturePhase: <span class="built_in">boolean</span>,</span></span></span><br><span class="line"><span class="params"><span class="function"></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> previousInstance;</span><br><span class="line">  <span class="comment">// 捕获</span></span><br><span class="line">  <span class="comment">// 因为添加dispatcher时是从当前然后return到null,所以捕获是倒过来的运行</span></span><br><span class="line">  <span class="keyword">if</span> (inCapturePhase) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = dispatchListeners.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">      <span class="comment">// &#123; instance: null | Fiber,listener: Function,currentTarget: EventTarget&#125;;</span></span><br><span class="line">      <span class="keyword">const</span> &#123; instance, currentTarget, listener &#125; = dispatchListeners[i];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 阻止冒泡stopPropagation</span></span><br><span class="line">      <span class="keyword">if</span> (instance !== previousInstance &amp;&amp; event.isPropagationStopped()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      executeDispatch(event, listener, currentTarget);</span><br><span class="line">      previousInstance = instance;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; dispatchListeners.length; i++) &#123;</span><br><span class="line">      <span class="keyword">const</span> &#123; instance, currentTarget, listener &#125; = dispatchListeners[i];</span><br><span class="line">      <span class="keyword">if</span> (instance !== previousInstance &amp;&amp; event.isPropagationStopped()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      executeDispatch(event, listener, currentTarget);</span><br><span class="line">      previousInstance = instance;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="executeDispatch"><a href="#executeDispatch" class="headerlink" title="executeDispatch"></a>executeDispatch</h2><ul>
+<li>最终调用用户的处理函数,其中包含一些react的invoke函数，以及一些在开发环境下的createEvent事件。</li>
+</ul>
+<blockquote>
+<p>本文还有许多细节没有提到，只是大致说明了事件系统的一个流程</p>
+</blockquote>
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2>
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/Jealh-h">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">github</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/" rel="prev" title="一封阿里云的喝茶邮件">
+      <i class="fa fa-chevron-left"></i> 一封阿里云的喝茶邮件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/07/21/svg%E5%9F%BA%E7%A1%80/" rel="next" title="svg基础">
+      svg基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">开始注册事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">大致流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#listenToAllSupportedEvent"><span class="nav-number">3.</span> <span class="nav-text">listenToAllSupportedEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%91%E5%AE%9Areact%E7%9A%84listener%E5%88%B0root-document%E4%B8%8A"><span class="nav-number">4.</span> <span class="nav-text">绑定react的listener到root || document上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#createEventListenerWrapperWithPriority"><span class="nav-number">5.</span> <span class="nav-text">createEventListenerWrapperWithPriority</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatchEvent"><span class="nav-number">6.</span> <span class="nav-text">dispatchEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#attemptToDispatchEvent"><span class="nav-number">7.</span> <span class="nav-text">attemptToDispatchEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatchEventForPluginEventSystem"><span class="nav-number">8.</span> <span class="nav-text">dispatchEventForPluginEventSystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatchEventsForPlugins"><span class="nav-number">9.</span> <span class="nav-text">dispatchEventsForPlugins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#executeDispatch"><span class="nav-number">10.</span> <span class="nav-text">executeDispatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD"><span class="nav-number">11.</span> <span class="nav-text">未完待续</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jealh"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jealh</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jealh-h" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Jealh-h" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1620175472@qq.com" title="E-Mail → mailto:1620175472@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hu.supreme" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;hu.supreme" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/438345456" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;438345456" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021006217号-1 </a>
+      <img src="/images/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jealh</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">42k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">38 mins.</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="200" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '06Q5US9u81vpeARmCf4LIxPm-gzGzoHsz',
+      appKey     : 'MU9IGOYetUaGvt99dzlmgQTm',
+      placeholder: "说一句吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<!-- hexo injector body_end start -->
+<script src="/js/theme.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jealh.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":280},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="事情还得从这么一道题开始： 1234567let p &#x3D; new Promise((resolve, reject) &#x3D;&gt; &amp;#123;  console.log(&quot;p&quot;);&amp;#125;);setTimeout(() &#x3D;&gt; &amp;#123;  console.log(&quot;setTime&quot;);&amp;#125;, 0);console.log(&quot;en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊JavaScript事件循环">
+<meta property="og:url" content="https://jealh.xyz/2022/01/12/%E8%81%8A%E8%81%8AJavaScript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/index.html">
+<meta property="og:site_name" content="Jealh&#39;s Blog">
+<meta property="og:description" content="事情还得从这么一道题开始： 1234567let p &#x3D; new Promise((resolve, reject) &#x3D;&gt; &amp;#123;  console.log(&quot;p&quot;);&amp;#125;);setTimeout(() &#x3D;&gt; &amp;#123;  console.log(&quot;setTime&quot;);&amp;#125;, 0);console.log(&quot;en">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122218.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122230.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122252.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122258.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122327.png">
+<meta property="article:published_time" content="2022-01-12T15:37:00.000Z">
+<meta property="article:modified_time" content="2022-10-09T16:02:43.655Z">
+<meta property="article:author" content="Jealh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122218.png">
+
+<link rel="canonical" href="https://jealh.xyz/2022/01/12/%E8%81%8A%E8%81%8AJavaScript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>聊聊JavaScript事件循环 | Jealh's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jealh's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+  <div class="theme-toggle"></div>
+  
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jealh's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">𝓣𝓱𝓲𝓼 𝓲𝓼 𝓪 𝓫𝓮𝓪𝓾𝓽𝓲𝓯𝓾𝓵 𝓼𝓾𝓫𝓽𝓲𝓽𝓵𝓮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-address-card fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/friendsLinks/" rel="section"><i class="fa fa-address-book fa-fw"></i>links</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jealh.xyz/2022/01/12/%E8%81%8A%E8%81%8AJavaScript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jealh">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jealh's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          聊聊JavaScript事件循环
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-12 23:37:00" itemprop="dateCreated datePublished" datetime="2022-01-12T23:37:00+08:00">2022-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-10 00:02:43" itemprop="dateModified" datetime="2022-10-10T00:02:43+08:00">2022-10-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/01/12/%E8%81%8A%E8%81%8AJavaScript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/01/12/%E8%81%8A%E8%81%8AJavaScript%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>事情还得从这么一道题开始：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;p&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;setTime&quot;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;end&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>各位想想下面的输出顺序是什么吧？<br>我先说一下我的答案吧：</p>
+<blockquote>
+<p>end<br>p<br>setTime</p>
+</blockquote>
+<p>上面的输出是错误的 😥，我是怎么也不开心啊，于是我就开始翻遍各种资料，其中包括任务、微任务、JavaScript 事件循环、Promise 等等资料。下面就让我来细说吧。</p>
+<span id="more"></span>
+
+<p><strong>首先介绍几个重要的概念。</strong></p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="任务（宏任务）"><a href="#任务（宏任务）" class="headerlink" title="任务（宏任务）"></a>任务（宏任务）</h3><p>任务有以下三类：</p>
+<ul>
+<li>一段新程序或子程序被直接执行时（比如从一个控制台，或在一个 &lt;script&gt; 元素中运行代码）。</li>
+<li>触发了一个事件，将其<strong>回调函数</strong>添加到任务队列时。</li>
+<li>执行到一个由 setTimeout() 或 setInterval() 创建的 timeout 或 interval，以致相应的<strong>回调函数</strong>被添加到任务队列时。</li>
+<li>setImmediate()回调（nodejs）</li>
+<li>I/O</li>
+<li>UI</li>
+<li>postMessage</li>
+<li>requestAnimationFrame</li>
+</ul>
+<h3 id="微任务"><a href="#微任务" class="headerlink" title="微任务"></a>微任务</h3><ul>
+<li>promise.then(callback)中的<strong>callback</strong>。</li>
+<li>MutationObserver</li>
+<li>process.nextTick(Node.js)</li>
+</ul>
+<h3 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h3><p>函数的互相调用会让函数树形成一个调用栈，而函数的执行会按照这个栈来执行，即后进先执行。执行栈会占用 JavaScript 的 run time。</p>
+<h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><p>JavaScript 在运行时，是运行在执行上下文中的，每一个上下文拥有自己的变量、对象，执行上下文有如下几类：</p>
+<ul>
+<li>全局上下文：在 JavaScript 开始执行时便创建，是最基础的上下文。</li>
+<li>函数上下文（局部上下文）：在函数调用时会创建，一个函数的执行，伴随一个函数上下文的产生。</li>
+<li>eval 上下文：使用 eval 函数所创建的上下文。</li>
+</ul>
+<h3 id="JavaScript-RunTime"><a href="#JavaScript-RunTime" class="headerlink" title="JavaScript RunTime"></a>JavaScript RunTime</h3><p>执行 js 代码时，运行时引擎拥有一系列的代理，每一个代理由一系列的执行上下文、执行栈、主线程、附加线程（worker）、任务队列、微任务队列。常见的 JavaScript run time 有 iframe、web worker、JavaScript 主线程。</p>
+<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>事件循环负责收集用事件（包括用户事件以及其他非用户事件等）、对任务进行排队以便在合适的时候执行回调。然后它执行所有处于等待中的 JavaScript 任务（宏任务），然后是微任务，然后在开始下一次循环之前执行一些必要的渲染和绘制操作。每一个 JavaScript run time 都会拥有自己的事件循环，RunTime 里面的代理由事件循环所驱动。<br><strong>事件循环分为三类：</strong></p>
+<h4 id="window-event-loop"><a href="#window-event-loop" class="headerlink" title="window event loop"></a>window event loop</h4><p>驱动同源的窗口（Frame,Tab）的事件循环，来自相同 origin 的 window 可能共享同一个事件循环</p>
+<h4 id="worker-event-loop"><a href="#worker-event-loop" class="headerlink" title="worker event loop"></a>worker event loop</h4><p>驱动 worker 执行（web workers、 shared workers、service workers）worker 拥有一个或多个与主程序不同的代理。</p>
+<h4 id="worklet-event-loop"><a href="#worklet-event-loop" class="headerlink" title="worklet event loop"></a>worklet event loop</h4><p>驱动 worklet 代理的运行。worklet 的类型包括（Worklet、AudioWorklet、PaintWorklet）。</p>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p>一种异步 JavaScript 的解决方案，是对异步方法的返回值的一种描述，用于在将来某个时刻将异步结果返回给使用者，最重要的一点是通过 then 链式调用。</p>
+<h2 id="事件循环机制"><a href="#事件循环机制" class="headerlink" title="事件循环机制"></a>事件循环机制</h2><p>在每一轮事件循环开始时，RunTime 会从任务队列里面取出任务来执行，如果任务里面又添加了新任务到队列里面，新任务不会再本轮事件循环里去执行。当一个任务执行完弹出任务队列时，并且执行栈位空时，这时会开始执行微任务队列，微任务不会像任务那样每次只执行一个，而是将微任务队列里的微任务执行完，即使是在执行微任务时有新的微任务加入到微任务队列，在下一个任务开始以及事件循环迭代结束之前依然会执行微任务。<br>OK，说到这儿，我们就可以来分析以下刚才的题了。</p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;p&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;setTime&quot;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;end&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>最开始：</strong>将整体代码（一段新程序）加入任务队列。此时的 JavaScript RunTime 的情况如下图：<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122218.png" alt="1"></p>
+<p>此时任务队列里面仅有整体程序，而微任务队列里面什么也没有。整体程序将进入执行栈中执行。<br><strong>创建 promise 对象：</strong>在创建 promise 对象时，传入了可选参数即：</p>
+<blockquote>
+<p>(resolve,reject)=&gt;{<br>console.log(‘p’);<br>}</p>
+</blockquote>
+<p>而 Promise 构造器将会在返回新对象之前执行传入的函数参数。所以在执行栈中会执行 console.log(‘p’)，打印出 ‘p’。<br><strong>执行定时器：</strong>执行定时器，会在传入的延迟时间之后将回调函数加入队列，加入什么队列呢，这里加入的是任务队列，因为 settimeoout 的回调属于宏任务。之后，当前执行栈不为空，会继续执行。<br><strong>打印 end:<strong>在执行 console.log(‘end’)后，现在执行栈为空了，整体程序弹出任务队列。此时任务队列是</strong>不为空的</strong>（包含定时器的回调()=&gt;{console.log(‘setTime’)}）</p>
+<p>此时的 JavaScript RunTime 的情况如下图：<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122230.png" alt="2"><br>这时的任务队列包括定时器的回调，而微任务队列依然为空（这道题就没涉及到微任务。。。）。随后定时器回调将进入执行栈，打印出 setTime。所以最终的打印结果为：</p>
+<blockquote>
+<p>p<br>end<br>setTime</p>
+</blockquote>
+<p><strong>这里就注意 promise 的构建就行了，是立即执行，我错的是应为它会进入微任务队列。而 Promise 进入微任务的是 then 的回调函数。</strong></p>
+<h2 id="扩展题目"><a href="#扩展题目" class="headerlink" title="扩展题目"></a>扩展题目</h2><p>上面的题没有涉及微任务，那我们改改原题目看看：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p_2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">res, rej</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;p_2&quot;</span>);</span><br><span class="line">  <span class="comment">// 定时器1</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    res(<span class="string">&quot;定时器1&quot;</span>);</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">v</span>) =&gt;</span> <span class="built_in">console</span>.log(v));</span><br><span class="line"><span class="comment">// 定时器2</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;定时器2&quot;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;end&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>上面新增的是在创建 Promise 对象时增加了一个定时器，以及增加了对 then 的回调。<br>依旧从整体程序开始，进入任务队列，当整体程序执行完时，这时的 RunTime 情况如下：<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122252.png" alt="3"><br>此时输出为：</p>
+<blockquote>
+<p>p_2<br>end</p>
+</blockquote>
+<p>按照队列先进先出，定时器 1 先进入队列，所以其先于定时器 2 执行。此时定时器 1 的回调进入执行栈执行，执行 res(‘定时器 1’)改变 promise 的状态为 resolve,将 then 的回调加入微任务队列，此时 RunTime 的情况如下：<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122258.png" alt="4"></p>
+<p>定时器 1 执行完毕弹出任务队列，一个任务执行完后，检索微任务队列，这时微任务队列存在一个 then 回调，所以将其加入执行栈。</p>
+<p>现在的输出是：</p>
+<blockquote>
+<p>p_2<br>end<br>定时器 1</p>
+</blockquote>
+<p>最终，只剩下了任务队列的定时器 2 回调，重复时间循环，将定时器 2 的回调加入执行栈并执行。最终的输出结果为：</p>
+<blockquote>
+<p>p_2<br>end<br>定时器 1<br>定时器 2</p>
+</blockquote>
+<p>上面这题就说明了一个任务弹出任务队列后会执行微任务队列的任务，可是在上面的概念一章中还提到了一个任务出队列后是要执行所有的微任务，而上面的那一题只有一个微任务看不出什么蹊跷，那么我们再改一下吧。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p_2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">res, rej</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;p_2&quot;</span>);</span><br><span class="line">  <span class="comment">// 定时器1</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    res(<span class="string">&quot;定时器1&quot;</span>);</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;微任务开始&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">window</span>.queueMicrotask(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 函数的内容</span></span><br><span class="line">      <span class="built_in">console</span>.log(i);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 定时器2</span></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;定时器2&quot;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;end&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这次我们更改了 then 的回调，使用了 window.queueMicrotask()来添加回调到微任务队列。这次是添加五个输出到微任务队列里面。顺着上一题的思路，我们只需将上一题的输出<strong>‘定时器 1’</strong>更改一下就行了。按照一次执行掉所有微任务的结论，我们可以作出如下更改。</p>
+<blockquote>
+<p>p_2<br>end<br>微任务开始<br>0<br>1<br>2<br>3<br>4<br>定时器 2</p>
+</blockquote>
+<p>在 chrome 里面试一下吧：）<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202201122327.png" alt="5"></p>
+<p>可以看见，结论正确。</p>
+<p><strong>参考：</strong><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide">https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth">https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth</a></p>
+
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/Jealh-h">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">github</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="prev" title="2021年终总结">
+      <i class="fa fa-chevron-left"></i> 2021年终总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/" rel="next" title="一封阿里云的喝茶邮件">
+      一封阿里云的喝茶邮件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%EF%BC%88%E5%AE%8F%E4%BB%BB%E5%8A%A1%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">任务（宏任务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.2.</span> <span class="nav-text">微任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%A0%88"><span class="nav-number">1.3.</span> <span class="nav-text">执行栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">1.4.</span> <span class="nav-text">执行上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-RunTime"><span class="nav-number">1.5.</span> <span class="nav-text">JavaScript RunTime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.6.</span> <span class="nav-text">事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#window-event-loop"><span class="nav-number">1.6.1.</span> <span class="nav-text">window event loop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#worker-event-loop"><span class="nav-number">1.6.2.</span> <span class="nav-text">worker event loop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#worklet-event-loop"><span class="nav-number">1.6.3.</span> <span class="nav-text">worklet event loop</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">1.7.</span> <span class="nav-text">Promise</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">事件循环机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%A2%98%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">扩展题目</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jealh"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jealh</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jealh-h" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Jealh-h" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1620175472@qq.com" title="E-Mail → mailto:1620175472@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hu.supreme" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;hu.supreme" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/438345456" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;438345456" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021006217号-1 </a>
+      <img src="/images/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jealh</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">42k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">38 mins.</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="200" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '06Q5US9u81vpeARmCf4LIxPm-gzGzoHsz',
+      appKey     : 'MU9IGOYetUaGvt99dzlmgQTm',
+      placeholder: "说一句吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<!-- hexo injector body_end start -->
+<script src="/js/theme.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>

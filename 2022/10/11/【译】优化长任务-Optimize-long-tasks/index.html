@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jealh.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":280},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="原文：https:&#x2F;&#x2F;web.dev&#x2F;optimize-long-tasks&#x2F;  你曾被告诉过，不要阻塞主线程并且分解你的长任务，但是有想过这样做的意义吗？  如果你读了很多关于网站性能的资料, 保持 JavasScript 应用程序快速运行的建议往往涉及以下的建议：  不要阻塞主线程 分解你的长任务  那这些意味着什么？减少 JavaScript 是好的，但这是否自动等同在整个页面生命周期中更快">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【译】优化长任务 Optimize long tasks">
+<meta property="og:url" content="https://jealh.xyz/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/index.html">
+<meta property="og:site_name" content="Jealh&#39;s Blog">
+<meta property="og:description" content="原文：https:&#x2F;&#x2F;web.dev&#x2F;optimize-long-tasks&#x2F;  你曾被告诉过，不要阻塞主线程并且分解你的长任务，但是有想过这样做的意义吗？  如果你读了很多关于网站性能的资料, 保持 JavasScript 应用程序快速运行的建议往往涉及以下的建议：  不要阻塞主线程 分解你的长任务  那这些意味着什么？减少 JavaScript 是好的，但这是否自动等同在整个页面生命周期中更快">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.23.12.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.42.24.png">
+<meta property="og:image" content="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/8Bhl9Ilki4tM0aC1nfn8.png?auto=format&w=1600">
+<meta property="og:image" content="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0yV0ynwW7FujIwvCbCxQ.png?auto=format&w=1600">
+<meta property="og:image" content="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0c61l5DCix9y0GBa3pFj.png?auto=format&w=1600">
+<meta property="og:image" content="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/wg0FW6S29CzOCbbwk9kK.png?auto=format&w=1600">
+<meta property="og:image" content="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/snMl3kRlWyJjdbL0qsqM.png?auto=format&w=1600">
+<meta property="og:image" content="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/ttvI1HqusI02CAdqhjWP.png?auto=format&w=1600">
+<meta property="og:image" content="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/fyuvJqAV0mLxfZDM9tAm.png?auto=format&w=1294">
+<meta property="article:published_time" content="2022-10-11T14:42:10.000Z">
+<meta property="article:modified_time" content="2022-12-28T09:36:03.182Z">
+<meta property="article:author" content="Jealh">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.23.12.png">
+
+<link rel="canonical" href="https://jealh.xyz/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>【译】优化长任务 Optimize long tasks | Jealh's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jealh's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+  <div class="theme-toggle"></div>
+  
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jealh's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">𝓣𝓱𝓲𝓼 𝓲𝓼 𝓪 𝓫𝓮𝓪𝓾𝓽𝓲𝓯𝓾𝓵 𝓼𝓾𝓫𝓽𝓲𝓽𝓵𝓮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-address-card fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/friendsLinks/" rel="section"><i class="fa fa-address-book fa-fw"></i>links</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jealh.xyz/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jealh">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jealh's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【译】优化长任务 Optimize long tasks
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-11 22:42:10" itemprop="dateCreated datePublished" datetime="2022-10-11T22:42:10+08:00">2022-10-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-28 17:36:03" itemprop="dateModified" datetime="2022-12-28T17:36:03+08:00">2022-12-28</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>原文：<a target="_blank" rel="noopener" href="https://web.dev/optimize-long-tasks/">https://web.dev/optimize-long-tasks/</a></p>
+<blockquote>
+<p>你曾被告诉过，不要阻塞主线程并且分解你的长任务，但是有想过这样做的意义吗？</p>
+</blockquote>
+<p>如果你读了很多关于网站性能的资料, 保持 JavasScript 应用程序快速运行的建议往往涉及以下的建议：</p>
+<ul>
+<li>不要阻塞主线程</li>
+<li>分解你的长任务</li>
+</ul>
+<p>那这些意味着什么？减少 JavaScript 是好的，但这是否自动等同在整个页面生命周期中更快速的用户界面？也许是，也许不是.</p>
+<span id="more"></span>
+
+<h2 id="一个-task-是什么样的？"><a href="#一个-task-是什么样的？" class="headerlink" title="一个 task 是什么样的？"></a>一个 task 是什么样的？</h2><p>一个 task 是浏览器所做的任何离散的工作，task 包括解析 HTML 和 CSS, 运行 JavaScript 代码, 以及一些你不能直接控制的事情。对于所有的这些，你所编写的并且部署到服务器的 JavaScript 是主要的任务来源。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.23.12.png" alt="img_1"></p>
+<p>Tasks 以多种方式影响性能。例如，当浏览器在启动时下载 js 文件时，浏览器将任务进行排队并且编译 js 以让其能被执行。然后在页面的生命周期中，（例如通过事件处理程序驱动交互、JavaScript 驱动的动画和后台活动（例如分析收集））启动任务。所有的这些东西，除了 web worker 和类似的 API 都发生在主线程上。</p>
+<h2 id="主线程是什么-？"><a href="#主线程是什么-？" class="headerlink" title="主线程是什么 ？"></a>主线程是什么 ？</h2><p>主线程是大多数任务在浏览器中运行的地方。它被称为主线程的原因是：它是您编写的几乎所有 JavaScript 都在这个线程中工作。</p>
+<p>主线程一次只能处理一个任务。当任务超出某个确定的点（准确来说是 50ms ）时,它们被归类为长任务。如果用户在长时间的任务运行时尝试与页面交互 — 或者如果需要进行重要的渲染更新 — 浏览器将延迟处理该工作。这会导致交互或渲染延迟。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.42.24.png" alt="img_2"></p>
+<p><em style="font-size:12px">Chrome浏览器的性能分析器中描述的长任务。长任务的角落里有一个红色的三角形，任务的阻塞部分用对角线的红色条纹填充</em></p>
+<p>你需要分解任务。这意味着将一个长任务划分为较小的任务，这些任务单独运行所需的时间更少。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/8Bhl9Ilki4tM0aC1nfn8.png?auto=format&w=1600" alt="img_3"></p>
+<p><em style="font-size:12px">单个长任务与同一任务分解为五个较短任务的可视化</em></p>
+<p>这很重要，因为当任务被分解时，浏览器有更多机会响应更高优先级的工作——包括用户交互。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0yV0ynwW7FujIwvCbCxQ.png?auto=format&w=1600" alt="img_3"></p>
+<p><em style="font-size:12px">当任务太长，浏览器不能对互动做出足够快的反应时，与将较长的任务分解成较小的任务时相比，互动会发生什么样的情况，这是一个可视化的结果</em></p>
+<p>如上图的上半部分所述，由用户交互排队的事件处理程序必须等待一个长任务才能运行。这延迟了交互的发生。在下半部分，事件处理程序有机会更快地运行。因为事件处理程序有机会在较小的任务之间运行。它运行得比它必须等待一个很长的任务完成要快。在上半部分中，用户可能已经感受到了延迟，在下半部分，交互可能是即时的。</p>
+<p>然而，问题在于 “分解你的长任务” 和 “不要阻塞主线程”的建议不够具体,除非你已经知道如何做这些事情，这就是本指南将要解释的内容。</p>
+<h2 id="任务管理策略"><a href="#任务管理策略" class="headerlink" title="任务管理策略"></a>任务管理策略</h2><p>在软件架构中，一个常见建议是将您的工作分解更小的功能。这为您提供了更好的代码可读性和项目可维护性的好处。这使得测试更容易编写。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  validateForm();</span><br><span class="line">  showSpinner();</span><br><span class="line">  saveToDatabase();</span><br><span class="line">  updateUI();</span><br><span class="line">  sendAnalytics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，这里的 saveSettings 函数，在它调用时，它调用了其他五个函数。从概念上讲，这是很好的架构，如果你需要调试这些函数中的一个，你可以便利项目树以弄清每个函数的作用。</p>
+<p>然而，问题在于 JavaScript 不会将这些函数中的每一个作为单独的任务运行，因为它们是在 savaSettings 函数中执行的。<strong>这意味着所有五个功能都作为单独任务运行。</strong></p>
+<blockquote>
+<p>JavaScript 以这种方式工作是因为它使用任务执行的运行到完成模型。这意味着每个任务将一直运行到完成，无论它阻塞主线程多长时间。</p>
+</blockquote>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0c61l5DCix9y0GBa3pFj.png?auto=format&w=1600" alt="img_4"></p>
+<p><em style="font-size:12px">调用五个函数的单个函数 saveSettings()。这项工作是作为一项长期的整体任务的一部分运行的</em></p>
+<p>在最好的情况下，即使只是这些功能中的一个，也可以为任务的总长度贡献50毫秒或更多。在最坏的情况下，更多的这些任务可以运行相当长的时间–特别是在资源有限的设备上。下面是一套策略，你可以用来分解和优先处理任务。</p>
+<h2 id="手动延迟代码执行"><a href="#手动延迟代码执行" class="headerlink" title="手动延迟代码执行"></a>手动延迟代码执行</h2><p>开发人员使用的一种将任务分解成小任务的方法涉及到 setTimeout(). 使用这种技术，你把函数传给 setTimeout 这将回调的执行推迟到一个单独的任务中，即时你指定的时间为 0。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 完成用户可见的关键工作:</span></span><br><span class="line">  validateForm();</span><br><span class="line">  showSpinner();</span><br><span class="line">  updateUI();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将用户不可见的工作推迟到单独的任务:</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    saveToDatabase();</span><br><span class="line">    sendAnalytics();</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果您有一系列需要按顺序运行的函数，这很有效，但您的代码可能并不总是以这种方式组织。例如，您可能有大量数据需要循环处理，如果您有数百万个项目，该任务可能需要很长时间。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processData</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> largeDataArray) &#123;</span><br><span class="line">    <span class="comment">// Process the individual item here.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 setTimeout 是存在问题的, 因为它的人机工程学（这是什么意思🤔，原文：ergonomics）使其难以实现，并且整个数据数组可能需要很长时间处理，即使每个项目都可以非常快速地处理。这一切加起来，setTimeout 不是合适的工具，至少在这样使用时不是。</p>
+<p>除了 setTimeout 之外，还有一些其他 API 允许您将代码执行推迟到后续任务。 一种方法是使用 postMessage 来加快超时。您也可以使用 requestIdleCallback() 来分解工作。 但是要注意 – requestIdleCallback() 以尽可能低的优先级安排任务，而且只在浏览器空闲时间内进行。当主线程拥挤时,用 requestIdleCallback() 安排的任务可能永远无法运行。</p>
+<h2 id="使用-async-await-yield-points"><a href="#使用-async-await-yield-points" class="headerlink" title="使用 async/await yield points"></a>使用 async/await yield points</h2><p>在本指南的其余部分，你会看到一个短语是 “yield to the main thread”，但是，这意味着什么？为什么你要这么做？你什么时候该这样做？</p>
+<blockquote>
+<p>当你 yield to the main thread，你会给它一个机会来处理比当前排队的任务更重要的任务。理想情况下（ideally），当你有一些关键的面向用户的工作，需要比 yield 更早地执行时，你应该 yield main thread，yield main thread 可以为关键工作创造机会，使其更快地运行。</p>
+</blockquote>
+<p>当任务被分解时，其他任务可以通过浏览器内部优先级方案更好地进行优先级排序。yield main thread 的方法涉及到使用一个 Promise 的组合，该组合与对 setTimeout() 进行的调用进行解析。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">yieldToMain</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, <span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>虽然这个代码实例返回了一个在调用 setTimeout 后解析的 Promise, 但负责在新任务中运行奇遇代码的并不是这个 Promise，而是 setTimeout 调用。Promise 回调作为微任务而不是任务运行，因此不会 yield main thread</p>
+</blockquote>
+<p>在 saveSettings() 函数中，如果在每次函数调用后 await yieldToMain() 函数，则可以在每次工作后 yield to the main</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create an array of functions to run:</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop over the tasks:</span></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Shift the first task off the tasks array:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Yield to the main thread:</span></span><br><span class="line">    <span class="keyword">await</span> yieldToMain();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>你不必在每次函数调用后都 yield。例如，如果你运行的两个函数会导致用户界面的关键性更新，你可能不想在它们之间 yield。如果可以的话，让这些 tast 先运行，然后考虑在那些不那么关键的或用户看不到的后台工作的函数之间进行 yield。</p>
+</blockquote>
+<p>结果是曾经单一的任务现在被分解为单独的任务</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/wg0FW6S29CzOCbbwk9kK.png?auto=format&w=1600" alt="img_5"></p>
+<p><em style="font-size:12px">saveSettings() 函数现在将其子函数作为单独的任务执行。</em></p>
+<p>使用基于 Promise 的方法来产生而不是手动使用 setTimeout() 的好处是更好的人体工程学。屈服点成为声明性的，因此更容易编写、阅读和理解。</p>
+<h2 id="仅在必要时-yield"><a href="#仅在必要时-yield" class="headerlink" title="仅在必要时 yield"></a>仅在必要时 yield</h2><p>如果您有一堆任务，但您只想在用户尝试与页面交互时让步怎么办？这就是 isInputPending() 的用途。</p>
+<p>isInputPending() 是一个您可以随时运行以确定用户是否正在尝试与页面元素交互的函数：对 isInputPending() 的调用将返回 true。否则返回 false。</p>
+<p>假设您可有一个需要运行的任务队列，但您不想妨碍任何输入。这段代码 — 它同时使用了 isInputPending() 函数 — 确保在用户尝试与页面交互时输入不会被延迟。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// A task queue of functions</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Yield to a pending user input:</span></span><br><span class="line">    <span class="keyword">if</span> (navigator.scheduling.isInputPending()) &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s a pending user input. Yield here:</span></span><br><span class="line">      <span class="keyword">await</span> yieldToMain();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// Shift the the task out of the queue:</span></span><br><span class="line">      <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Run the task:</span></span><br><span class="line">      task();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当 saveSettings() 运行时，它将遍历队列中的任务。如果 isInputPending() 在循环期间返回 true，则 saveSettings() 将调用 yieldToMain() 以便处理用户输入。否则，它将把下一个任务移出队列的前面并继续运行它。它将执行此操作，直到没有其他任务为止。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/snMl3kRlWyJjdbL0qsqM.png?auto=format&w=1600" alt="img_5"></p>
+<p><em style="font-size:12px">saveSettings()运行一个有五个任务的任务队列，但在第二个工作项运行时，用户已经点击打开了一个菜单。 isInputPending()让位于主线程来处理这个交互，并恢复运行其余的任务。</em></p>
+<blockquote>
+<p>isInputPending()不一定在用户输入后立即返回true。这是因为操作系统需要时间来告诉浏览器发生了交互。这意味着其他代码可能已经开始执行了（正如你在上面的截图中看到的saveToDatabase()函数）。即使你使用isInputPending()，你仍然要限制每个函数的工作量，这是至关重要的。</p>
+</blockquote>
+<p>将 isInputPending() 与让步机制结合使用是让浏览器停止其正在处理的任何任务以响应关键的面向用户的交互的好方法。这可以帮助提高您的页面在许多任务正在进行时在许多情况下响应用户的能力。</p>
+<p>另一种使用isInputPending()的方法–特别是如果你担心为不支持它的浏览器提供退路–是使用基于时间的方法与 可选链操作符 （?.）</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// A task queue of functions</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> deadline = performance.now() + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Optional chaining operator used here helps to avoid</span></span><br><span class="line">    <span class="comment">// errors in browsers that don&#x27;t support `isInputPending`:</span></span><br><span class="line">    <span class="keyword">if</span> (navigator.scheduling?.isInputPending() || performance.now() &gt;= deadline) &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s a pending user input, or the</span></span><br><span class="line">      <span class="comment">// deadline has been reached. Yield here:</span></span><br><span class="line">      <span class="keyword">await</span> yieldToMain();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Extend the deadline:</span></span><br><span class="line">      deadline += <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Stop the execution of the current loop and</span></span><br><span class="line">      <span class="comment">// move onto the next iteration:</span></span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Shift the the task out of the queue:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方法，你可以为不支持isInputPending()的浏览器提供一个后备方案，即使用（并调整）一个截止日期，以便在必要时将工作分开，无论是通过屈服于用户输入，还是在某个时间点之前。</p>
+<h2 id="当前-api-的差异"><a href="#当前-api-的差异" class="headerlink" title="当前 api 的差异"></a>当前 api 的差异</h2><p>到目前为止提到的API可以帮助你分解任务，但它们有一个显著的缺点：当你通过推迟代码在后续任务中运行而屈服于主线程时，该代码会被添加到任务队列的最末端。</p>
+<p>如果你控制了你页面上的所有代码，就有可能创建你自己的scheduler （参考 react 吗，😯），并能对任务进行优先排序，但第三方脚本不会使用你的调度器。实际上，在这样的环境中，你并不能真正地对工作进行优先排序。你只能把它分成几块，或者明确地屈从于用户的互动。</p>
+<p>幸运的是，目前有一个专门的调度器API正在开发中，可以解决这些问题。</p>
+<h2 id="一个专门的调度程序API"><a href="#一个专门的调度程序API" class="headerlink" title="一个专门的调度程序API"></a>一个专门的调度程序API</h2><p>调度器API目前提供了postTask()函数，在撰写本文时，该函数在Chromium浏览器和Firefox的一个标志后面可用。 postTask()允许对任务进行更精细的调度，是帮助浏览器确定工作优先级的一种方法，这样低优先级的任务就会让位于主线程。 postTask()使用 Promise，并接受一个优先级设置。</p>
+<p>postTask() API 具有三个可以使用的 priorities</p>
+<ul>
+<li>‘background’ : 最低优先级任务。</li>
+<li>‘user-visible’ : 中等优先级任务，“用户可见”，如果没有设置优先级，这是默认设置。</li>
+<li>‘user-blocking’: 用于需要高优先级运行的关键任务。</li>
+</ul>
+<p>以下面的代码为例，postTask()API被用来以尽可能高的优先级运行三个任务，并以尽可能低的优先级运行其余两个任务。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Validate the form at high priority</span></span><br><span class="line">  scheduler.postTask(validateForm, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Show the spinner at high priority:</span></span><br><span class="line">  scheduler.postTask(showSpinner, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update the database in the background:</span></span><br><span class="line">  scheduler.postTask(saveToDatabase, &#123;<span class="attr">priority</span>: <span class="string">&#x27;background&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update the user interface at high priority:</span></span><br><span class="line">  scheduler.postTask(updateUI, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Send analytics data in the background:</span></span><br><span class="line">  scheduler.postTask(sendAnalytics, &#123;<span class="attr">priority</span>: <span class="string">&#x27;background&#x27;</span>&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在这里，任务的优先级以浏览器优先级任务（例如用户交互）可以正常工作的方式安排。</p>
+<div style="color:red">子任务执行顺序差异</div>
+
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/ttvI1HqusI02CAdqhjWP.png?auto=format&w=1600" alt="img_6"></p>
+<p><em style="font-size:12px">当saveSettings()运行时，该函数使用postTask()对各个函数进行调度。面向用户的关键工作被安排在高优先级，而用户不知道的工作被安排在后台运行。这使得用户交互的执行速度更快，因为工作被分割开来并被适当地安排了优先次序。</em></p>
+<p>这是一个如何使用 postTask() 的简单示例。可以实例化不同的 TaskController 对象，这些对象可以在任务之间共享优先级，包括根据需要更改不同 TaskController 实例的优先级的能力。</p>
+<blockquote>
+<p>并非所有浏览器都支持 postTask()。您可以使用特征检测来查看它是否可用，或者考虑使用 polyfill</p>
+</blockquote>
+<h2 id="内置的-yield"><a href="#内置的-yield" class="headerlink" title="内置的 yield"></a>内置的 yield</h2><p>调度器API的一个拟议的部分，目前没有在任何浏览器中实现，就是一个内置的 yield 机制。它的使用类似于本文前面演示的 yieldToMain() 函数。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create an array of functions to run:</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop over the tasks:</span></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Shift the first task off the tasks array:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Yield to the main thread with the scheduler</span></span><br><span class="line">    <span class="comment">// API&#x27;s own yielding mechanism:</span></span><br><span class="line">    <span class="keyword">await</span> scheduler.yield();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>您会注意到，上面的代码非常熟悉，但是您没有使用 yieldToMain()，而是调用并等待 scheduler.yield()。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/fyuvJqAV0mLxfZDM9tAm.png?auto=format&w=1294" alt="img_7"></p>
+<p><em style="font-size:12px">一个没有yield、yield、yield 和 continuation 的任务执行的可视化图。当使用scheduler.yield()时，任务的执行甚至在屈服点之后还能继续执行。</em></p>
+<p>scheduler.yield() 的好处是continuation，这意味着如果你在一组任务中间yield，其他的计划任务会在yield点之后以同样的顺序继续执行。这可以避免第三方脚本中的代码篡夺您的代码执行顺序。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>管理任务是具有挑战性的，但这样做有助于你的页面对用户的互动作出更快速的反应。在管理和确定任务的优先次序方面，没有单一的建议。相反，它是一些不同的技术。重申一下，这些是你在管理任务时要考虑的主要事项。</p>
+<ul>
+<li><p>让给主线程以完成关键的、面向用户的任务。</p>
+</li>
+<li><p>当用户尝试与页面交互时，使用 isInputPending() 让步给主线程。</p>
+</li>
+<li><p>使用 postTask() 对任务进行优先级排序。</p>
+</li>
+<li><p>最后，在你的函数中做尽可能少的工作。</p>
+</li>
+</ul>
+<p>有了这些工具中的一个或多个，你应该能够在你的应用程序中构造工作，使其优先考虑用户的需求，同时确保不太关键的工作仍然能够完成。这将创造一个更好的用户体验，它的响应速度更快，使用起来更愉快。</p>
+<p>Special thanks to Philip Walton for his technical vetting of this article.</p>
+<p>Hero image sourced from Unsplash, courtesy of Amirali Mirhashemian.</p>
+
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/Jealh-h">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">github</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/11/Scroll-%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0/" rel="prev" title="Scroll 开发小记">
+      <i class="fa fa-chevron-left"></i> Scroll 开发小记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/31/2022-%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" rel="next" title="2022 年终总结">
+      2022 年终总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA-task-%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">一个 task 是什么样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88-%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">主线程是什么 ？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5"><span class="nav-number">3.</span> <span class="nav-text">任务管理策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E5%BB%B6%E8%BF%9F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C"><span class="nav-number">4.</span> <span class="nav-text">手动延迟代码执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-async-await-yield-points"><span class="nav-number">5.</span> <span class="nav-text">使用 async&#x2F;await yield points</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%85%E5%9C%A8%E5%BF%85%E8%A6%81%E6%97%B6-yield"><span class="nav-number">6.</span> <span class="nav-text">仅在必要时 yield</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%93%E5%89%8D-api-%E7%9A%84%E5%B7%AE%E5%BC%82"><span class="nav-number">7.</span> <span class="nav-text">当前 api 的差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E4%B8%93%E9%97%A8%E7%9A%84%E8%B0%83%E5%BA%A6%E7%A8%8B%E5%BA%8FAPI"><span class="nav-number">8.</span> <span class="nav-text">一个专门的调度程序API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E7%9A%84-yield"><span class="nav-number">9.</span> <span class="nav-text">内置的 yield</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jealh"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jealh</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jealh-h" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Jealh-h" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1620175472@qq.com" title="E-Mail → mailto:1620175472@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hu.supreme" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;hu.supreme" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/438345456" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;438345456" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021006217号-1 </a>
+      <img src="/images/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jealh</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">42k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">38 mins.</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="200" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '06Q5US9u81vpeARmCf4LIxPm-gzGzoHsz',
+      appKey     : 'MU9IGOYetUaGvt99dzlmgQTm',
+      placeholder: "说一句吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<!-- hexo injector body_end start -->
+<script src="/js/theme.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>

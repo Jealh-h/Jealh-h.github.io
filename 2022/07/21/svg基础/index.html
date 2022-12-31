@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jealh.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":280},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="定义svg（Scalable Vector Graphics）可缩放的矢量图形，是 W3C XML 的分支语言之一，用于标记可缩放的矢量图形。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="svg基础">
+<meta property="og:url" content="https://jealh.xyz/2022/07/21/svg%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Jealh&#39;s Blog">
+<meta property="og:description" content="定义svg（Scalable Vector Graphics）可缩放的矢量图形，是 W3C XML 的分支语言之一，用于标记可缩放的矢量图形。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-21T07:52:53.000Z">
+<meta property="article:modified_time" content="2022-10-09T16:02:43.651Z">
+<meta property="article:author" content="Jealh">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://jealh.xyz/2022/07/21/svg%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>svg基础 | Jealh's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jealh's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+  <div class="theme-toggle"></div>
+  
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jealh's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">𝓣𝓱𝓲𝓼 𝓲𝓼 𝓪 𝓫𝓮𝓪𝓾𝓽𝓲𝓯𝓾𝓵 𝓼𝓾𝓫𝓽𝓲𝓽𝓵𝓮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-address-card fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/friendsLinks/" rel="section"><i class="fa fa-address-book fa-fw"></i>links</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jealh.xyz/2022/07/21/svg%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jealh">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jealh's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          svg基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-21 15:52:53" itemprop="dateCreated datePublished" datetime="2022-07-21T15:52:53+08:00">2022-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-10 00:02:43" itemprop="dateModified" datetime="2022-10-10T00:02:43+08:00">2022-10-10</time>
+              </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/07/21/svg%E5%9F%BA%E7%A1%80/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2022/07/21/svg%E5%9F%BA%E7%A1%80/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>svg（Scalable Vector Graphics）可缩放的矢量图形，是 W3C XML 的分支语言之一，用于标记可缩放的矢量图形。</p>
+<span id="more"></span>
+
+<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>定义的命名空间可以把通配、元素、属性选择器限制在指定命名空间里的元素。</p>
+<h3 id="声明命名空间"><a href="#声明命名空间" class="headerlink" title="声明命名空间"></a>声明命名空间</h3><p>使用xmlns属性进行命名空间的声明，下面的声明意味着svg以及它的子节点都属于“<a target="_blank" rel="noopener" href="http://www.w3.org/2000/svg%E2%80%9D%E8%BF%99%E4%B8%AAsvg%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E3%80%82">http://www.w3.org/2000/svg”这个svg命名空间。</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SVG-元素"><a href="#SVG-元素" class="headerlink" title="SVG 元素"></a>SVG 元素</h2><p>See more：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element#svg_%E5%85%83%E7%B4%A0%EF%BC%88%E6%8C%89%E7%B1%BB%E5%88%AB%E5%88%86%E7%B1%BB%EF%BC%89">mdn-svg元素参考</a></p>
+<blockquote>
+<p>上面列出了一些常见以及常用的svg元素，下面我们可以来看看它们是什么样子的以及怎么改变它们的属性。</p>
+</blockquote>
+<h2 id="图形元素"><a href="#图形元素" class="headerlink" title="图形元素"></a>图形元素</h2><h3 id="基础图形元素"><a href="#基础图形元素" class="headerlink" title="基础图形元素"></a>基础图形元素</h3><iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/RwMVwNE?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/RwMVwNE"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h3 id="线段属性"><a href="#线段属性" class="headerlink" title="线段属性"></a>线段属性</h3><p>对于stroke填充的线段来说，stroke-dasharray与stroke-dashoffset是两个比较有用的属性。</p>
+<ul>
+<li>  stroke-dasharray：控制用控制线段实线与虚线的单元长度。</li>
+</ul>
+<!---->
+
+<ul>
+<li>  stroke-dasharray：控制虚线的偏移</li>
+</ul>
+<blockquote>
+<p>stroke-dasharray结合animate的例子</p>
+</blockquote>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/ZExoMmN?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/ZExoMmN"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>使用stroke-dashoffset与animateTransform、animate绘制加载动画</p>
+</blockquote>
+<p>用animate控制stroke-dashoffset虚线部分的偏移，同时animateTransform控制整个圆环的自转。</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/ExELqMa?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/ExELqMa"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<blockquote>
+<p>心电图</p>
+</blockquote>
+<p>这里主要思路就是使用polyline绘制折线图，使用stroke-dasharray绘制虚线，stroke-dashoffset控制虚线空白处的偏移，然后用animate控制stroke-dashoffset的值，就能看见这种线段移动的效果了🫥</p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/qBoYyxL?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/qBoYyxL"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h3 id="强大的path元素"><a href="#强大的path元素" class="headerlink" title="强大的path元素"></a>强大的path元素</h3><p>上面的基本图形都是可以用path来创建的，而path的功能远远不止上面这些图形😏。path元素的形状通过属性d来定义，属性d的值是一个“命令+参数”的序列。下面就列出了一些常用的命令。</p>
+<h4 id="直线命令"><a href="#直线命令" class="headerlink" title="直线命令"></a>直线命令</h4><ol>
+<li><p>Moveto</p>
+<ul>
+<li> <code>M x,y</code> 在这里x和y是绝对坐标，分别代表水平坐标和垂直坐标。</li>
+<li> <code>m dx,dy</code> 在这里dx和dy是相对于当前点的距离，分别是向右和向下的距离。</li>
+</ul>
+</li>
+</ol>
+<!---->
+
+<ol start="2">
+<li><p>Lineto<br><code>Lineto</code>指令将绘制一条直线段。这个直线段从当前位置移到指定位置</p>
+<ul>
+<li>  <code>Lx,y</code> x与y是绝对坐标，分别代表水平坐标和垂直坐标</li>
+<li>  <code>ldx,dy</code> dx和dy是相对于当前点的距离，分别是向右和向下的距离</li>
+<li>  <code>Hx</code> 绝对坐标，水平移动</li>
+<li>  <code>Vy</code> 绝对坐标，垂直移动</li>
+<li>  <code>hdx</code> 水平移动相对距离</li>
+<li>  <code>vdy</code> 垂直移动相对距离</li>
+</ul>
+</li>
+<li><p> Z or z：闭合路径</p>
+</li>
+</ol>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/NWYjyxL?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/NWYjyxL"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h4 id="曲线命令"><a href="#曲线命令" class="headerlink" title="曲线命令"></a>曲线命令</h4><p>小写的指令意义同上，都是跟相对的距离</p>
+<ol>
+<li> Curveto</li>
+</ol>
+<ul>
+<li>   C命令创建一个三次贝塞尔曲线，其中 (x1,y1) (x2,y2)为控制点，x,y为曲线终点</li>
+<li> <code>C x1 y1, x2 y2, x y </code>or <code>c dx1 dy1, dx2 dy2, dx dy</code></li>
+</ul>
+<!---->
+
+<ol start="2">
+<li> Smooth Curveto</li>
+</ol>
+<ul>
+<li>   S命令可以用来创建于与前面一样的贝塞尔曲线，如果S命令跟在一个C或S命令后面，则它的第一个控制点会被假设成前一个命令曲线的第二个控制点的中心对称点。如果S命令单独使用，前面没有C或者S命令，那当前点将作为第一个控制点。最大的作用就是光滑地连接两条曲线</li>
+<li> <code>S x2 y2,x y</code> or <code>s dx2 dy2, dx dy</code></li>
+</ul>
+<blockquote>
+<p>C、S命令例子</p>
+</blockquote>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/rNdmJma?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/rNdmJma"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<ol start="3">
+<li> Quadratic Bézier curveto</li>
+</ol>
+<ul>
+<li>  Q命令用来创建一条二次贝塞尔曲线，只需要一个控制点</li>
+<li>  <code>Q x1 y1,x y</code> or <code>q dx1 dx2,dx dy</code></li>
+</ul>
+<ol start="4">
+<li> Smooth quadratic Bézier curveto</li>
+</ol>
+<ul>
+<li> T命令类似S命令，用于平滑链接二次贝塞尔曲线</li>
+<li> <code>T x1 y1 </code>or <code>t dx dy</code></li>
+</ul>
+<blockquote>
+<p>Q、T命令例子</p>
+</blockquote>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/PoRJaqN?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/PoRJaqN"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<ol start="5">
+<li> Arc</li>
+</ol>
+<ul>
+<li>A命令也可以用于绘制曲线<ul>
+<li>  <code>A rx ry x-axis-rotation large-arc-flag sweep-flag x y</code> <code>a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy</code></li>
+<li>    参数说明：</li>
+<li>    rx ry: x、y轴半径</li>
+<li>    X-axis-rotation: 绕x轴旋转角度</li>
+<li>    large-arc-flag：0-弧小于180度、1-弧大于180度</li>
+<li>    sweep-flag：0-逆时针画弧、1-顺时针画弧</li>
+<li>    x y：终点坐标</li>
+</ul>
+</li>
+</ul>
+<h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><blockquote>
+<p>放入形状元素内部，在指定的时间段里，设置相关属性的开始与结束值，变化曲线等。</p>
+</blockquote>
+<h3 id="动画元素"><a href="#动画元素" class="headerlink" title="动画元素"></a>动画元素</h3><ul>
+<li>  animate：用来定义一个元素的某个属性在相应时间的变化</li>
+<li>  animateTransform：改变目标元素上的一个变形属性，控制旋转、缩放、平移、斜切变换</li>
+<li>  animateMotion：定义目标元素如何沿一个路径运动</li>
+<li>  discard：指定在何时丢弃特定元素，从而减少 SVG 用户代理所需的资源。</li>
+<li>  mpath：配合animateMotion，可代替animateMotion的path属性，用于引用一个外部的path</li>
+<li>  set：可以用来设定一个属性值，并为该值赋予一个持续时间。它支持所有的属性类型， 包括那些原理上不能插值的， 例如值为字符串和布尔类型的属性。 set 元素是非叠加的。无法在其上使用 additive 属性或 accumulate 属性，即使声明了这些属性也会自动被忽略。</li>
+</ul>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/wvmrYLy?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/wvmrYLy"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h3 id="动画属性"><a href="#动画属性" class="headerlink" title="动画属性"></a>动画属性</h3><p>这里大致可以分为三类：</p>
+<ol>
+<li> 取值属性：控制要动画的属性（如x坐标，width等属性）的值</li>
+</ol>
+<pre><code>-  **calcMode：** 设置动画的变化曲线（discrete | linear | paced | spline），除了animateMotion默认是paced外，其他是默认linear，当一些不支持线性变化的属性值（string类型的）就会变为discrete。
+
+-  **values：** 定义动画过程中的值序列（一个或多个值的分号分隔列表）的值。 如果指定了此属性，则将忽略在元素上设置的任何 `from`, `to`, 和 `by` 属性值。
+
+-  **keyTimes：** 以分号分隔的时间值列表，用于控制动画的执行步骤。列表中的每个值与`values`中的值一一对应，定义了`values`中的值在动画中何时执行，keyTimes 列表中的每一个值都是指定在 [0-1] 之间的浮点数，表示动画的完成时间。每一个连续的时间值必须大于等于前一个时间值。
+
+    -   对于 linear 和 spline动画，列表中的第一个时间值必须为 0，列表的最后一个时间值必须为 1。与每个 value 关联的时间值定义了何时设置该 value，该 value 在 keyTimes 的时间 值的中间插值。
+    -   对于 discrete动画，列表中的第一个值必须为 0。与每个 value 关联的时间值定义了何时设置该 value，动画函数使用该 value，直到 keyTimes 中定义的下一个时间值。
+    -   如果插值模式是 paced动画，keyTimes 属性被忽略。
+
+-  **keySplines：** 定义了一组与 keyTimes 列表关联的 Bézier 曲线控制点，定义了一个控制间隔（keyTimes的值列表长度减1即为间隔数）的三次 Bézier 函数。只有spline动画才会有效。
+
+-  **from：** 指定属性的开始值
+
+-  **by：** 指定将在动画期间修改的属性的相对偏移值
+
+-  **to：** 表示将在动画期间修改的属性的最终值
+</code></pre>
+<blockquote>
+<p>取值属性例子</p>
+</blockquote>
+  <iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/WNzdXNZ?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+    See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/WNzdXNZ"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+    on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+  </iframe>
+
+<ol start="2">
+<li> 时间属性：控制动画如何开始，何时开始、重复次数等</li>
+</ol>
+<pre><code>-  **begin：** 动画开始时间
+
+-  **end：** 动画结束时间
+
+-  **dur：** 动画持续时间
+
+-  **min/max：** 限制动画的最小/大持续时间
+
+-  **restart：** 控制动画是否可以重新开始
+
+    -   `always` ：任何时候都可重新开始
+    -   `whenNotActive` ：非动画时可重新开始
+    -   `never` ：任何时候都不能重新开始
+
+-  **repeatCount：** 指定动画重复的次数、值必须大于 0。
+
+-  **repeatDur：** 指定动画的重复时间
+
+-  **fill：** 控制动画结束时的状态。有两个值可选
+
+    -   remove：在动画的激活持续时间结束后，动画效果会移除（不再应用）。在动画的激活结束后，动画不再对目标元素有影响（除非动画重新开始）。
+    -   freeze：在动画激活持续时间结束后，文档持续时间的剩余时间里（或者直到动画重新开始）动画效果会“冻结”着。（保持动画终态）
+</code></pre>
+<ol start="3">
+<li> 目标属性：控制要动画的属性</li>
+</ol>
+<pre><code>-  **ttributeType：** 当attributeType=&quot;XML&quot;时，attributeName被认为是XML的属性；当attributeType=&quot;CSS&quot;时，attributeName被认为是css的属性；不指定attributeType时，默认为&quot;auto&quot;，会先将attributeName作为css的属性，如果无效，再将attributeName作为XML的属性。
+-  **attributeName：** 要动画的属性名
+</code></pre>
+<!---->
+
+<ol start="4">
+<li> 其他属性：additive、accumulate</li>
+</ol>
+<pre><code>-  **additive：** 控制动画属性是否是附加的。
+-  **accumulate：** 在原来的结果的基础上重复动画的时候每一次循环都累加。这个属性告诉动画是否是每次循环，前一个动画属性值要加上去。需要设置from与to属性。
+</code></pre>
+<blockquote>
+<p>additive、accumulate例子</p>
+</blockquote>
+  <iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/PoREOjj?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+    See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/PoREOjj"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+    on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+  </iframe>
+
+<h2 id="结构元素"><a href="#结构元素" class="headerlink" title="结构元素"></a>结构元素</h2><blockquote>
+<p>结构元素关注的是复用</p>
+</blockquote>
+<ul>
+<li>  <strong>defs：</strong> 定义一个复用的图形。在<code>defs</code>元素中定义的图形元素不会直接呈现。 你可以在你的视口的任意地方利用 <code>use</code>元素呈现这些元素。</li>
+</ul>
+<!---->
+
+<ul>
+<li>  <strong>g：</strong> 组合子元素的容器，g元素的属性会被其所有的子元素继承 。与<code>defs</code>相比，g定义的除了复用外，在定义时会进行渲染。</li>
+</ul>
+<!---->
+
+<ul>
+<li>  <strong>symbol：</strong> 定义一个图形模版对象，使用<code>use</code>元素实例化。<code>symbol</code>元素对图形的作用是在同一文档中多次使用，添加结构和语义。symbol通过<code>use</code>调用时，<code> &lt;use  ``/``&gt;</code>可以设置height、width控制实际绘制的大小。</li>
+</ul>
+<!---->
+
+<ul>
+<li>  <strong>svg</strong> <strong>：</strong> 如果 <code>svg</code> 不是根元素，<code>svg</code> 元素可以用于在当前文档（比如说，一个 HTML 文档）内嵌套一个独立的 svg 片段 。 这个独立片段拥有独立的视口和坐标系统。</li>
+</ul>
+<!---->
+
+<ul>
+<li><p><strong>marker：</strong> 定义了在特定的path元素、line元素、polyline元素或者polygon元素上绘制箭头或者多边形标记图形。</p>
+<ul>
+<li>  refx：定义元素参考点的x坐标 (默认是0)</li>
+<li>  refy：定义元素参考点的y坐标 (默认是0)</li>
+<li>  markerWidth：表示根据 viewBox 和 preserveAspectRatio 属性渲染 <code>&lt;marker&gt;</code> 时要适合的视口宽度</li>
+<li>  markerHeight：表示根据 viewBox 和 preserveAspectRatio 属性渲染 <code>&lt;marker&gt; </code>时要适合的视口高度</li>
+<li>  markerUnits：指示标记放置在形状上的位置时如何旋转</li>
+</ul>
+</li>
+</ul>
+<!---->
+
+<ul>
+<li>  mask</li>
+</ul>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/GRxmgEN?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/GRxmgEN"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="滤镜元素"><a href="#滤镜元素" class="headerlink" title="滤镜元素"></a>滤镜元素</h2><h3 id="相关标签"><a href="#相关标签" class="headerlink" title="相关标签"></a>相关标签</h3><blockquote>
+<p>滤镜通过<code>&lt;filter&gt;</code>在<code>&lt;defs&gt;</code>中进行定义，在filter标签中提供一系列图元，使用滤镜只需为svg元素设置filter属性即可。</p>
+</blockquote>
+<h3 id="常见属性"><a href="#常见属性" class="headerlink" title="常见属性"></a>常见属性</h3><p>  in：标识输入的原语</p>
+<pre><code>-   SourceGraphic：该关键词表示图形元素自身将作为`&lt;filter&gt;`原语的原始输入
+-   SourceAlpha：该关键词表示图形元素自身将作为`&lt;filter&gt;`原语的原始输入. SourceAlpha 与 SourceGraphic 具有相同的规则除了 SourceAlpha 只使用元素的透明度。
+-   BackgroundImage：该关键词表示 filter 元素当前底下的区域的图形快照将被调用。
+-   BackgroundAlpha：BackgroundImage 相同除了只使用透明度。
+-   FillPaint：此关键字表示过滤效果的目标元素上的`fill`属性值。在许多情况下，FillPaint 在任何地方都是不透明的，但如果形状是使用渐变或图案绘制的，它本身包括透明或半透明部分，则情况可能并非如此。
+-   StrokePaint：此关键字表示滤镜效果的目标元素上的笔画属性的值。在许多情况下，StrokePaint 在任何地方都是不透明的，但如果形状是使用渐变或图案绘制的，它本身包括透明或半透明部分，则情况可能并非如此。
+</code></pre>
+<!---->
+
+<p>  in2：in2 属性标识给定filter原语的第二个输入。它的工作原理与 in 属性完全相同。</p>
+<blockquote>
+<p>colorMatrix颜色矩阵变换</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* R G B A 1 颜色矩阵计算 */</span></span><br><span class="line"> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="comment">// R = 1*R + 0*G + 0*B + 0*A + 0 </span></span><br><span class="line"> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="comment">// G = 0*R + 1*G + 0*B + 0*A + 0 </span></span><br><span class="line"> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="comment">// B = 0*R + 0*G + 1*B + 0*A + 0 </span></span><br><span class="line"> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="comment">// A = 0*R + 0*G + 0*B + 1*A + 0</span></span><br></pre></td></tr></table></figure>
+
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/xxWzjde?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/xxWzjde"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+
+<blockquote>
+<p>使用feGaussianBlur、feColorMatrix、feBlend实现粘稠效果</p>
+</blockquote>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/JjLZbQO?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/JjLZbQO"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+
+<blockquote>
+<p>使用feComposite并设置operator为in，控制显示图像的一部分。</p>
+</blockquote>
+<p>关于feComposite，更多可以看这里：<a target="_blank" rel="noopener" href="https://apike.ca/prog_svg_filter_feComposite.html">feComposite</a></p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/wvmXOwZ?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/wvmXOwZ"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+
+<blockquote>
+<p>feDisplacementMap、feTurbulence</p>
+</blockquote>
+<p>feDisplacementMap推荐看这篇：<a target="_blank" rel="noopener" href="https://www.zhangxinxu.com/wordpress/2017/12/understand-svg-fedisplacementmap-filter/">深入理解SVG feDisplacementMap滤镜及实际应用</a></p>
+<p>feTurbulence推荐看这篇：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366438535">说说SVG的feTurbulence滤镜</a></p>
+<p>位置转换公式：</p>
+<p><code>P&#39;(x,y) ← P(x + scale * (XC(x,y) - 0.5), y + scale * (YC(x,y) - 0.5))</code></p>
+<iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/OJvwJqV?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/OJvwJqV"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="渐变元素"><a href="#渐变元素" class="headerlink" title="渐变元素"></a>渐变元素</h2><h3 id="linearGradient：线性渐变"><a href="#linearGradient：线性渐变" class="headerlink" title="linearGradient：线性渐变"></a>linearGradient：线性渐变</h3><ul>
+<li>  gradientUnits: 控制渐变坐标的单位</li>
+<li>  gradientTransform: 对渐变坐标系进行变换（translate、skew、rotate。。。）</li>
+<li>  x1：线性渐变起点x坐标-   y1：线性渐变起点y坐标</li>
+<li>  x2：线性渐变终点x坐标-   y2：线性渐变终点y坐标</li>
+<li>  spreadMethod：定义如何在渐变之外填充    -   pad：用渐变终点颜色去填充额外区域    -   repeat：按照开始的渐变顺序重复    -   reflect：按照开始的渐变相反顺序重复</li>
+</ul>
+  <iframe height="300" style="width: 100%;" scrolling="no" title="feDisplacementMap" src="https://codepen.io/l-jour/embed/JjLMMjR?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+    See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/JjLMMjR"></a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+    on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+  </iframe>
+
+<h3 id="radialGradient：径向渐变"><a href="#radialGradient：径向渐变" class="headerlink" title="radialGradient：径向渐变"></a>radialGradient：径向渐变</h3><ul>
+<li>  gradientUnits：控制渐变坐标的单位</li>
+<li>  gradientTransform：对渐变坐标系进行变换（translate、skew、rotate。。。）</li>
+<li>  cx: 用来定义径向渐变终止圆的 x 轴坐标(默认50%)。</li>
+<li>  cy：用来定义径向渐变终止圆的 y 轴坐标。</li>
+<li>  r：用来定义径向渐变终止圆的半径。</li>
+<li>  fx：用来定义径向渐变的焦点的 x 轴坐标</li>
+<li>  fy：用来定义径向渐变的焦点的 y 轴坐标</li>
+<li>  spreadMethod：确定如何在渐变的定义边缘之外填充形状。    -   pad：用渐变终点颜色去填充额外区域    -   repeat：按照开始的渐变顺序重复    -   reflect：按照开始的渐变相反顺序重复</li>
+<li>  stop：渐变的颜色坡度</li>
+</ul>
+<iframe height="300" style="width: 100%;" scrolling="no" title="svg-radialgradient" src="https://codepen.io/l-jour/embed/zYWWLBa?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/l-jour/pen/zYWWLBa">
+  svg-radialgradient</a> by L-jour (<a target="_blank" rel="noopener" href="https://codepen.io/l-jour">@l-jour</a>)
+  on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<h2 id="关于svg与canvas"><a href="#关于svg与canvas" class="headerlink" title="关于svg与canvas"></a>关于svg与canvas</h2><p>  可以看看msdn的文章<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/previous-versions/msdn10/Hh377884(v=MSDN.10)">如何为您的网站在Canvas和SVG之间做出选择</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  svg的世界非常丰富，并且很多属性可以作用不同的元素、拥有不同的效果。元素直接有可以搭配使用，如多个动画，多个滤镜等等，滤镜元素还涉及更多领域知识。总之，元素种类、元素属性非常多，还是需要得慢慢地学习、阅读相关的案例并操作一下才能有所掌握。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li>  <a target="_blank" rel="noopener" href="https://apike.ca/prog_svg_filter_feComposite.html">feComposite</a></li>
+<li>  <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A">贝塞尔曲线-wiki</a></li>
+</ul>
+
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/Jealh-h">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">github</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/01/react%E5%90%88%E6%88%90%E4%BA%8B%E4%BB%B6/" rel="prev" title="react事件系统">
+      <i class="fa fa-chevron-left"></i> react事件系统
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/09/11/Scroll-%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0/" rel="next" title="Scroll 开发小记">
+      Scroll 开发小记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">2.</span> <span class="nav-text">命名空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">2.1.</span> <span class="nav-text">声明命名空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVG-%E5%85%83%E7%B4%A0"><span class="nav-number">3.</span> <span class="nav-text">SVG 元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%BD%A2%E5%85%83%E7%B4%A0"><span class="nav-number">4.</span> <span class="nav-text">图形元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%9B%BE%E5%BD%A2%E5%85%83%E7%B4%A0"><span class="nav-number">4.1.</span> <span class="nav-text">基础图形元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%AE%B5%E5%B1%9E%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">线段属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E7%9A%84path%E5%85%83%E7%B4%A0"><span class="nav-number">4.3.</span> <span class="nav-text">强大的path元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E7%BA%BF%E5%91%BD%E4%BB%A4"><span class="nav-number">4.3.1.</span> <span class="nav-text">直线命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B2%E7%BA%BF%E5%91%BD%E4%BB%A4"><span class="nav-number">4.3.2.</span> <span class="nav-text">曲线命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB"><span class="nav-number">5.</span> <span class="nav-text">动画</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E5%85%83%E7%B4%A0"><span class="nav-number">5.1.</span> <span class="nav-text">动画元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">5.2.</span> <span class="nav-text">动画属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%85%83%E7%B4%A0"><span class="nav-number">6.</span> <span class="nav-text">结构元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%A4%E9%95%9C%E5%85%83%E7%B4%A0"><span class="nav-number">7.</span> <span class="nav-text">滤镜元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%A0%87%E7%AD%BE"><span class="nav-number">7.1.</span> <span class="nav-text">相关标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%B1%9E%E6%80%A7"><span class="nav-number">7.2.</span> <span class="nav-text">常见属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%90%E5%8F%98%E5%85%83%E7%B4%A0"><span class="nav-number">8.</span> <span class="nav-text">渐变元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linearGradient%EF%BC%9A%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98"><span class="nav-number">8.1.</span> <span class="nav-text">linearGradient：线性渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#radialGradient%EF%BC%9A%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-number">8.2.</span> <span class="nav-text">radialGradient：径向渐变</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Esvg%E4%B8%8Ecanvas"><span class="nav-number">9.</span> <span class="nav-text">关于svg与canvas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">11.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jealh"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jealh</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jealh-h" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Jealh-h" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1620175472@qq.com" title="E-Mail → mailto:1620175472@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hu.supreme" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;hu.supreme" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/438345456" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;438345456" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021006217号-1 </a>
+      <img src="/images/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jealh</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">42k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">38 mins.</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="200" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '06Q5US9u81vpeARmCf4LIxPm-gzGzoHsz',
+      appKey     : 'MU9IGOYetUaGvt99dzlmgQTm',
+      placeholder: "说一句吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<!-- hexo injector body_end start -->
+<script src="/js/theme.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
