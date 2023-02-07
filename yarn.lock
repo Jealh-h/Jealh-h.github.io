@@ -156,7 +156,7 @@ binary-extensions@^2.0.0:
   resolved "https://registry.nlark.com/binary-extensions/download/binary-extensions-2.2.0.tgz"
   integrity sha1-dfUC7q+f/eQvyYgpZFvk6na9ni0=
 
-bluebird@^3.2.2, bluebird@^3.4.0, bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.2, bluebird@^3.5.5, bluebird@^3.7.2:
+bluebird@^3.2.2, bluebird@^3.4.0, bluebird@^3.5.1, bluebird@^3.5.2, bluebird@^3.5.5, bluebird@^3.7.2:
   version "3.7.2"
   resolved "https://registry.nlark.com/bluebird/download/bluebird-3.7.2.tgz"
   integrity sha1-nyKcFb4nJFT/qXOs4NvueaGww28=
@@ -214,6 +214,21 @@ chokidar@^3.0.0:
   version "3.5.2"
   resolved "https://registry.nlark.com/chokidar/download/chokidar-3.5.2.tgz"
   integrity sha1-26OXb8rbAW9m/TZQIdkWANAcHnU=
+  dependencies:
+    anymatch "~3.1.2"
+    braces "~3.0.2"
+    glob-parent "~5.1.2"
+    is-binary-path "~2.1.0"
+    is-glob "~4.0.1"
+    normalize-path "~3.0.0"
+    readdirp "~3.6.0"
+  optionalDependencies:
+    fsevents "~2.3.2"
+
+chokidar@^3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
+  integrity sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==
   dependencies:
     anymatch "~3.1.2"
     braces "~3.0.2"
@@ -679,6 +694,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.3:
   resolved "https://registry.nlark.com/graceful-fs/download/graceful-fs-4.2.8.tgz?cache=0&sync_timestamp=1628194007768&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fgraceful-fs%2Fdownload%2Fgraceful-fs-4.2.8.tgz"
   integrity sha1-5BK40z9eAGWTy9PO5t+fLOu+gCo=
 
+graceful-fs@^4.2.10:
+  version "4.2.10"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
+  integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
+
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
@@ -720,17 +740,17 @@ hexo-cli@^4.3.0:
     resolve "^1.11.0"
     tildify "^2.0.0"
 
-hexo-deployer-git@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npm.taobao.org/hexo-deployer-git/download/hexo-deployer-git-3.0.0.tgz"
-  integrity sha1-2oL3o0Rd8rITkm3I0DC6VJm2jPM=
+hexo-deployer-git@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/hexo-deployer-git/-/hexo-deployer-git-4.0.0.tgz#d507ecd5ba7d07f60b0c1ab50ced3e47535f6017"
+  integrity sha512-28t1Q+4taB/UaBAP52W3mD/wcCwa2y2zBieUfBJFBZudbmVgiKJB5YedYILeyI5QByaUKAOwoupmdTbocdQ+CQ==
   dependencies:
-    bluebird "^3.5.0"
-    chalk "^4.0.0"
-    hexo-fs "^3.0.1"
-    hexo-util "^2.1.0"
-    moment "^2.18.0"
-    nunjucks "^3.2.1"
+    bluebird "^3.7.2"
+    hexo-fs "^4.0.0"
+    hexo-util "^2.7.0"
+    luxon "^3.0.4"
+    nunjucks "^3.2.3"
+    picocolors "^1.0.0"
 
 hexo-front-matter@^3.0.0:
   version "3.0.0"
@@ -748,6 +768,16 @@ hexo-fs@^3.0.1, hexo-fs@^3.1.0:
     chokidar "^3.0.0"
     graceful-fs "^4.1.11"
     hexo-util "^2.0.0"
+
+hexo-fs@^4.0.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/hexo-fs/-/hexo-fs-4.1.1.tgz#4a95d0d6b15eb7baf642ce54b8234fb32e5f032d"
+  integrity sha512-aDysNTyv8ElcerbFVbPLRXnYt+QDY6gAOZZ5DLbCxudY0Ywppqd+uZ03gZ2BDypIBvmNB27WYWYz76M+Yv/YXw==
+  dependencies:
+    bluebird "^3.7.2"
+    chokidar "^3.5.3"
+    graceful-fs "^4.2.10"
+    hexo-util "^2.7.0"
 
 hexo-generator-archive@^1.0.0:
   version "1.0.0"
@@ -1235,6 +1265,11 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
+luxon@^3.0.4:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.2.1.tgz#14f1af209188ad61212578ea7e3d518d18cee45f"
+  integrity sha512-QrwPArQCNLAKGO/C+ZIilgIuDnEnKx5QYODdDtbFaxzsbZcc/a7WFq7MhsVYgRlwawLtvOUESTlfJ+hc/USqPg==
+
 marked@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.1.1.tgz#2f709a4462abf65a283f2453dc1c42ab177d302e"
@@ -1324,7 +1359,7 @@ moment-timezone@^0.5.34:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.18.0, moment@^2.29.1:
+"moment@>= 2.9.0", moment@^2.29.1:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -1385,7 +1420,7 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   resolved "https://registry.nlark.com/normalize-path/download/normalize-path-3.0.0.tgz"
   integrity sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=
 
-nunjucks@^3.0.0, nunjucks@^3.2.1, nunjucks@^3.2.2, nunjucks@^3.2.3:
+nunjucks@^3.0.0, nunjucks@^3.2.2, nunjucks@^3.2.3:
   version "3.2.3"
   resolved "https://registry.nlark.com/nunjucks/download/nunjucks-3.2.3.tgz"
   integrity sha1-GzNhUkcpDpTigmO12FXs52VkijE=
