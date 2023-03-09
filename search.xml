@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2022 年终总结</title>
+    <url>/2022/12/31/2022-%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>2022 年就要结束了，回想这一年可谓是五味杂陈啊。也是经历许多第一次的一年吧。</p>
+<span id="more"></span>
+
+<h2 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h2><p>在这学期开始，也就是大三下，然后开始找实习了。在找实习的过程中还算坎坷吧，经历了人生的第一次面试。其实投的公司一个手能数过来。然后就分别面了字节、网易、蚂蚁。其中字节面了两次，一次是国际化电商，另一次就是我下半年所实习的部门懂车帝了。</p>
+<p>曲曲折折，这一年最美好的也就是下半年实习北漂的这一段时间了，跟我的实验室同学、室友、一开始不认识的同校同学（哈哈哈，这称呼感觉有点怪怪的）。</p>
+<h3 id="租房篇"><a href="#租房篇" class="headerlink" title="租房篇"></a>租房篇</h3><p>去北京总得租房吧。是的，然后我们就被中介…(懂的都懂)。第一次租房是三个合租的，房租 8000 一月，首付一共 4 万多吧，三个月。当时还是挺震惊的，第一次拿出去这么多钱 😂。</p>
+<p>总的来说，北京租房想事少的话还是走一些平台，比如自如什么的，虽然说有那么亿丢丢贵。但是会有一些服务之类的，比如打扫房间。好像就打扫房间有用 🤔。</p>
+<h3 id="上班篇"><a href="#上班篇" class="headerlink" title="上班篇"></a>上班篇</h3><p><strong>团队聚餐</strong><br>手动补上 俊哥跟东阳哥 👍</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311521.JPG" alt="team"></p>
+<ul>
+<li><p>地点：北京市海淀区中城/中兴大厦</p>
+</li>
+<li><p>交通工具：开水团的自行车啊哈哈哈哈哈</p>
+</li>
+</ul>
+<p>一个职场小白，初入职场，有很多东西需要学习，不论是专业的还是非专业的。从一个月开始的陌生到后来的轻车熟路。收获颇为丰厚，在这里必须要感谢下我的 mentor，真是非常的 nice。</p>
+<p>收获满满的 gitlab</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311520.JPG" alt="gitlab commit"></p>
+<p>很高兴能在这里实习，总的来说累并快乐着，遗憾就是未能留下继续前行 😅。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311502.png" alt="waka time"></p>
+<h3 id="娱乐篇"><a href="#娱乐篇" class="headerlink" title="娱乐篇"></a>娱乐篇</h3><p>这波啊，虽然北京跟我想象的有点不一样，但还是可以的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311522.PNG" alt="跟朋友们吃的美食"></p>
+<p>第一次看见了“大裤衩”<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311739.JPG" alt="大裤衩"></p>
+<p>和朋友们逛了一小会鸟巢<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311740.png" alt="鸟巢"></p>
+<p><strong>回想起来真是回忆满满</strong></p>
+<h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>这方面还是得多思考吧，也要学会 say no，同时要有自己得见解。</p>
+<h2 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h2><ul>
+<li>坚持写作，输出质量文章</li>
+<li>学习图形学，发展多领域</li>
+<li>有机会发几个 b 站视频 🤔</li>
+<li>positive</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>2022 充满回忆的一年，感谢我身边的每一个人，他们教会了我许多，让我明白了许多。 Respect。</p>
+]]></content>
+      <categories>
+        <category>年终总结</category>
+      </categories>
+  </entry>
+  <entry>
     <title>2021年终总结</title>
     <url>/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<blockquote>
@@ -19,6 +60,176 @@
       <categories>
         <category>年终总结</category>
       </categories>
+  </entry>
+  <entry>
+    <title>JavaScript 的隐式转换</title>
+    <url>/2023/03/09/JavaScript-%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p>对于 JavaScript 中的一些运算符（如：==）来说是比较迷惑的。它们产生的结果有时会让我们变得混淆，那这一切的背后就是“隐式转换”在作祟了。</p>
+<h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><h3 id="Number-强制转换"><a href="#Number-强制转换" class="headerlink" title="Number 强制转换"></a>Number 强制转换</h3><table>
+<thead>
+<tr>
+<th align="center">target</th>
+<th align="center">number</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">undefined</td>
+<td align="center">NaN</td>
+</tr>
+<tr>
+<td align="center">null</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">true/false</td>
+<td align="center">1/0</td>
+</tr>
+<tr>
+<td align="center">string</td>
+<td align="center">解析失败返回 NaN</td>
+</tr>
+<tr>
+<td align="center">BigInt</td>
+<td align="center">TypeError</td>
+</tr>
+<tr>
+<td align="center">Symbol</td>
+<td align="center">TypeError</td>
+</tr>
+<tr>
+<td align="center">Object</td>
+<td align="center"><a href="%22number%22">@@toPrimitive</a> → valueOf() → toString()</td>
+</tr>
+</tbody></table>
+<p><strong>string 解析失败：</strong></p>
+<ul>
+<li>忽略前导与尾随的空格/行终止符</li>
+<li>前导 0 不会识别为八进制文本</li>
+<li>+和-允许在字符串开头，且只能出现一次，后面不能跟空格</li>
+<li>Infinity 和 -Infinity 当作字面量</li>
+<li>空串或全为空格解析成 0</li>
+<li>不能含数字分割符</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="强制-boolean-转换"><a href="#强制-boolean-转换" class="headerlink" title="强制 boolean 转换"></a>强制 boolean 转换</h3><table>
+<thead>
+<tr>
+<th align="center">target</th>
+<th align="center">Boolean</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0 / -0</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">null</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">NaN</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">undefined</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">“”</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">Object / “anything but not empty”</td>
+<td align="center">true</td>
+</tr>
+</tbody></table>
+<h3 id="复杂类型转换成原始类型"><a href="#复杂类型转换成原始类型" class="headerlink" title="复杂类型转换成原始类型"></a>复杂类型转换成原始类型</h3><p>复杂数据类型转换为原始类型有以下规则：</p>
+<ul>
+<li>强制原始值转换：<a href="%22default%22">@@toPrimitive</a> → valueOf() → toString()</li>
+<li>强制数字类型转换、强制 number 类型转换、强制 BigInt 类型转换：<a href="%22number%22">@@toPrimitive</a> → valueOf() → toString()</li>
+<li>强制字符串类型转换：<a href="%22string%22">@@toPrimitive</a> → toString() → valueOf()</li>
+<li>Date 和 Symbol 对象是唯一重写 [@@toPrimitive] 方法的对象。Date.prototype[@@toPrimitive] 将 “default” hint 视为 “string”，而 Symbol.prototype[@@toPrimitive] 忽略 hint 并始终返回一个 symbol。</li>
+</ul>
+<p>其中 [@@toPrimitive] 为一个内置的 Symbol 属性，其部署方式为：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  [<span class="built_in">Symbol</span>.toPrimitive](hint) &#123;</span><br><span class="line">    <span class="keyword">if</span> (hint === <span class="string">&quot;number&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (hint === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// &#x27;default&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 那么当遇到原始类型转换时就相当于自定义转化了</span></span><br><span class="line"><span class="keyword">const</span> num = +obj;</span><br><span class="line"><span class="comment">// hint为 number, 结果： 10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id=""><a href="#" class="headerlink" title="=="></a>==</h3><p>首当其冲的肯定是 ”==“， 想必其已经臭名昭著了。那么我们先来看看它的一些坑坑吧 😀。</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">&#123;&#125; == []</span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&quot;str&quot;</span>) == <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>首先，我们明确一下 == 的规则，那么就非常容易去判断结果了，其规则为：</p>
+<ol>
+<li><span id="same primitve">相同类型</span>：</li>
+</ol>
+<ul>
+<li>Object 类型：比较引用地址</li>
+<li>Number: 有 NaN 则返回 false, +0 与 -0 相等，操作数相等则返回 true。</li>
+<li>String：只有当两个操作数具有相同的字符且顺序相同时才返回 true。</li>
+<li>Boolean：仅当操作数都为 true 或都为 false 时返回 true。</li>
+<li>BigInt：仅当两个操作数值相同时返回 true。</li>
+<li>Symbol：仅当两个操作数引用相同的符号时返回 true。</li>
+<li>null: 另一个数为 undefined 或 null 才返回 true。否则返回 false。</li>
+<li>undefined: 另一个数为 undefined 或 null 才返回 true。否则返回 false。</li>
+</ul>
+<ol start="2">
+<li><p>其中一个是对象，另一个是基本类型。会按照**<a href="#前置">前置</a>**的规则进行转换成基本类型。</p>
+</li>
+<li><p>这时都是<strong>基本类型</strong>了，那么有如下规则。</p>
+</li>
+</ol>
+<ul>
+<li>都是基本类型，按照<a href="#same primitve">规则 1</a>进行对比。</li>
+<li>其中一个是 Symbol, 另一个不是，返回 false。</li>
+<li>其中一个是 boolean, 另一个不是，则将 boolean 转换成数字。</li>
+<li>Number 与 String 对比：使用与 <a href="#Number 强制转换">Number() 构造函数相同的算法</a>将字符串转换为数字。转换失败将导致 NaN，这将保证相等是 false。</li>
+<li>Number 与 BigInt 对比：按数值进行比较。如果数值为 ±∞ 或 NaN，返回 false。</li>
+<li>String 与 BigInt 对比：使用与 BigInt() 构造函数相同的算法将字符串转换为 BigInt。如果转换失败，返回 false。</li>
+</ul>
+<h4 id="回到上题"><a href="#回到上题" class="headerlink" title="回到上题"></a>回到上题</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">&#123;&#125; == []</span><br><span class="line"><span class="comment">// 相同类型都是 Object, 比较引用地址，因此返回 false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span></span><br><span class="line"><span class="comment">// null 与 undefined 返回 true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">&quot;str&quot;</span>) == <span class="literal">true</span></span><br><span class="line"><span class="comment">// 不同类型</span></span><br><span class="line"><span class="comment">// 先将 new String(&quot;str&quot;) 转换成基本类型（强制字符串类型转换）得到：</span></span><br><span class="line"><span class="comment">// &quot;str&quot; == true</span></span><br><span class="line"><span class="comment">//其中一个是 boolean 类型，转成 number</span></span><br><span class="line"><span class="comment">// &quot;str&quot; == 1</span></span><br><span class="line"><span class="comment">// 将 string 装换成 number</span></span><br><span class="line"><span class="comment">// NaN == 1</span></span><br><span class="line"><span class="comment">// 最后：false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title="+"></a>+</h3><p><strong>在求值时，它首先将两个操作数强制转换为基本类型。然后，检查两个操作数的类型</strong>:</p>
+<ul>
+<li>多个值运算，进行相加操作，如果其中有一个是字符串，那么会将另一个数转换成字符串，进行字符串连接。</li>
+<li>多个值运算，都是 BigInt, 执行 BigInt 加法，一方是 BigInt,另一个不是，抛出 TypeError。</li>
+<li>多个值运算，没有 String、BigInt, 都转为数字。</li>
+<li>单值运算，转换成数字</li>
+</ul>
+<h4 id="下面来看一下常见的运算-😏"><a href="#下面来看一下常见的运算-😏" class="headerlink" title="下面来看一下常见的运算 😏"></a>下面来看一下常见的运算 😏</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">&#123;&#125; + [] + &#123;&#125; + []</span><br><span class="line"><span class="comment">// 这里有一个坑就是 &#123;&#125; 会识别为一个 block, 然后就成了下面这种情况</span></span><br><span class="line"><span class="comment">// + [] + &#123;&#125; + []</span></span><br><span class="line"><span class="comment">// 前部分就相当于单目运算，转换成数字类型 []--valueOf--&gt;[]--toString--&gt;&#x27;&#x27;--toNumber--&gt;0</span></span><br><span class="line"><span class="comment">// 0 + &#123;&#125; + []</span></span><br><span class="line"><span class="comment">// 先转换成基本类型</span></span><br><span class="line"><span class="comment">// 0 + &#x27;[object Object]&#x27; + []</span></span><br><span class="line"><span class="comment">// &#x27;0[object Object]&#x27; + []</span></span><br><span class="line"><span class="comment">// 转换成基本类型</span></span><br><span class="line"><span class="comment">// &#x27;0[object Object]&#x27; + &#x27;&#x27;</span></span><br><span class="line"><span class="comment">// 拼接</span></span><br><span class="line"><span class="comment">//&#x27;0[object Object]&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="literal">true</span> + <span class="number">1</span></span><br><span class="line"><span class="comment">// 已经都是基本类型了</span></span><br><span class="line"><span class="comment">// 没有 String、BigInt，都转换成数字</span></span><br><span class="line"><span class="comment">// 1 + 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="literal">NaN</span> + <span class="number">1</span></span><br><span class="line"><span class="comment">// 已经都是基本类型了</span></span><br><span class="line"><span class="comment">// 没有 String、BigInt，都转换成数字</span></span><br><span class="line"><span class="comment">// NaN + 1</span></span><br><span class="line"><span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line">[] + &#123;&#125;</span><br><span class="line"><span class="comment">// 装换成基本类型</span></span><br><span class="line"><span class="comment">// &#x27;&#x27; + &#x27;[object Object]&#x27;</span></span><br><span class="line"><span class="comment">// [object Object]</span></span><br><span class="line"></span><br><span class="line">&#123;&#125; + []</span><br><span class="line"><span class="comment">// 同样的坑就是 &#123;&#125; 会识别为一个 block, 然后就成了下面这种情况</span></span><br><span class="line"><span class="comment">// + []</span></span><br><span class="line"><span class="comment">// 这里成了单目运算，将后面的转换为数值</span></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line">（&#123;&#125;） + []</span><br><span class="line"><span class="comment">// 这种情况就与 [] + &#123;&#125; 类似了</span></span><br><span class="line"><span class="comment">// &#x27;[object Object]&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;&#125; + &#123;&#125;</span></span><br><span class="line"><span class="comment">// 前面识别为 block</span></span><br><span class="line"><span class="comment">// + &#123;&#125;</span></span><br><span class="line"><span class="comment">// 单目运算。转换成数字</span></span><br><span class="line"><span class="comment">// &#123;&#125; --valueOf--&gt;&#123;&#125;--toString--&gt;&#x27;[object Object]&#x27;--toNumber--&gt;NaN</span></span><br><span class="line"><span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// [] + []</span></span><br><span class="line"><span class="comment">// 转换成基本类型</span></span><br><span class="line"><span class="comment">// &#x27;&#x27; + &#x27;&#x27;</span></span><br><span class="line"><span class="comment">// 拼接</span></span><br><span class="line"><span class="comment">// &#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="-2"><a href="#-2" class="headerlink" title="-"></a>-</h3><ul>
+<li>两个操作数：将两个操作数转换为数值，并根据两个操作数的类型执行数字减法或 BigInt 减法。如果类型不匹配，则抛出 TypeError。</li>
+<li>一个操作数：数字则取反，否则转换成数字类型。</li>
+</ul>
+<h4 id="看看例题"><a href="#看看例题" class="headerlink" title="看看例题"></a>看看例题</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">[] - &#123;&#125;;</span><br><span class="line"><span class="comment">// 转成数字</span></span><br><span class="line"><span class="comment">// [] --valueOf--》 [] --toString--》 &quot;&quot; --toNumber--》 0</span></span><br><span class="line"><span class="comment">// &#123;&#125;--valueOf--》 &#123;&#125;--toString--》 &#x27;[object Object]&#x27;--toNumber--》 NaN</span></span><br><span class="line"><span class="comment">// 0 - NaN</span></span><br><span class="line"><span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="-3"><a href="#-3" class="headerlink" title="!"></a>!</h3><ul>
+<li>运算符将真值或假值转换为对应的相反值</li>
+<li>当与非布尔值使用时，如果其操作数可以转化为 true，则返回 false，否则返回 true。</li>
+</ul>
+<h4 id="-4"><a href="#-4" class="headerlink" title="!!"></a>!!</h4><p>双非运算符，将运算值转换成相应的 boolean 类型。</p>
+<h4 id="看看例题-1"><a href="#看看例题-1" class="headerlink" title="看看例题"></a>看看例题</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">![];</span><br><span class="line"><span class="comment">// 将 [] 转成 boolean, 根据强制Boolean转换(Object类型）：[] --&gt; true</span></span><br><span class="line"><span class="comment">// !true</span></span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="gt-lt"><a href="#gt-lt" class="headerlink" title="&gt; / &lt;"></a>&gt; / &lt;</h3><p><strong>所有的比较操作符都是先强制转化左操作数再强制转化右操作数。</strong><br>首先，通过依次调用其 [@@toPrimitive]（以 “number” 作为提示）、valueOf() 和 toString() 方法，将对象转换为原始类型。左边的操作数总是在右边的操作数之前被强制转换。</p>
+<ul>
+<li>如果两个值都是字符串，则根据它们所包含的 Unicode 码位的值，将它们作为字符串进行比较。</li>
+<li>否则，尝试将非数值类型转化为数值类型。</li>
+<li>如果一个为 NaN, 返回 false。</li>
+</ul>
+<h4 id="看看例题-2"><a href="#看看例题-2" class="headerlink" title="看看例题"></a>看看例题</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;a&quot;</span> &lt; <span class="number">3</span>;</span><br><span class="line"><span class="comment">// 先将左边转化为数值类型</span></span><br><span class="line"><span class="comment">// NaN &lt; 3</span></span><br><span class="line"><span class="comment">// 有一个为NaN, 返回 false</span></span><br><span class="line"><span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> &lt; [];</span><br><span class="line"><span class="comment">// 左边为数字类型，将右边转换为数字类型</span></span><br><span class="line"><span class="comment">// [] --toString--&gt; &#x27;&#x27; --toNumber--&gt; 0</span></span><br><span class="line"><span class="comment">// 0 &lt; 0</span></span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>隐式转换的规则非常多，但都是向基本类型转换，所以理解<a href="#复杂类型转换成原始类型">复杂类型转换成原始类型</a>比较重要，特别的还需要注意 {} 识别为一个 block 的情况。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Equality">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Equality</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures#%E5%BC%BA%E5%88%B6%E5%8E%9F%E5%A7%8B%E5%80%BC%E8%BD%AC%E6%8D%A2">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures#%E5%BC%BA%E5%88%B6%E5%8E%9F%E5%A7%8B%E5%80%BC%E8%BD%AC%E6%8D%A2</a></li>
+<li><a href="https://www.zhihu.com/question/45478070">https://www.zhihu.com/question/45478070</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>隐式转换</tag>
+      </tags>
   </entry>
   <entry>
     <title>Scroll 开发小记</title>
@@ -67,6 +278,26 @@
 <li>原生滚动不能有回弹效果，如果需要增加回弹效果，需要手动模拟滚动，然后再添加回弹。(ios特定的边界弹簧效果不能禁止)</li>
 <li>边界 drag 不流畅，有待改进。</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/07/21/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -213,24 +444,30 @@
       </categories>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/07/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <title>一次base64指令的powershell</title>
+    <url>/2021/11/18/%E4%B8%80%E6%AC%A1base64%E6%8C%87%E4%BB%A4%E7%9A%84powershell/</url>
+    <content><![CDATA[<p><strong>事情发生是在一个月黑风高的晚上。。。。不好意思搞错了 😬。</strong><br><strong>事情是这样的，今天在使用 webpack-dev-middleware 构建开发环境的时候，想要使用 node 启动浏览器并自动打开相关的本地网址。于是就发生了下面的一幕。</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/u=1178727920,923148390&fm=26&fmt=auto.webp"></p>
 <span id="more"></span>
 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<h1 id="关于-open-这个-node-module"><a href="#关于-open-这个-node-module" class="headerlink" title="关于 open 这个 node_module"></a>关于 open 这个 node_module</h1><p><strong>这是一个 node 的依赖包，使用其提供的相关 api 可以用浏览器打开具体的网址。具体用法如下</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> open = <span class="built_in">require</span>(<span class="string">&quot;open&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Opens the image in the default image viewer and waits for the opened app to quit.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;unicorn.png&quot;</span>, &#123; <span class="attr">wait</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;The image viewer app quit&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Opens the URL in the default browser.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;https://sindresorhus.com&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Opens the URL in a specified browser.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;https://sindresorhus.com&quot;</span>, &#123; <span class="attr">app</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;firefox&quot;</span> &#125; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Specify app arguments.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;https://sindresorhus.com&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">app</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;google chrome&quot;</span>, <span class="attr">arguments</span>: [<span class="string">&quot;--incognito&quot;</span>] &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open an app</span></span><br><span class="line"><span class="keyword">await</span> open.openApp(<span class="string">&quot;xcode&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open an app with arguments</span></span><br><span class="line"><span class="keyword">await</span> open.openApp(open.apps.chrome, &#123; <span class="attr">arguments</span>: [<span class="string">&quot;--incognito&quot;</span>] &#125;);</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p><strong>为了一探究竟，它是怎样打开浏览器的，所以我就开始了查看源代码之旅。然后就出现了 powershell 执行 base64 编码的命令这个有趣的事情了。</strong></p>
+<h1 id="在-powershell-中使用-base64-编码的指令"><a href="#在-powershell-中使用-base64-编码的指令" class="headerlink" title="在 powershell 中使用 base64 编码的指令"></a>在 powershell 中使用 base64 编码的指令</h1><p><strong>在 open 的源码中，有个 encodeArguments 的数组，大概是这个样子[‘start’, ‘http://….’ ]，其打开浏览的的主要命令就是</strong></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">start</span> (application) &lt;网址&gt;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p><strong>而它在传递 powershell 命令时有这样一行代码代码,通过注释我们可以明白这是一个使用 base64 编码的 powershell 命令。于是乎我就开始了我的实验性探究了了</strong>🥳。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using Base64-encoded command, accepted by PowerShell, to allow special characters.</span></span><br><span class="line">target = Buffer.from(encodedArguments.join(<span class="string">&quot; &quot;</span>), <span class="string">&quot;utf16le&quot;</span>).to;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p><strong>果不其然，在微软的文档里确实查到了 😃,不过需要注意的是需要 utf-16le 的编码。</strong><br><strong><em>铛铛铛铛！！</em></strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/encodedCommand.png"></p>
+<h1 id="实际测试"><a href="#实际测试" class="headerlink" title="实际测试"></a>实际测试</h1><p><strong>下面我就以 node 打开浏览器为例子，进行 base64 编码命令的测试。</strong><br><strong>node 打开浏览器的代码如下：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取base64编码的指令</span></span><br><span class="line"><span class="keyword">let</span> command = Buffer.from(&lt;目标指令&gt; <span class="string">&#x27;utf16le&#x27;</span>).toString(<span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> subprocess = cp.spawn(<span class="string">`<span class="subst">$&#123;process.env.SYSTEMROOT&#125;</span>\\System32\\WindowsPowerShell\\v1.0\\powershell`</span>, [</span><br><span class="line">    <span class="string">&quot;-EncodedCommand&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;cwB0AGEAcgB0ACAAaAB0AHQAcAA6AC8ALwBiAGEAaQBkAHUALgBjAG8AbQA=&#x27;</span></span><br><span class="line">    <span class="comment">// &#x27;start http://baidu.com&#x27; 上面是这一行命令的编码</span></span><br><span class="line">], &#123;</span><br><span class="line">    <span class="attr">windowsVerbatimArguments</span>: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><strong>下面是效果图</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/20211191146.gif"><br><strong>奇怪的知识又增加了 🌟</strong></p>
 ]]></content>
+      <categories>
+        <category>一些趣事的🌟</category>
+      </categories>
   </entry>
   <entry>
     <title>svg基础</title>
@@ -610,6 +847,19 @@
 ]]></content>
   </entry>
   <entry>
+    <title>一封阿里云的喝茶邮件</title>
+    <url>/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/</url>
+    <content><![CDATA[<p>事情是这样的，就在今天早上，收到了一封来自阿里云的【喝茶（核查）通知】。一看邮件，很明显就是域名没有解析到内地节点的服务器上面呢。回想一下自己的解析，它说的对！。。。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081154.png" alt="why"></p>
+<span id="more"></span>
+
+<h2 id="原由"><a href="#原由" class="headerlink" title="原由"></a>原由</h2><p>在老早以前了，我用 hexo 部署 blog 在 GitHub Page 上面，然后解析了自己的域名在 gh-page 上，显然，GitHub Page 的服务器不在内地。我为了访问速度能快那么一丁点，就继续使用了 cloudflare 的 cdn 加速，因此也在上面设置了 DNS，但是我在 DNS 上也解析了一个二级域名到了阿里云的服务器上啊。按照网上的说法，设置一个二级域名解析到内地服务器就行了呢，然后点击复查连接后还是检查有问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过原由的分析，我这次将问题放在了 cloudflare 上面，看了一下 DNS 设置。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081207.png" alt="dns setting"><br>看到上面的代理状态了吗，我就开始怀疑是这个的问题，ok,查查什么意思。看到了下面的一个问题。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081210.png" alt="Q&amp;A proxy"><br>按照上面的说法，显然 proxy 就是一个代理，访问域名时，如果设置了代理，那么就会走代理，而不是直接走解析地址。<br>那我们来 ping 一下看看。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081213.png" alt="ping res"><br>上面的两个域名其实是同一个 ip,但是 ping 出来响应的不一样，因此，确实是有代理的存在。<br>我自己的服务器 ip 是 47 开始的，上面的 ping 结果一个是 cloudflare 代理的服务器，一个是 gh-page 的服务器。<br>那么关闭代理就可以了吗？<br>是的，可以了。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081229.jpg" alt="pre|left|350*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081231.png" alt="|right|250*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081217.png" alt="result"></p>
+]]></content>
+      <categories>
+        <category>一些趣事的🌟</category>
+      </categories>
+  </entry>
+  <entry>
     <title>【译】优化长任务 Optimize long tasks</title>
     <url>/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/</url>
     <content><![CDATA[<p>原文：<a href="https://web.dev/optimize-long-tasks/">https://web.dev/optimize-long-tasks/</a></p>
@@ -735,45 +985,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>一封阿里云的喝茶邮件</title>
-    <url>/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/</url>
-    <content><![CDATA[<p>事情是这样的，就在今天早上，收到了一封来自阿里云的【喝茶（核查）通知】。一看邮件，很明显就是域名没有解析到内地节点的服务器上面呢。回想一下自己的解析，它说的对！。。。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081154.png" alt="why"></p>
-<span id="more"></span>
-
-<h2 id="原由"><a href="#原由" class="headerlink" title="原由"></a>原由</h2><p>在老早以前了，我用 hexo 部署 blog 在 GitHub Page 上面，然后解析了自己的域名在 gh-page 上，显然，GitHub Page 的服务器不在内地。我为了访问速度能快那么一丁点，就继续使用了 cloudflare 的 cdn 加速，因此也在上面设置了 DNS，但是我在 DNS 上也解析了一个二级域名到了阿里云的服务器上啊。按照网上的说法，设置一个二级域名解析到内地服务器就行了呢，然后点击复查连接后还是检查有问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过原由的分析，我这次将问题放在了 cloudflare 上面，看了一下 DNS 设置。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081207.png" alt="dns setting"><br>看到上面的代理状态了吗，我就开始怀疑是这个的问题，ok,查查什么意思。看到了下面的一个问题。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081210.png" alt="Q&amp;A proxy"><br>按照上面的说法，显然 proxy 就是一个代理，访问域名时，如果设置了代理，那么就会走代理，而不是直接走解析地址。<br>那我们来 ping 一下看看。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081213.png" alt="ping res"><br>上面的两个域名其实是同一个 ip,但是 ping 出来响应的不一样，因此，确实是有代理的存在。<br>我自己的服务器 ip 是 47 开始的，上面的 ping 结果一个是 cloudflare 代理的服务器，一个是 gh-page 的服务器。<br>那么关闭代理就可以了吗？<br>是的，可以了。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081229.jpg" alt="pre|left|350*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081231.png" alt="|right|250*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081217.png" alt="result"></p>
-]]></content>
-      <categories>
-        <category>一些趣事的🌟</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>一次base64指令的powershell</title>
-    <url>/2021/11/18/%E4%B8%80%E6%AC%A1base64%E6%8C%87%E4%BB%A4%E7%9A%84powershell/</url>
-    <content><![CDATA[<p><strong>事情发生是在一个月黑风高的晚上。。。。不好意思搞错了 😬。</strong><br><strong>事情是这样的，今天在使用 webpack-dev-middleware 构建开发环境的时候，想要使用 node 启动浏览器并自动打开相关的本地网址。于是就发生了下面的一幕。</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/u=1178727920,923148390&fm=26&fmt=auto.webp"></p>
-<span id="more"></span>
-
-<h1 id="关于-open-这个-node-module"><a href="#关于-open-这个-node-module" class="headerlink" title="关于 open 这个 node_module"></a>关于 open 这个 node_module</h1><p><strong>这是一个 node 的依赖包，使用其提供的相关 api 可以用浏览器打开具体的网址。具体用法如下</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> open = <span class="built_in">require</span>(<span class="string">&quot;open&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Opens the image in the default image viewer and waits for the opened app to quit.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;unicorn.png&quot;</span>, &#123; <span class="attr">wait</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;The image viewer app quit&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Opens the URL in the default browser.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;https://sindresorhus.com&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Opens the URL in a specified browser.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;https://sindresorhus.com&quot;</span>, &#123; <span class="attr">app</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;firefox&quot;</span> &#125; &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Specify app arguments.</span></span><br><span class="line"><span class="keyword">await</span> open(<span class="string">&quot;https://sindresorhus.com&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">app</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;google chrome&quot;</span>, <span class="attr">arguments</span>: [<span class="string">&quot;--incognito&quot;</span>] &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open an app</span></span><br><span class="line"><span class="keyword">await</span> open.openApp(<span class="string">&quot;xcode&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Open an app with arguments</span></span><br><span class="line"><span class="keyword">await</span> open.openApp(open.apps.chrome, &#123; <span class="attr">arguments</span>: [<span class="string">&quot;--incognito&quot;</span>] &#125;);</span><br></pre></td></tr></table></figure>
-
-<p><strong>为了一探究竟，它是怎样打开浏览器的，所以我就开始了查看源代码之旅。然后就出现了 powershell 执行 base64 编码的命令这个有趣的事情了。</strong></p>
-<h1 id="在-powershell-中使用-base64-编码的指令"><a href="#在-powershell-中使用-base64-编码的指令" class="headerlink" title="在 powershell 中使用 base64 编码的指令"></a>在 powershell 中使用 base64 编码的指令</h1><p><strong>在 open 的源码中，有个 encodeArguments 的数组，大概是这个样子[‘start’, ‘http://….’ ]，其打开浏览的的主要命令就是</strong></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">start</span> (application) &lt;网址&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>而它在传递 powershell 命令时有这样一行代码代码,通过注释我们可以明白这是一个使用 base64 编码的 powershell 命令。于是乎我就开始了我的实验性探究了了</strong>🥳。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Using Base64-encoded command, accepted by PowerShell, to allow special characters.</span></span><br><span class="line">target = Buffer.from(encodedArguments.join(<span class="string">&quot; &quot;</span>), <span class="string">&quot;utf16le&quot;</span>).to;</span><br></pre></td></tr></table></figure>
-
-<p><strong>果不其然，在微软的文档里确实查到了 😃,不过需要注意的是需要 utf-16le 的编码。</strong><br><strong><em>铛铛铛铛！！</em></strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/encodedCommand.png"></p>
-<h1 id="实际测试"><a href="#实际测试" class="headerlink" title="实际测试"></a>实际测试</h1><p><strong>下面我就以 node 打开浏览器为例子，进行 base64 编码命令的测试。</strong><br><strong>node 打开浏览器的代码如下：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">&#x27;child_process&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取base64编码的指令</span></span><br><span class="line"><span class="keyword">let</span> command = Buffer.from(&lt;目标指令&gt; <span class="string">&#x27;utf16le&#x27;</span>).toString(<span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> subprocess = cp.spawn(<span class="string">`<span class="subst">$&#123;process.env.SYSTEMROOT&#125;</span>\\System32\\WindowsPowerShell\\v1.0\\powershell`</span>, [</span><br><span class="line">    <span class="string">&quot;-EncodedCommand&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;cwB0AGEAcgB0ACAAaAB0AHQAcAA6AC8ALwBiAGEAaQBkAHUALgBjAG8AbQA=&#x27;</span></span><br><span class="line">    <span class="comment">// &#x27;start http://baidu.com&#x27; 上面是这一行命令的编码</span></span><br><span class="line">], &#123;</span><br><span class="line">    <span class="attr">windowsVerbatimArguments</span>: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>下面是效果图</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/20211191146.gif"><br><strong>奇怪的知识又增加了 🌟</strong></p>
-]]></content>
-      <categories>
-        <category>一些趣事的🌟</category>
-      </categories>
-  </entry>
-  <entry>
     <title>对javaScript事件冒泡与事件捕获的再学习</title>
     <url>/2021/10/21/%E5%AF%B9javaScript%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%8D%95%E8%8E%B7%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="对-javaScript-事件冒泡与事件捕获的再学习"><a href="#对-javaScript-事件冒泡与事件捕获的再学习" class="headerlink" title="对 javaScript 事件冒泡与事件捕获的再学习"></a>对 javaScript 事件冒泡与事件捕获的再学习</h1><h2 id="DOM-树结构"><a href="#DOM-树结构" class="headerlink" title="DOM 树结构"></a>DOM 树结构</h2><p>我们在浏览器上会看见一颗 dom 树，这样的树状结构决定了事件的冒泡与捕获。</p>
@@ -810,58 +1021,6 @@
       <tags>
         <tag>Event</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>谈谈cookie、session与token(jwt)</title>
-    <url>/2021/12/07/%E8%B0%88%E8%B0%88cookie%E3%80%81session%E4%B8%8Etoken-jwt/</url>
-    <content><![CDATA[<p><strong>首先呢，网上关于它们的文章已经很多了，在这里我就只是来记录以下我的理解，其实也是看其他网上内容的一个总结吧。</strong></p>
-<blockquote>
-<p><strong>前言：由于 HTTP 协议无状态的缺陷。WEB 的设计者们提出了 Cookie 和 Session 两种解决机制。而 token,通常是 jwt(json web token)作为一种用户身份令牌，也常常用于记录 http 的状态存储，通常是在用户登录后，伴随每一次请求发送给给后端。下面就来聊聊它们。</strong></p>
-</blockquote>
- <span id="more"></span>
-
-<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>Cookie 是一段不超过 4KB 的小型文本数据，由一个名称（Name）、一个值（Value）和其它几个用于控制 Cookie 有效期、安全性、使用范围的可选属性组成。<br>包括：</p>
-<ol>
-<li>Name/Value：设置 Cookie 的名称及相对应的值，对于认证 Cookie，Value 值包括 Web 服务器所提供的访问令牌。</li>
-<li>Expires 属性：设置 Cookie 的生存期。有两种存储类型的 Cookie：会话性与持久性。Expires 属性缺省时，为会话性 Cookie，仅保存在客户端内存中，并在用户关闭浏览器时失效；持久性 Cookie 会保存在用户的硬盘中，直至生存期到或用户直接在网页中单击“注销”等按钮结束会话时才会失效。</li>
-<li>Domain 属性：指定了可以访问该 Cookie 的 Web 站点或域。Cookie 机制并未遵循严格的同源策略，允许一个子域（域名前缀不同）可以设置或获取其父域的 Cookie。</li>
-<li>Secure 属性：指定是否使用 HTTPS 安全协议发送 Cookie。</li>
-<li>Path 属性：定义了 Web 站点上可以访问该 Cookie 的目录。</li>
-<li>HTTPOnly 属性 ：用于防止客户端脚本通过 document.cookie 属性访问 Cookie，有助于保护 Cookie 不被跨站脚本攻击窃取或篡改。但是，HTTPOnly 的应用仍存在局限性，一些浏览器可以阻止客户端脚本对 Cookie 的读操作，但允许写操作；此外大多数浏览器仍允许通过 XMLHTTP 对象读取 HTTP 响应中的 Set-Cookie 头。<br><strong>好了，以上内容是来自百度百科。简单地做个总结：cookie 是一种存储在客户端的小型文本数据，里面的类容有键值对、生存周期、访问域、是否使用 http,web 站点可访问 cookie 的目录以及是否允许客户端读取 cookie。</strong></li>
-</ol>
-<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p><strong>XSRF/CSRF（跨站请求伪造）</strong>：利用的是 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器,却不能保证请求本身是用户自愿发出的。这里有一些如 Firefox、Opera 等浏览器使用单进程机制，<strong>多个窗口或标签使用同一个进程，共享 Cookie 等会话数据</strong>。IE 则混合使用单进程与多进程模式，一个窗口中的多个标签，以及使用“CTRL+N” 或单击网页中的链接打开的新窗口使用同一进程，共享会话数据；只有直接运行 IE 可执行程序打开窗口时，才会创建新的进程。<strong>Chrome 虽然使用多进程机制，然而经测试发现，其不同的窗口或标签之间仍会共享会话数据，除非使用隐身访问方式。</strong>因而，用户同时打开多个浏览器窗口或标签访问互联网资源时，就为 CSRF 攻击篡夺用户的会话 Cookie 创造了条件。却不能保证请求本身是用户自愿发出的。其最典型的例子<strong>就是当 cookie 还没过期时，用户浏览的网站有与其没过期的网站的一些 api 请求，那么当用户浏览这个恶意网站时就可能会受到危害</strong>。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202112161949.png"><br><strong>会话定置(Session Fixation)攻击</strong>是指，攻击者向受害者主机注入自己控制的认证 Cookie 等信息，使得受害者以攻击者的身份登录网站，从而窃取受害者的会话信息。注入 Cookie 的方法包括：使用跨站脚本或木马等恶意程序；或伪造与合法网站同域的站点，并利用各种方法欺骗用户访问该仿冒网站，从而通过 HTTP 响应中的 Set-Cookie 头将攻击者拥有的该域 Cookie 发送给用户等。因为 sessionID 一般都会放在 cookie 中存储，所以会容易受到会话定制攻击。</p>
-<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>与 cookie 相比，session 就是存放在服务端了，它表示在客户端登录时，服务端会发放一个 sessionid 到客户端，它一般存在 cookie 中，所以客户端以后的请求就会在请求头的 cookies 字段中携带这个信息。这样服务端就可以通过这个数据判断客户端的登录状态。这就好比我们去点菜，点好了后商家给我们一个号码牌，等菜好了，就送往相应号码牌的位置。</p>
-<h4 id="安全性-1"><a href="#安全性-1" class="headerlink" title="安全性"></a>安全性</h4><p>因为 session 是放在服务器上的，所以一般的安全性就考虑 sessionid 的伪造与截获。如果 sessionid 是放在 cookie 中的，那么 cookie 的时效就决定了 sessionid 即登录状态的时效。<br>需要注意的就是会话固定（session fixation)：意思是攻击者先自己获取一个 sessionid,然后假冒一个网站并将连接发给被攻击的人，当受害者登录后，攻击者就可以劫持受害人的会话。因为在攻击者登录获取 sessionid 后，网络服务器看到会话已经建立，无需创建新的会话。所以攻击者就成功地冒充了受害者，从而获取了受害者的信息。</p>
-<h3 id="Token（JWT）"><a href="#Token（JWT）" class="headerlink" title="Token（JWT）"></a>Token（JWT）</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>JSON Web Token (JWT) 是一种开放标准 (RFC 7519)，它定义了一种紧凑且自包含的方式，用于在各方之间作为 JSON 对象安全地传输信息。由于此信息经过数字签名，因此可以验证和信任。 JWT 可以使用秘密（使用 HMAC 算法）或使用 RSA 或 ECDSA 的公钥/私钥对进行签名。尽管 JWTs 可以被加密，以便在各方之间提供保密性，但我们将专注于签名的令牌。签名的令牌可以验证其中包含的索赔的完整性，而加密的令牌则对其他各方隐藏这些索赔。当令牌使用公钥/私钥对签名时，签名也证明了只有持有私钥的一方才是签名者。 - - - - <a href="https://jwt.io/introduction">https://jwt.io/introduction</a></p>
-<h4 id="组成："><a href="#组成：" class="headerlink" title="组成："></a>组成：</h4><blockquote>
-<p>形如：xxxxx.yyyyy.zzzzz</p>
-</blockquote>
-<ol>
-<li>header：标头通常由两部分组成：令牌的类型，即 JWT，以及正在使用的签名算法，例如 HMAC SHA256 或 RSA。<strong>然后，这个 JSON 被 Base64Url 编码以形成 JWT 的第一部分。</strong></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;alg&quot;</span>: <span class="string">&quot;HS256&quot;</span>,</span><br><span class="line">  <span class="string">&quot;typ&quot;</span>: <span class="string">&quot;JWT&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>payload：包含一些声明， 声明是关于实体（通常是用户）和附加数据的声明。共有三种类型的 claims：注册负载、公共负载和私人负载。</li>
-</ol>
-<ul>
-<li>Registered claims（注册）: 通常有四个部分，iss(issuer)，exp (expiration time), sub (subject), aud (audience)。还有一些其他的，比如：nbf (Not Before)、iat (Issued At)、jti (JWT ID)。<br><strong>iss（issuer）</strong>：声明标识发行该证书的委托人。<br>**exp (expiration time)**：声明标识了过期时间或之后不得接受 JWT 进行处理<br>**sub (subject)**：JWT 的主题。 JWT 中的声明通常是声明，关于主题。主题值必须要么被限定为在发行人的上下文中是本地唯一的，或者是全球唯一的。<br>**aud (audience)**：声明标识了 JWT 的接收者。</li>
-<li>Public claims（公共）：这些可以由使用 JWT 的人随意定义。但是为了避免冲突，它们应该在 <a href="https://www.iana.org/assignments/jwt/jwt.xhtml">IANA JSON Web Token Registry</a> 中定义，或者定义为包含抗冲突命名空间的 URI。</li>
-<li>Private claims（私有）：这些是为了在同意使用它们的各方之间共享信息而创建的自定义声明，这些声明既不是注册声明也不是公开声明。此声明的处理通常是<strong>特定于应用程序</strong>的。</li>
-</ul>
-<p><strong>然后，这个 JSON 被 Base64Url 编码以形成 JWT 的第二部分。</strong><br><strong>这里，header 与 payload 都是可以直接通过 base64url 解码获得其 json 数据的。</strong> 3. signature：签名，这是 jwt 最核心的部分，就是包含 base64 编码的 header,payload,以及 secret，最后再将整个使用加密算法进行加密。其中的 secret 就是服务端发放的私钥。</p>
-<blockquote>
-<p>形如：<br>HMACSHA256(<br>base64UrlEncode(header) + “.” +<br>base64UrlEncode(payload),<br>secret<br>)</p>
-</blockquote>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>每当用户想要访问受保护的路由或资源时，用户代理应发送 JWT，通常在使用 Bearer 模式的 Authorization 标头中。标题的内容应如下所示：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Authorization: Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure>
-
-<p>如果令牌在 Authorization 标头中发送，则跨源资源共享 (CORS) 不会成为问题，因为它不使用 cookie（cookie 是不能跨域的）。这一点就非常适合单点登录。</p>
-<h4 id="安全性-2"><a href="#安全性-2" class="headerlink" title="安全性"></a>安全性</h4><p>因为在 jwt 签发的时候，密钥是服务端生成的，所以来说是比较安全的，当 payload 的数据修改后，发送给服务端，服务端会采用相同的加密算法生成一个 token 副本与之前签发的进行对比，显然，修改后的数据再次加密后与之前的 token 对比肯定不同。<br>在 payload 中，因为是 base64url 编码的，所以很容易解码获取信息，因此不宜在里面放一些比较重要的信息。</p>
-]]></content>
-      <categories>
-        <category>web</category>
-      </categories>
   </entry>
   <entry>
     <title>聊聊JavaScript事件循环</title>
@@ -953,44 +1112,55 @@
       </categories>
   </entry>
   <entry>
-    <title>2022 年终总结</title>
-    <url>/2022/12/31/2022-%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>2022 年就要结束了，回想这一年可谓是五味杂陈啊。也是经历许多第一次的一年吧。</p>
-<span id="more"></span>
+    <title>谈谈cookie、session与token(jwt)</title>
+    <url>/2021/12/07/%E8%B0%88%E8%B0%88cookie%E3%80%81session%E4%B8%8Etoken-jwt/</url>
+    <content><![CDATA[<p><strong>首先呢，网上关于它们的文章已经很多了，在这里我就只是来记录以下我的理解，其实也是看其他网上内容的一个总结吧。</strong></p>
+<blockquote>
+<p><strong>前言：由于 HTTP 协议无状态的缺陷。WEB 的设计者们提出了 Cookie 和 Session 两种解决机制。而 token,通常是 jwt(json web token)作为一种用户身份令牌，也常常用于记录 http 的状态存储，通常是在用户登录后，伴随每一次请求发送给给后端。下面就来聊聊它们。</strong></p>
+</blockquote>
+ <span id="more"></span>
 
-<h2 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h2><p>在这学期开始，也就是大三下，然后开始找实习了。在找实习的过程中还算坎坷吧，经历了人生的第一次面试。其实投的公司一个手能数过来。然后就分别面了字节、网易、蚂蚁。其中字节面了两次，一次是国际化电商，另一次就是我下半年所实习的部门懂车帝了。</p>
-<p>曲曲折折，这一年最美好的也就是下半年实习北漂的这一段时间了，跟我的实验室同学、室友、一开始不认识的同校同学（哈哈哈，这称呼感觉有点怪怪的）。</p>
-<h3 id="租房篇"><a href="#租房篇" class="headerlink" title="租房篇"></a>租房篇</h3><p>去北京总得租房吧。是的，然后我们就被中介…(懂的都懂)。第一次租房是三个合租的，房租 8000 一月，首付一共 4 万多吧，三个月。当时还是挺震惊的，第一次拿出去这么多钱 😂。</p>
-<p>总的来说，北京租房想事少的话还是走一些平台，比如自如什么的，虽然说有那么亿丢丢贵。但是会有一些服务之类的，比如打扫房间。好像就打扫房间有用 🤔。</p>
-<h3 id="上班篇"><a href="#上班篇" class="headerlink" title="上班篇"></a>上班篇</h3><p><strong>团队聚餐</strong><br>手动补上 俊哥跟东阳哥 👍</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311521.JPG" alt="team"></p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>Cookie 是一段不超过 4KB 的小型文本数据，由一个名称（Name）、一个值（Value）和其它几个用于控制 Cookie 有效期、安全性、使用范围的可选属性组成。<br>包括：</p>
+<ol>
+<li>Name/Value：设置 Cookie 的名称及相对应的值，对于认证 Cookie，Value 值包括 Web 服务器所提供的访问令牌。</li>
+<li>Expires 属性：设置 Cookie 的生存期。有两种存储类型的 Cookie：会话性与持久性。Expires 属性缺省时，为会话性 Cookie，仅保存在客户端内存中，并在用户关闭浏览器时失效；持久性 Cookie 会保存在用户的硬盘中，直至生存期到或用户直接在网页中单击“注销”等按钮结束会话时才会失效。</li>
+<li>Domain 属性：指定了可以访问该 Cookie 的 Web 站点或域。Cookie 机制并未遵循严格的同源策略，允许一个子域（域名前缀不同）可以设置或获取其父域的 Cookie。</li>
+<li>Secure 属性：指定是否使用 HTTPS 安全协议发送 Cookie。</li>
+<li>Path 属性：定义了 Web 站点上可以访问该 Cookie 的目录。</li>
+<li>HTTPOnly 属性 ：用于防止客户端脚本通过 document.cookie 属性访问 Cookie，有助于保护 Cookie 不被跨站脚本攻击窃取或篡改。但是，HTTPOnly 的应用仍存在局限性，一些浏览器可以阻止客户端脚本对 Cookie 的读操作，但允许写操作；此外大多数浏览器仍允许通过 XMLHTTP 对象读取 HTTP 响应中的 Set-Cookie 头。<br><strong>好了，以上内容是来自百度百科。简单地做个总结：cookie 是一种存储在客户端的小型文本数据，里面的类容有键值对、生存周期、访问域、是否使用 http,web 站点可访问 cookie 的目录以及是否允许客户端读取 cookie。</strong></li>
+</ol>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p><strong>XSRF/CSRF（跨站请求伪造）</strong>：利用的是 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器,却不能保证请求本身是用户自愿发出的。这里有一些如 Firefox、Opera 等浏览器使用单进程机制，<strong>多个窗口或标签使用同一个进程，共享 Cookie 等会话数据</strong>。IE 则混合使用单进程与多进程模式，一个窗口中的多个标签，以及使用“CTRL+N” 或单击网页中的链接打开的新窗口使用同一进程，共享会话数据；只有直接运行 IE 可执行程序打开窗口时，才会创建新的进程。<strong>Chrome 虽然使用多进程机制，然而经测试发现，其不同的窗口或标签之间仍会共享会话数据，除非使用隐身访问方式。</strong>因而，用户同时打开多个浏览器窗口或标签访问互联网资源时，就为 CSRF 攻击篡夺用户的会话 Cookie 创造了条件。却不能保证请求本身是用户自愿发出的。其最典型的例子<strong>就是当 cookie 还没过期时，用户浏览的网站有与其没过期的网站的一些 api 请求，那么当用户浏览这个恶意网站时就可能会受到危害</strong>。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202112161949.png"><br><strong>会话定置(Session Fixation)攻击</strong>是指，攻击者向受害者主机注入自己控制的认证 Cookie 等信息，使得受害者以攻击者的身份登录网站，从而窃取受害者的会话信息。注入 Cookie 的方法包括：使用跨站脚本或木马等恶意程序；或伪造与合法网站同域的站点，并利用各种方法欺骗用户访问该仿冒网站，从而通过 HTTP 响应中的 Set-Cookie 头将攻击者拥有的该域 Cookie 发送给用户等。因为 sessionID 一般都会放在 cookie 中存储，所以会容易受到会话定制攻击。</p>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>与 cookie 相比，session 就是存放在服务端了，它表示在客户端登录时，服务端会发放一个 sessionid 到客户端，它一般存在 cookie 中，所以客户端以后的请求就会在请求头的 cookies 字段中携带这个信息。这样服务端就可以通过这个数据判断客户端的登录状态。这就好比我们去点菜，点好了后商家给我们一个号码牌，等菜好了，就送往相应号码牌的位置。</p>
+<h4 id="安全性-1"><a href="#安全性-1" class="headerlink" title="安全性"></a>安全性</h4><p>因为 session 是放在服务器上的，所以一般的安全性就考虑 sessionid 的伪造与截获。如果 sessionid 是放在 cookie 中的，那么 cookie 的时效就决定了 sessionid 即登录状态的时效。<br>需要注意的就是会话固定（session fixation)：意思是攻击者先自己获取一个 sessionid,然后假冒一个网站并将连接发给被攻击的人，当受害者登录后，攻击者就可以劫持受害人的会话。因为在攻击者登录获取 sessionid 后，网络服务器看到会话已经建立，无需创建新的会话。所以攻击者就成功地冒充了受害者，从而获取了受害者的信息。</p>
+<h3 id="Token（JWT）"><a href="#Token（JWT）" class="headerlink" title="Token（JWT）"></a>Token（JWT）</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>JSON Web Token (JWT) 是一种开放标准 (RFC 7519)，它定义了一种紧凑且自包含的方式，用于在各方之间作为 JSON 对象安全地传输信息。由于此信息经过数字签名，因此可以验证和信任。 JWT 可以使用秘密（使用 HMAC 算法）或使用 RSA 或 ECDSA 的公钥/私钥对进行签名。尽管 JWTs 可以被加密，以便在各方之间提供保密性，但我们将专注于签名的令牌。签名的令牌可以验证其中包含的索赔的完整性，而加密的令牌则对其他各方隐藏这些索赔。当令牌使用公钥/私钥对签名时，签名也证明了只有持有私钥的一方才是签名者。 - - - - <a href="https://jwt.io/introduction">https://jwt.io/introduction</a></p>
+<h4 id="组成："><a href="#组成：" class="headerlink" title="组成："></a>组成：</h4><blockquote>
+<p>形如：xxxxx.yyyyy.zzzzz</p>
+</blockquote>
+<ol>
+<li>header：标头通常由两部分组成：令牌的类型，即 JWT，以及正在使用的签名算法，例如 HMAC SHA256 或 RSA。<strong>然后，这个 JSON 被 Base64Url 编码以形成 JWT 的第一部分。</strong></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;alg&quot;</span>: <span class="string">&quot;HS256&quot;</span>,</span><br><span class="line">  <span class="string">&quot;typ&quot;</span>: <span class="string">&quot;JWT&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>payload：包含一些声明， 声明是关于实体（通常是用户）和附加数据的声明。共有三种类型的 claims：注册负载、公共负载和私人负载。</li>
+</ol>
 <ul>
-<li><p>地点：北京市海淀区中城/中兴大厦</p>
-</li>
-<li><p>交通工具：开水团的自行车啊哈哈哈哈哈</p>
-</li>
+<li>Registered claims（注册）: 通常有四个部分，iss(issuer)，exp (expiration time), sub (subject), aud (audience)。还有一些其他的，比如：nbf (Not Before)、iat (Issued At)、jti (JWT ID)。<br><strong>iss（issuer）</strong>：声明标识发行该证书的委托人。<br>**exp (expiration time)**：声明标识了过期时间或之后不得接受 JWT 进行处理<br>**sub (subject)**：JWT 的主题。 JWT 中的声明通常是声明，关于主题。主题值必须要么被限定为在发行人的上下文中是本地唯一的，或者是全球唯一的。<br>**aud (audience)**：声明标识了 JWT 的接收者。</li>
+<li>Public claims（公共）：这些可以由使用 JWT 的人随意定义。但是为了避免冲突，它们应该在 <a href="https://www.iana.org/assignments/jwt/jwt.xhtml">IANA JSON Web Token Registry</a> 中定义，或者定义为包含抗冲突命名空间的 URI。</li>
+<li>Private claims（私有）：这些是为了在同意使用它们的各方之间共享信息而创建的自定义声明，这些声明既不是注册声明也不是公开声明。此声明的处理通常是<strong>特定于应用程序</strong>的。</li>
 </ul>
-<p>一个职场小白，初入职场，有很多东西需要学习，不论是专业的还是非专业的。从一个月开始的陌生到后来的轻车熟路。收获颇为丰厚，在这里必须要感谢下我的 mentor，真是非常的 nice。</p>
-<p>收获满满的 gitlab</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311520.JPG" alt="gitlab commit"></p>
-<p>很高兴能在这里实习，总的来说累并快乐着，遗憾就是未能留下继续前行 😅。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311502.png" alt="waka time"></p>
-<h3 id="娱乐篇"><a href="#娱乐篇" class="headerlink" title="娱乐篇"></a>娱乐篇</h3><p>这波啊，虽然北京跟我想象的有点不一样，但还是可以的</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311522.PNG" alt="跟朋友们吃的美食"></p>
-<p>第一次看见了“大裤衩”<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311739.JPG" alt="大裤衩"></p>
-<p>和朋友们逛了一小会鸟巢<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202212311740.png" alt="鸟巢"></p>
-<p><strong>回想起来真是回忆满满</strong></p>
-<h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>这方面还是得多思考吧，也要学会 say no，同时要有自己得见解。</p>
-<h2 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h2><ul>
-<li>坚持写作，输出质量文章</li>
-<li>学习图形学，发展多领域</li>
-<li>有机会发几个 b 站视频 🤔</li>
-<li>positive</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>2022 充满回忆的一年，感谢我身边的每一个人，他们教会了我许多，让我明白了许多。 Respect。</p>
+<p><strong>然后，这个 JSON 被 Base64Url 编码以形成 JWT 的第二部分。</strong><br><strong>这里，header 与 payload 都是可以直接通过 base64url 解码获得其 json 数据的。</strong> 3. signature：签名，这是 jwt 最核心的部分，就是包含 base64 编码的 header,payload,以及 secret，最后再将整个使用加密算法进行加密。其中的 secret 就是服务端发放的私钥。</p>
+<blockquote>
+<p>形如：<br>HMACSHA256(<br>base64UrlEncode(header) + “.” +<br>base64UrlEncode(payload),<br>secret<br>)</p>
+</blockquote>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>每当用户想要访问受保护的路由或资源时，用户代理应发送 JWT，通常在使用 Bearer 模式的 Authorization 标头中。标题的内容应如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Authorization: Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果令牌在 Authorization 标头中发送，则跨源资源共享 (CORS) 不会成为问题，因为它不使用 cookie（cookie 是不能跨域的）。这一点就非常适合单点登录。</p>
+<h4 id="安全性-2"><a href="#安全性-2" class="headerlink" title="安全性"></a>安全性</h4><p>因为在 jwt 签发的时候，密钥是服务端生成的，所以来说是比较安全的，当 payload 的数据修改后，发送给服务端，服务端会采用相同的加密算法生成一个 token 副本与之前签发的进行对比，显然，修改后的数据再次加密后与之前的 token 对比肯定不同。<br>在 payload 中，因为是 base64url 编码的，所以很容易解码获取信息，因此不宜在里面放一些比较重要的信息。</p>
 ]]></content>
       <categories>
-        <category>年终总结</category>
+        <category>web</category>
       </categories>
   </entry>
 </search>
