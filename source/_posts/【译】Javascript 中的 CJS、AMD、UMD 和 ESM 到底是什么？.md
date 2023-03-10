@@ -10,6 +10,8 @@ tags:
 
 然后，比我聪明得多的人试图为 Javascript 添加模块化。其中一些是 CJS、AMD、UMD 和 ESM。您可能听说过其中一些方法（还有其他方法，但这些都是大玩家）。
 
+<!-- more -->
+
 ## CJS
 
 CJS 是 CommonJS 的缩写。这是它的样子：
