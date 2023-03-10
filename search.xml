@@ -281,6 +281,26 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2021/07/21/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>使用github actions进行轻服务的页面部署</title>
     <url>/2021/10/22/actions%E8%BF%9B%E8%A1%8C%E8%BD%BB%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%A1%B5%E9%9D%A2%E9%83%A8%E7%BD%B2/</url>
     <content><![CDATA[<h1 id="使用-github-actions-进行轻服务的页面托管"><a href="#使用-github-actions-进行轻服务的页面托管" class="headerlink" title="使用 github actions 进行轻服务的页面托管"></a>使用 github actions 进行<a href="https://qingfuwu.cn/">轻服务</a>的页面托管</h1><h3 id="首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用-github-actions-的自动部署。只要会一点-github-actions-实现起来也比较简单。"><a href="#首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用-github-actions-的自动部署。只要会一点-github-actions-实现起来也比较简单。" class="headerlink" title="首先，轻服务官方文档给出了手动部署页面的教程页面托管。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。"></a>首先，轻服务官方文档给出了手动部署页面的教程<a href="https://qingfuwu.cn/docs/openapi/sdk/hosting.html#%E8%8E%B7%E5%8F%96%E9%A1%B5%E9%9D%A2%E6%89%98%E7%AE%A1%E4%BF%A1%E6%81%AF">页面托管</a>。而我这里就简单地介绍一下使用 github actions 的自动部署。只要会一点 github actions,实现起来也比较简单。</h3><p><a href="https://qcjtoy.web.cloudendpoint.cn/">看看效果</a></p>
@@ -304,26 +324,6 @@
       <tags>
         <tag>deploy qingfuwu</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/07/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>numpy条件选择</title>
@@ -826,6 +826,8 @@
     <content><![CDATA[<p>原文：<a href="https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm">https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm</a></p>
 <p>一开始，Javascript 没有导入/导出模块的方法。这是个问题。想象一下只在一个文件中编写您的应用程序——那将是一场噩梦！</p>
 <p>然后，比我聪明得多的人试图为 Javascript 添加模块化。其中一些是 CJS、AMD、UMD 和 ESM。您可能听说过其中一些方法（还有其他方法，但这些都是大玩家）。</p>
+<span id="more"></span>
+
 <h2 id="CJS"><a href="#CJS" class="headerlink" title="CJS"></a>CJS</h2><p>CJS 是 CommonJS 的缩写。这是它的样子：</p>
 <figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//importing</span></span><br><span class="line"><span class="keyword">const</span> doSomething = <span class="built_in">require</span>(<span class="string">&quot;./doSomething.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//exporting</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -885,19 +887,6 @@
 <li>AMD 是异步的，适合前端。<br>感谢阅读，开发者！以后打算把每个模块都写的很深入，尤其是 ESM，因为里面有很多牛逼。敬请关注！<br>如果您发现任何错误，请告诉我。</li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>一封阿里云的喝茶邮件</title>
-    <url>/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/</url>
-    <content><![CDATA[<p>事情是这样的，就在今天早上，收到了一封来自阿里云的【喝茶（核查）通知】。一看邮件，很明显就是域名没有解析到内地节点的服务器上面呢。回想一下自己的解析，它说的对！。。。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081154.png" alt="why"></p>
-<span id="more"></span>
-
-<h2 id="原由"><a href="#原由" class="headerlink" title="原由"></a>原由</h2><p>在老早以前了，我用 hexo 部署 blog 在 GitHub Page 上面，然后解析了自己的域名在 gh-page 上，显然，GitHub Page 的服务器不在内地。我为了访问速度能快那么一丁点，就继续使用了 cloudflare 的 cdn 加速，因此也在上面设置了 DNS，但是我在 DNS 上也解析了一个二级域名到了阿里云的服务器上啊。按照网上的说法，设置一个二级域名解析到内地服务器就行了呢，然后点击复查连接后还是检查有问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过原由的分析，我这次将问题放在了 cloudflare 上面，看了一下 DNS 设置。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081207.png" alt="dns setting"><br>看到上面的代理状态了吗，我就开始怀疑是这个的问题，ok,查查什么意思。看到了下面的一个问题。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081210.png" alt="Q&amp;A proxy"><br>按照上面的说法，显然 proxy 就是一个代理，访问域名时，如果设置了代理，那么就会走代理，而不是直接走解析地址。<br>那我们来 ping 一下看看。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081213.png" alt="ping res"><br>上面的两个域名其实是同一个 ip,但是 ping 出来响应的不一样，因此，确实是有代理的存在。<br>我自己的服务器 ip 是 47 开始的，上面的 ping 结果一个是 cloudflare 代理的服务器，一个是 gh-page 的服务器。<br>那么关闭代理就可以了吗？<br>是的，可以了。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081229.jpg" alt="pre|left|350*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081231.png" alt="|right|250*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081217.png" alt="result"></p>
-]]></content>
-      <categories>
-        <category>一些趣事的🌟</category>
-      </categories>
   </entry>
   <entry>
     <title>【译】优化长任务 Optimize long tasks</title>
@@ -1023,6 +1012,19 @@
 <p>Special thanks to Philip Walton for his technical vetting of this article.</p>
 <p>Hero image sourced from Unsplash, courtesy of Amirali Mirhashemian.</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>一封阿里云的喝茶邮件</title>
+    <url>/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/</url>
+    <content><![CDATA[<p>事情是这样的，就在今天早上，收到了一封来自阿里云的【喝茶（核查）通知】。一看邮件，很明显就是域名没有解析到内地节点的服务器上面呢。回想一下自己的解析，它说的对！。。。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081154.png" alt="why"></p>
+<span id="more"></span>
+
+<h2 id="原由"><a href="#原由" class="headerlink" title="原由"></a>原由</h2><p>在老早以前了，我用 hexo 部署 blog 在 GitHub Page 上面，然后解析了自己的域名在 gh-page 上，显然，GitHub Page 的服务器不在内地。我为了访问速度能快那么一丁点，就继续使用了 cloudflare 的 cdn 加速，因此也在上面设置了 DNS，但是我在 DNS 上也解析了一个二级域名到了阿里云的服务器上啊。按照网上的说法，设置一个二级域名解析到内地服务器就行了呢，然后点击复查连接后还是检查有问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过原由的分析，我这次将问题放在了 cloudflare 上面，看了一下 DNS 设置。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081207.png" alt="dns setting"><br>看到上面的代理状态了吗，我就开始怀疑是这个的问题，ok,查查什么意思。看到了下面的一个问题。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081210.png" alt="Q&amp;A proxy"><br>按照上面的说法，显然 proxy 就是一个代理，访问域名时，如果设置了代理，那么就会走代理，而不是直接走解析地址。<br>那我们来 ping 一下看看。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081213.png" alt="ping res"><br>上面的两个域名其实是同一个 ip,但是 ping 出来响应的不一样，因此，确实是有代理的存在。<br>我自己的服务器 ip 是 47 开始的，上面的 ping 结果一个是 cloudflare 代理的服务器，一个是 gh-page 的服务器。<br>那么关闭代理就可以了吗？<br>是的，可以了。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081229.jpg" alt="pre|left|350*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081231.png" alt="|right|250*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081217.png" alt="result"></p>
+]]></content>
+      <categories>
+        <category>一些趣事的🌟</category>
+      </categories>
   </entry>
   <entry>
     <title>一次base64指令的powershell</title>
