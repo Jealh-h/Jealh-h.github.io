@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2021年终总结</title>
-    <url>/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<blockquote>
-<p>感想： 时间过得真的很快，而需要学习的东西一直在变多，从大二到大三的，慢慢地就觉得自己接触的领域所渺小。而这一年里感受最深的总还是时间不够的样子。</p>
-</blockquote>
-<hr>
-<span id="more"></span>
-
-<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>在学习上，尽管不是所有课程安排得很妥当，但也有一些课程让我受益良多。记忆比较深刻得还是暑假前的 flutter 课程吧。那一次面临得挑战是未知、课程时间短。而最终的任务是使用 flutter 完成一个 APP。而我做的就是一个记笔记的 APP 了<a href="https://github.com/Jealh-h/lightNote">(https://github.com/Jealh-h/lightNote)</a>，尽管功能不是那么完善，但这次让我体验到了全栈开发的一些困难吧，得益于 eggjs 框架能让我一个不太懂后端的轻松一点…….。数据分析这门课也挺好的，至少让我在机器学习方面能够调库了，能训练模型了。特别是在最后的房价预测的项目上，从数据获取到数据分析再到模型预测，这一套下来让我觉得 python 更加强大了。其次就是数据可视化了，虽然说理论课着实有一点无聊，好在实验课还比较有趣，这次让我体验了一把 d3js,给我的感觉就是 jquery 的一个兄弟一样，只不过更加适合于绘制图形。最后说说编译原理吧，这门课就感觉比较神奇吧？！从词法分析到语法分析，再到语义分析等等。都感觉有很强的理论支撑。单就对于给定的 test 来说，做一个词法分析、语法分析的工作量就挺大的（求 NFA、DFA,改写 LL(1)文法等等），可见哪些语言之父是有多 🐂 了。</p>
-<h3 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h3><p>在这一年里依然那么喜欢逛 bi 站,喜欢听音乐。印象最深的还是《双城之战》了,一方面是我喜欢的画风，但是呢这剧情确实有点虐了,这大概就是角色设定吧。<br><strong>qq 音乐年度报告</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/qqmusic_2021.PNG" alt="qq音乐"></p>
-<p><strong>bilibili 年度报告</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/bilibili_2021.PNG" alt="bilibili"></p>
-<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><p>在技术栈上，对于 react 的使用更加熟悉了，尽管自己想用 vue 写一个个人博客，但写到一半还是放弃了（可能那时候还不知道一些强大的 nodejs 框架吧）。所以还是 hexo 香啊，就这样发现了写博客是一件强化记忆的事情。在这一年里，虽然在知识广度上有了提升，但在深度上感觉还学提升。比较纠结的还是对于一些工具不知到是要会到什么层度吧，比如 webpack,vite 是会按照官方文档配置，还是能熟练地写出来。暑期在实验室期间，把原有的 oj3 由 webpack 构建改成了 vite,只能说 vite 真快。使用 react 重写了一个会议室管理系统端。而对于微信小程序那边，虽然没有获得奖，但也收获了一些开发经验吧。而对于一些其他知识，比如 rust、electron、wasm、以及游戏开发都是很想学的，但都会感觉自由的时间太少，而学习又需要耗费大量时间。所以还需要控制自己、让自己珍惜时间啊。</p>
-<h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><p>希望自己记忆力好一点。<br>每一天都要崭新的一点。<br>对渴望的事情执着一点。<br>让自己的想法丰富一点。</p>
-<p><strong>就上面那么亿点就够了</strong></p>
-]]></content>
-      <categories>
-        <category>年终总结</category>
-      </categories>
-  </entry>
-  <entry>
     <title>2022 年终总结</title>
     <url>/2022/12/31/2022-%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>2022 年就要结束了，回想这一年可谓是五味杂陈啊。也是经历许多第一次的一年吧。</p>
@@ -60,6 +40,55 @@
       <categories>
         <category>年终总结</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Scroll 开发小记</title>
+    <url>/2022/09/11/Scroll-%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0/</url>
+    <content><![CDATA[<blockquote>
+<p>背景：一次左滑加载更多的的交互开发</p>
+</blockquote>
+<h2 id="填坑开始"><a href="#填坑开始" class="headerlink" title="填坑开始"></a>填坑开始</h2><p>在最开始时，我得到了一个提示，左滑加载更多类似下拉刷新。想了想，好家伙，不就是把下拉刷新横过来嘛，碰巧下拉刷新还是前几天新增的一个组件，这回可以借鉴借鉴了 😍。OK 开干！</p>
+<span id="more"></span>
+
+<h2 id="下拉刷新组件的设计"><a href="#下拉刷新组件的设计" class="headerlink" title="下拉刷新组件的设计"></a>下拉刷新组件的设计</h2><p>在查看组件的源码后，发现下拉刷新组件的设计其实比较简单。这里使用了 @use-gesture/react 用在手势上的绑定，react-spring 用作动画的实现。下面就简单介绍下其设计思路。</p>
+<p>首先抛出几个问题</p>
+<ul>
+<li>什么时候触发刷新 或者什么时候调用手势？</li>
+<li>scroll 容器滚动时与手势冲突。</li>
+<li>下拉的阈值、回弹动画</li>
+</ul>
+<ol>
+<li><p>下拉刷新组件在设计时，采用的是浏览器原生滚动加上自定义用户手势事件。这样我们很容易判断什么时候触发手势事件了。其答案是：判断 dom 节点的 scrollTop，当 scrollTop 为 0 时，说明已经到顶了，然后在往下拉时，就开始触发手势，当手势下拉的距离超过某个阈值时，即变为了可刷新的状态，松手后，直接触发下拉回调。</p>
+</li>
+<li><p>从问题 1 的答案我们就可以很合理地规避原生滚动与手势下拉的冲突，及 scrollTop 不为 0 时，不会触发手势事件。</p>
+</li>
+<li><p>通过 use-gesture/react 中的 rubberbandIfOutOfBounds 函数创建一个弹簧效果，回弹动画呢，这个组件采用的是设置 loading 的 height 来实现，虽然可以，但我理解这种动态高度不是太适合这种滚动场景。因此后面经过各种实验（踩坑）后，丢弃了这种改变高度（宽度）的方式展示 loading。</p>
+</li>
+</ol>
+<blockquote>
+<p>大概的一个框架图</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-09-01%2018.42.03.png" alt="img_1"></p>
+<h2 id="横滑实践"><a href="#横滑实践" class="headerlink" title="横滑实践"></a>横滑实践</h2><p>横滑多简单呢，把竖着的横过来就是了 😊。哈哈，确实是这样的。</p>
+<h3 id="Version-1"><a href="#Version-1" class="headerlink" title="Version 1"></a>Version 1</h3><p>基本套路：</p>
+<ul>
+<li>overflow：hidden</li>
+<li>transform：translate3d<br>基于以上套路，第一版没有采用浏览器的原生滚动，然后全程触发手势事件，通过手势事件控制 react-spring 的动画参数，实现模拟滚动。显然，模拟滚动的效果不是太好，其原因在于滚动速率变化、滚动惯性等比较难控制（实际原因：🥬 🐶）。<br>下面来看一下初版效果:</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/Sep-01-2022%2019-11-16.gif" alt="img_2"></p>
+<p>目测效果还行，但是在真机调试上就比较拉胯了，在真机上，实际移动的距离是手指一动的距离，所以是非常的慢并且每一次滚动的距离、速度这些比较受限。</p>
+<h3 id="Version-2"><a href="#Version-2" class="headerlink" title="Version 2"></a>Version 2</h3><p>参考 picker 组件，做一个滚动惯性。这种滚动对应的是每一次移动，终点位置都是一个整数位置（最终移动坐标是： index * itemWidth 或者 itemHeight）。</p>
+<h3 id="Version-3"><a href="#Version-3" class="headerlink" title="Version 3"></a>Version 3</h3><p>思路：原生滚动结合手势，这款设计比较合理，原生滚动改善了速度问题，横向长列表在滚动时，只有到滚动到最右边时才触发整体容器的移动，然后露出 load。<br>注意：原生滚动采用 overflow：auto。在滚动到最右边时，触发手势，需要设置 overflow：hidden，不然就会发生滚动重叠（原生的在滚动、手势也在移动）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-09-02%2020.17.02.png" alt="img_3"></p>
+<p>看似可用了，然而 ios 有个坑点，原生滚动具有惯性回弹，所以，当你拇指快速左滑时，会出现一个滚动回弹。这个回弹不会将 load 露出来，反而露出的是一个白底。</p>
+<h2 id="能用待改善"><a href="#能用待改善" class="headerlink" title="能用待改善"></a>能用待改善</h2><p>如标题所说，最终版只是一个能用的版本。各种原因，选择将 load 放在了原生 scroll 里面了（里外差别不大 😅）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/Sep-02-2022%2021-05-15.gif" alt="img_3"></p>
+<p>待优化的点</p>
+<ul>
+<li>原生滚动不能有回弹效果，如果需要增加回弹效果，需要手动模拟滚动，然后再添加回弹。(ios特定的边界弹簧效果不能禁止)</li>
+<li>边界 drag 不流畅，有待改进。</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>JavaScript 的隐式转换</title>
@@ -232,73 +261,24 @@
       </tags>
   </entry>
   <entry>
-    <title>Scroll 开发小记</title>
-    <url>/2022/09/11/Scroll-%E5%BC%80%E5%8F%91%E5%B0%8F%E8%AE%B0/</url>
+    <title>2021年终总结</title>
+    <url>/2021/12/31/2021%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<blockquote>
-<p>背景：一次左滑加载更多的的交互开发</p>
+<p>感想： 时间过得真的很快，而需要学习的东西一直在变多，从大二到大三的，慢慢地就觉得自己接触的领域所渺小。而这一年里感受最深的总还是时间不够的样子。</p>
 </blockquote>
-<h2 id="填坑开始"><a href="#填坑开始" class="headerlink" title="填坑开始"></a>填坑开始</h2><p>在最开始时，我得到了一个提示，左滑加载更多类似下拉刷新。想了想，好家伙，不就是把下拉刷新横过来嘛，碰巧下拉刷新还是前几天新增的一个组件，这回可以借鉴借鉴了 😍。OK 开干！</p>
+<hr>
 <span id="more"></span>
 
-<h2 id="下拉刷新组件的设计"><a href="#下拉刷新组件的设计" class="headerlink" title="下拉刷新组件的设计"></a>下拉刷新组件的设计</h2><p>在查看组件的源码后，发现下拉刷新组件的设计其实比较简单。这里使用了 @use-gesture/react 用在手势上的绑定，react-spring 用作动画的实现。下面就简单介绍下其设计思路。</p>
-<p>首先抛出几个问题</p>
-<ul>
-<li>什么时候触发刷新 或者什么时候调用手势？</li>
-<li>scroll 容器滚动时与手势冲突。</li>
-<li>下拉的阈值、回弹动画</li>
-</ul>
-<ol>
-<li><p>下拉刷新组件在设计时，采用的是浏览器原生滚动加上自定义用户手势事件。这样我们很容易判断什么时候触发手势事件了。其答案是：判断 dom 节点的 scrollTop，当 scrollTop 为 0 时，说明已经到顶了，然后在往下拉时，就开始触发手势，当手势下拉的距离超过某个阈值时，即变为了可刷新的状态，松手后，直接触发下拉回调。</p>
-</li>
-<li><p>从问题 1 的答案我们就可以很合理地规避原生滚动与手势下拉的冲突，及 scrollTop 不为 0 时，不会触发手势事件。</p>
-</li>
-<li><p>通过 use-gesture/react 中的 rubberbandIfOutOfBounds 函数创建一个弹簧效果，回弹动画呢，这个组件采用的是设置 loading 的 height 来实现，虽然可以，但我理解这种动态高度不是太适合这种滚动场景。因此后面经过各种实验（踩坑）后，丢弃了这种改变高度（宽度）的方式展示 loading。</p>
-</li>
-</ol>
-<blockquote>
-<p>大概的一个框架图</p>
-</blockquote>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-09-01%2018.42.03.png" alt="img_1"></p>
-<h2 id="横滑实践"><a href="#横滑实践" class="headerlink" title="横滑实践"></a>横滑实践</h2><p>横滑多简单呢，把竖着的横过来就是了 😊。哈哈，确实是这样的。</p>
-<h3 id="Version-1"><a href="#Version-1" class="headerlink" title="Version 1"></a>Version 1</h3><p>基本套路：</p>
-<ul>
-<li>overflow：hidden</li>
-<li>transform：translate3d<br>基于以上套路，第一版没有采用浏览器的原生滚动，然后全程触发手势事件，通过手势事件控制 react-spring 的动画参数，实现模拟滚动。显然，模拟滚动的效果不是太好，其原因在于滚动速率变化、滚动惯性等比较难控制（实际原因：🥬 🐶）。<br>下面来看一下初版效果:</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/Sep-01-2022%2019-11-16.gif" alt="img_2"></p>
-<p>目测效果还行，但是在真机调试上就比较拉胯了，在真机上，实际移动的距离是手指一动的距离，所以是非常的慢并且每一次滚动的距离、速度这些比较受限。</p>
-<h3 id="Version-2"><a href="#Version-2" class="headerlink" title="Version 2"></a>Version 2</h3><p>参考 picker 组件，做一个滚动惯性。这种滚动对应的是每一次移动，终点位置都是一个整数位置（最终移动坐标是： index * itemWidth 或者 itemHeight）。</p>
-<h3 id="Version-3"><a href="#Version-3" class="headerlink" title="Version 3"></a>Version 3</h3><p>思路：原生滚动结合手势，这款设计比较合理，原生滚动改善了速度问题，横向长列表在滚动时，只有到滚动到最右边时才触发整体容器的移动，然后露出 load。<br>注意：原生滚动采用 overflow：auto。在滚动到最右边时，触发手势，需要设置 overflow：hidden，不然就会发生滚动重叠（原生的在滚动、手势也在移动）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-09-02%2020.17.02.png" alt="img_3"></p>
-<p>看似可用了，然而 ios 有个坑点，原生滚动具有惯性回弹，所以，当你拇指快速左滑时，会出现一个滚动回弹。这个回弹不会将 load 露出来，反而露出的是一个白底。</p>
-<h2 id="能用待改善"><a href="#能用待改善" class="headerlink" title="能用待改善"></a>能用待改善</h2><p>如标题所说，最终版只是一个能用的版本。各种原因，选择将 load 放在了原生 scroll 里面了（里外差别不大 😅）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/Sep-02-2022%2021-05-15.gif" alt="img_3"></p>
-<p>待优化的点</p>
-<ul>
-<li>原生滚动不能有回弹效果，如果需要增加回弹效果，需要手动模拟滚动，然后再添加回弹。(ios特定的边界弹簧效果不能禁止)</li>
-<li>边界 drag 不流畅，有待改进。</li>
-</ul>
+<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>在学习上，尽管不是所有课程安排得很妥当，但也有一些课程让我受益良多。记忆比较深刻得还是暑假前的 flutter 课程吧。那一次面临得挑战是未知、课程时间短。而最终的任务是使用 flutter 完成一个 APP。而我做的就是一个记笔记的 APP 了<a href="https://github.com/Jealh-h/lightNote">(https://github.com/Jealh-h/lightNote)</a>，尽管功能不是那么完善，但这次让我体验到了全栈开发的一些困难吧，得益于 eggjs 框架能让我一个不太懂后端的轻松一点…….。数据分析这门课也挺好的，至少让我在机器学习方面能够调库了，能训练模型了。特别是在最后的房价预测的项目上，从数据获取到数据分析再到模型预测，这一套下来让我觉得 python 更加强大了。其次就是数据可视化了，虽然说理论课着实有一点无聊，好在实验课还比较有趣，这次让我体验了一把 d3js,给我的感觉就是 jquery 的一个兄弟一样，只不过更加适合于绘制图形。最后说说编译原理吧，这门课就感觉比较神奇吧？！从词法分析到语法分析，再到语义分析等等。都感觉有很强的理论支撑。单就对于给定的 test 来说，做一个词法分析、语法分析的工作量就挺大的（求 NFA、DFA,改写 LL(1)文法等等），可见哪些语言之父是有多 🐂 了。</p>
+<h3 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h3><p>在这一年里依然那么喜欢逛 bi 站,喜欢听音乐。印象最深的还是《双城之战》了,一方面是我喜欢的画风，但是呢这剧情确实有点虐了,这大概就是角色设定吧。<br><strong>qq 音乐年度报告</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/qqmusic_2021.PNG" alt="qq音乐"></p>
+<p><strong>bilibili 年度报告</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/bilibili_2021.PNG" alt="bilibili"></p>
+<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><p>在技术栈上，对于 react 的使用更加熟悉了，尽管自己想用 vue 写一个个人博客，但写到一半还是放弃了（可能那时候还不知道一些强大的 nodejs 框架吧）。所以还是 hexo 香啊，就这样发现了写博客是一件强化记忆的事情。在这一年里，虽然在知识广度上有了提升，但在深度上感觉还学提升。比较纠结的还是对于一些工具不知到是要会到什么层度吧，比如 webpack,vite 是会按照官方文档配置，还是能熟练地写出来。暑期在实验室期间，把原有的 oj3 由 webpack 构建改成了 vite,只能说 vite 真快。使用 react 重写了一个会议室管理系统端。而对于微信小程序那边，虽然没有获得奖，但也收获了一些开发经验吧。而对于一些其他知识，比如 rust、electron、wasm、以及游戏开发都是很想学的，但都会感觉自由的时间太少，而学习又需要耗费大量时间。所以还需要控制自己、让自己珍惜时间啊。</p>
+<h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><p>希望自己记忆力好一点。<br>每一天都要崭新的一点。<br>对渴望的事情执着一点。<br>让自己的想法丰富一点。</p>
+<p><strong>就上面那么亿点就够了</strong></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/07/21/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
+      <categories>
+        <category>年终总结</category>
+      </categories>
   </entry>
   <entry>
     <title>使用github actions进行轻服务的页面部署</title>
@@ -326,34 +306,24 @@
       </tags>
   </entry>
   <entry>
-    <title>numpy条件选择</title>
-    <url>/2021/10/13/numpy%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9/</url>
-    <content><![CDATA[<h2 id="numpy-的条件筛选"><a href="#numpy-的条件筛选" class="headerlink" title="numpy 的条件筛选"></a>numpy 的条件筛选</h2><h3 id="筛选基础"><a href="#筛选基础" class="headerlink" title="筛选基础"></a>筛选基础</h3><h4 id="数组切片"><a href="#数组切片" class="headerlink" title="数组切片"></a>数组切片</h4><p>我们一般都知道 python 的 [ ] 操作符可以进行切片操作,举例如下:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment">#切片操作参数介绍：[起始位置下标（默认最开始）:结束位置下标(默认最后):步长(默认为一)]</span></span><br><span class="line">arr[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line"><span class="comment"># [1,2]</span></span><br><span class="line"></span><br><span class="line">arr[<span class="number">0</span>:<span class="number">2</span>:<span class="number">2</span>]</span><br><span class="line"><span class="comment"># [1,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当步长为-1时，能够逆置数组</span></span><br><span class="line">arr[::-<span class="number">1</span>]</span><br><span class="line"><span class="comment"># [3,2,1]</span></span><br></pre></td></tr></table></figure>
-
+    <title>Hello World</title>
+    <url>/2021/07/21/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <span id="more"></span>
 
-<h4 id="下面是-ndarray-二维数组的例子"><a href="#下面是-ndarray-二维数组的例子" class="headerlink" title="下面是 ndarray 二维数组的例子"></a>下面是 ndarray 二维数组的例子</h4><h5 id="单列-行筛选"><a href="#单列-行筛选" class="headerlink" title="单列/行筛选"></a>单列/行筛选</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = [</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">]</span><br><span class="line">arr = np.array(arr)</span><br><span class="line"><span class="comment"># 单列筛选</span></span><br><span class="line"><span class="comment"># 列筛选，第一个冒号不能省略</span></span><br><span class="line">arr[:,<span class="number">0</span>] <span class="comment"># 选择下标为0的列</span></span><br><span class="line"><span class="comment"># [1,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 单行筛选</span></span><br><span class="line">arr[<span class="number">0</span>] <span class="comment"># 选择下标为0的行，就像普通的二维数组访问第一个一维数组一样</span></span><br><span class="line"><span class="comment"># [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="多行-列筛选"><a href="#多行-列筛选" class="headerlink" title="多行/列筛选"></a>多行/列筛选</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = [</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">]</span><br><span class="line">arr = np.array(arr)</span><br><span class="line"><span class="comment"># 多列筛选</span></span><br><span class="line">	<span class="comment"># 选择某个下标区间的列</span></span><br><span class="line">arr[:,<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line"><span class="comment"># [</span></span><br><span class="line"><span class="comment"># [1,2],</span></span><br><span class="line"><span class="comment"># [4,5]</span></span><br><span class="line"><span class="comment"># ]</span></span><br><span class="line">	<span class="comment"># 选择某些列</span></span><br><span class="line">arr[:,[<span class="number">0</span>,<span class="number">3</span>]] <span class="comment"># 选择下标为 0，3的列</span></span><br><span class="line"><span class="comment"># [</span></span><br><span class="line"><span class="comment"># [1,4],</span></span><br><span class="line"><span class="comment"># [4,7]</span></span><br><span class="line"><span class="comment"># ]</span></span><br><span class="line">	<span class="comment"># bool选择</span></span><br><span class="line">	<span class="comment"># bool数组的  长度  必须要与列的  维数相同</span></span><br><span class="line">arr[:,[<span class="literal">True</span>,<span class="literal">False</span>,<span class="literal">False</span>,<span class="literal">False</span>]]</span><br><span class="line"><span class="comment"># [</span></span><br><span class="line"><span class="comment"># [1],</span></span><br><span class="line"><span class="comment"># [4]</span></span><br><span class="line"><span class="comment"># ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行筛选</span></span><br><span class="line"><span class="comment"># 与多列筛选类似</span></span><br><span class="line">arr = np.array([</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],</span><br><span class="line">[<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>]</span><br><span class="line">])</span><br><span class="line">	<span class="comment"># 选择某些行</span></span><br><span class="line">arr[[<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line"><span class="comment"># [[</span></span><br><span class="line"><span class="comment"># [1,2,3,4],</span></span><br><span class="line"><span class="comment"># [4,5,6,7]</span></span><br><span class="line"><span class="comment"># ]]</span></span><br><span class="line">	<span class="comment"># 其余就不在赘述，可以字行测试</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<h3 id="条件筛选"><a href="#条件筛选" class="headerlink" title="条件筛选"></a>条件筛选</h3><p>通过上面的一些基本的筛选规则，可以大致了解了 numpy 的筛选原则了，那么下面就看一 numpy 比较强大的条件筛选吧。而条件筛选就是依赖 bool 筛选实现的。</p>
-<h4 id="条件筛选行"><a href="#条件筛选行" class="headerlink" title="条件筛选行"></a>条件筛选行</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = np.array([</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],</span><br><span class="line">[<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如：选择第一个元素为偶数的行</span></span><br><span class="line">arr[arr[:,<span class="number">0</span>]%<span class="number">2</span>==<span class="number">0</span>]</span><br><span class="line"><span class="comment"># [[ 4,  5,  6,  7],</span></span><br><span class="line"><span class="comment">#  [ 8,  9, 10, 11]]</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>我们可以看一下上面发生了什么。<br>首先: arr[:,0]x 选择除了二维数组的第一列—–[1,4,8]<br>然后: arr[:,0]%2==0 得到了一个 bool 数组—–[False,True,True]<br>最后 arr[[False,True,True]],这个样子是不是有点熟悉了，也就是上面的 bool 筛选。</p>
-<h4 id="条件筛选列"><a href="#条件筛选列" class="headerlink" title="条件筛选列"></a>条件筛选列</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 与行筛选类似</span></span><br><span class="line">arr[:,arr[<span class="number">1</span>]&gt;<span class="number">5</span>] <span class="comment"># 选择第二行中大于5的列</span></span><br><span class="line"><span class="comment"># [[ 3,  4],</span></span><br><span class="line"><span class="comment">#  [ 6,  7],</span></span><br><span class="line"><span class="comment">#  [10, 11]]</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<h4 id="行列一起选择"><a href="#行列一起选择" class="headerlink" title="行列一起选择"></a>行列一起选择</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr[arr&gt;<span class="number">5</span>] <span class="comment"># 选择arr中，大于5的元素</span></span><br><span class="line"><span class="comment"># 其中arr&gt;5得到一个二维的bool数组</span></span><br><span class="line"><span class="comment"># [[False, False, False, False],</span></span><br><span class="line"><span class="comment">#  [False, False,  True,  True],</span></span><br><span class="line"><span class="comment">#  [ True,  True,  True,  True]]</span></span><br><span class="line"><span class="comment"># 最终结果是一个一维数组</span></span><br><span class="line"><span class="comment"># [ 6,  7,  8,  9, 10, 11]</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列-int，第二列是-str，这样再用-arr-gt-5-就会出现错误。"><a href="#注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列-int，第二列是-str，这样再用-arr-gt-5-就会出现错误。" class="headerlink" title="注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列 int，第二列是 str，这样再用 arr&gt;5 就会出现错误。"></a>注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列 int，第二列是 str，这样再用 arr&gt;5 就会出现错误。</h5><h4 id="多条件选择"><a href="#多条件选择" class="headerlink" title="多条件选择"></a>多条件选择</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr[(arr&gt;<span class="number">5</span>) &amp; (arr%<span class="number">2</span>==<span class="number">0</span>)] <span class="comment"># 选择大于5且为偶数的元素</span></span><br><span class="line"><span class="comment"># [ 6,  8, 10]</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="注意：多条件要用（）括起每一个条件，逻辑关系用-或者-amp-，不能用-and-or-这样。"><a href="#注意：多条件要用（）括起每一个条件，逻辑关系用-或者-amp-，不能用-and-or-这样。" class="headerlink" title="注意：多条件要用（）括起每一个条件，逻辑关系用 | 或者 &amp;，不能用 and,or 这样。"></a>注意：多条件要用（）括起每一个条件，逻辑关系用 | 或者 &amp;，不能用 and,or 这样。</h5>]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>numpy</tag>
-      </tags>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>react事件系统</title>
@@ -442,6 +412,411 @@
       <categories>
         <category>react</category>
       </categories>
+  </entry>
+  <entry>
+    <title>numpy条件选择</title>
+    <url>/2021/10/13/numpy%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9/</url>
+    <content><![CDATA[<h2 id="numpy-的条件筛选"><a href="#numpy-的条件筛选" class="headerlink" title="numpy 的条件筛选"></a>numpy 的条件筛选</h2><h3 id="筛选基础"><a href="#筛选基础" class="headerlink" title="筛选基础"></a>筛选基础</h3><h4 id="数组切片"><a href="#数组切片" class="headerlink" title="数组切片"></a>数组切片</h4><p>我们一般都知道 python 的 [ ] 操作符可以进行切片操作,举例如下:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment">#切片操作参数介绍：[起始位置下标（默认最开始）:结束位置下标(默认最后):步长(默认为一)]</span></span><br><span class="line">arr[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line"><span class="comment"># [1,2]</span></span><br><span class="line"></span><br><span class="line">arr[<span class="number">0</span>:<span class="number">2</span>:<span class="number">2</span>]</span><br><span class="line"><span class="comment"># [1,3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当步长为-1时，能够逆置数组</span></span><br><span class="line">arr[::-<span class="number">1</span>]</span><br><span class="line"><span class="comment"># [3,2,1]</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h4 id="下面是-ndarray-二维数组的例子"><a href="#下面是-ndarray-二维数组的例子" class="headerlink" title="下面是 ndarray 二维数组的例子"></a>下面是 ndarray 二维数组的例子</h4><h5 id="单列-行筛选"><a href="#单列-行筛选" class="headerlink" title="单列/行筛选"></a>单列/行筛选</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = [</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">]</span><br><span class="line">arr = np.array(arr)</span><br><span class="line"><span class="comment"># 单列筛选</span></span><br><span class="line"><span class="comment"># 列筛选，第一个冒号不能省略</span></span><br><span class="line">arr[:,<span class="number">0</span>] <span class="comment"># 选择下标为0的列</span></span><br><span class="line"><span class="comment"># [1,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 单行筛选</span></span><br><span class="line">arr[<span class="number">0</span>] <span class="comment"># 选择下标为0的行，就像普通的二维数组访问第一个一维数组一样</span></span><br><span class="line"><span class="comment"># [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="多行-列筛选"><a href="#多行-列筛选" class="headerlink" title="多行/列筛选"></a>多行/列筛选</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = [</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</span><br><span class="line">]</span><br><span class="line">arr = np.array(arr)</span><br><span class="line"><span class="comment"># 多列筛选</span></span><br><span class="line">	<span class="comment"># 选择某个下标区间的列</span></span><br><span class="line">arr[:,<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line"><span class="comment"># [</span></span><br><span class="line"><span class="comment"># [1,2],</span></span><br><span class="line"><span class="comment"># [4,5]</span></span><br><span class="line"><span class="comment"># ]</span></span><br><span class="line">	<span class="comment"># 选择某些列</span></span><br><span class="line">arr[:,[<span class="number">0</span>,<span class="number">3</span>]] <span class="comment"># 选择下标为 0，3的列</span></span><br><span class="line"><span class="comment"># [</span></span><br><span class="line"><span class="comment"># [1,4],</span></span><br><span class="line"><span class="comment"># [4,7]</span></span><br><span class="line"><span class="comment"># ]</span></span><br><span class="line">	<span class="comment"># bool选择</span></span><br><span class="line">	<span class="comment"># bool数组的  长度  必须要与列的  维数相同</span></span><br><span class="line">arr[:,[<span class="literal">True</span>,<span class="literal">False</span>,<span class="literal">False</span>,<span class="literal">False</span>]]</span><br><span class="line"><span class="comment"># [</span></span><br><span class="line"><span class="comment"># [1],</span></span><br><span class="line"><span class="comment"># [4]</span></span><br><span class="line"><span class="comment"># ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多行筛选</span></span><br><span class="line"><span class="comment"># 与多列筛选类似</span></span><br><span class="line">arr = np.array([</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],</span><br><span class="line">[<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>]</span><br><span class="line">])</span><br><span class="line">	<span class="comment"># 选择某些行</span></span><br><span class="line">arr[[<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line"><span class="comment"># [[</span></span><br><span class="line"><span class="comment"># [1,2,3,4],</span></span><br><span class="line"><span class="comment"># [4,5,6,7]</span></span><br><span class="line"><span class="comment"># ]]</span></span><br><span class="line">	<span class="comment"># 其余就不在赘述，可以字行测试</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="条件筛选"><a href="#条件筛选" class="headerlink" title="条件筛选"></a>条件筛选</h3><p>通过上面的一些基本的筛选规则，可以大致了解了 numpy 的筛选原则了，那么下面就看一 numpy 比较强大的条件筛选吧。而条件筛选就是依赖 bool 筛选实现的。</p>
+<h4 id="条件筛选行"><a href="#条件筛选行" class="headerlink" title="条件筛选行"></a>条件筛选行</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr = np.array([</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],</span><br><span class="line">[<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>]</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如：选择第一个元素为偶数的行</span></span><br><span class="line">arr[arr[:,<span class="number">0</span>]%<span class="number">2</span>==<span class="number">0</span>]</span><br><span class="line"><span class="comment"># [[ 4,  5,  6,  7],</span></span><br><span class="line"><span class="comment">#  [ 8,  9, 10, 11]]</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看一下上面发生了什么。<br>首先: arr[:,0]x 选择除了二维数组的第一列—–[1,4,8]<br>然后: arr[:,0]%2==0 得到了一个 bool 数组—–[False,True,True]<br>最后 arr[[False,True,True]],这个样子是不是有点熟悉了，也就是上面的 bool 筛选。</p>
+<h4 id="条件筛选列"><a href="#条件筛选列" class="headerlink" title="条件筛选列"></a>条件筛选列</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 与行筛选类似</span></span><br><span class="line">arr[:,arr[<span class="number">1</span>]&gt;<span class="number">5</span>] <span class="comment"># 选择第二行中大于5的列</span></span><br><span class="line"><span class="comment"># [[ 3,  4],</span></span><br><span class="line"><span class="comment">#  [ 6,  7],</span></span><br><span class="line"><span class="comment">#  [10, 11]]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="行列一起选择"><a href="#行列一起选择" class="headerlink" title="行列一起选择"></a>行列一起选择</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr[arr&gt;<span class="number">5</span>] <span class="comment"># 选择arr中，大于5的元素</span></span><br><span class="line"><span class="comment"># 其中arr&gt;5得到一个二维的bool数组</span></span><br><span class="line"><span class="comment"># [[False, False, False, False],</span></span><br><span class="line"><span class="comment">#  [False, False,  True,  True],</span></span><br><span class="line"><span class="comment">#  [ True,  True,  True,  True]]</span></span><br><span class="line"><span class="comment"># 最终结果是一个一维数组</span></span><br><span class="line"><span class="comment"># [ 6,  7,  8,  9, 10, 11]</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列-int，第二列是-str，这样再用-arr-gt-5-就会出现错误。"><a href="#注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列-int，第二列是-str，这样再用-arr-gt-5-就会出现错误。" class="headerlink" title="注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列 int，第二列是 str，这样再用 arr&gt;5 就会出现错误。"></a>注意：在进行行列一起选择时，可能会有元素类型不一致的情况，如第一列 int，第二列是 str，这样再用 arr&gt;5 就会出现错误。</h5><h4 id="多条件选择"><a href="#多条件选择" class="headerlink" title="多条件选择"></a>多条件选择</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">arr[(arr&gt;<span class="number">5</span>) &amp; (arr%<span class="number">2</span>==<span class="number">0</span>)] <span class="comment"># 选择大于5且为偶数的元素</span></span><br><span class="line"><span class="comment"># [ 6,  8, 10]</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="注意：多条件要用（）括起每一个条件，逻辑关系用-或者-amp-，不能用-and-or-这样。"><a href="#注意：多条件要用（）括起每一个条件，逻辑关系用-或者-amp-，不能用-and-or-这样。" class="headerlink" title="注意：多条件要用（）括起每一个条件，逻辑关系用 | 或者 &amp;，不能用 and,or 这样。"></a>注意：多条件要用（）括起每一个条件，逻辑关系用 | 或者 &amp;，不能用 and,or 这样。</h5>]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>numpy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【译】Inside Fiber：深入概述 React 中的新协调算法</title>
+    <url>/2023/03/26/%E3%80%90%E8%AF%91%E3%80%91Inside%20Fiber%EF%BC%9A%E6%B7%B1%E5%85%A5%E6%A6%82%E8%BF%B0%20React%20%E4%B8%AD%E7%9A%84%E6%96%B0%E5%8D%8F%E8%B0%83%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<p>原文链接：<a href="https://indepth.dev/posts/1008/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react">https://indepth.dev/posts/1008/inside-fiber-in-depth-overview-of-the-new-reconciliation-algorithm-in-react</a></p>
+<blockquote>
+<p>深入研究 React 的名为 Fiber 的新架构，了解新协调算法的两个主要阶段。我们将详细了解 React 如何更新 state 和 props 以及处理 children。</p>
+</blockquote>
+<span id="more"></span>
+
+<p>React 是一个用于构建用户界面的 JavaScript 库。其核心是跟踪组件状态变化并将更新后的状态投射到屏幕的机制。在 React 中，我们将此过程称为协调。我们调用 setState 方法，框架检查状态或道具是否已更改并在 UI 上重新呈现组件。</p>
+<p>React 的文档很好地概括了该机制：React 元素的作用、生命周期方法和渲染方法，以及应用于组件子组件的差异算法。从 render 方法返回的不可变 React 元素树通常被称为“虚拟 DOM”。该术语有助于早期向人们解释 React，但它也引起了混淆，并且不再在 React 文档中使用。在本文中，我将坚持称其为 React 元素树。</p>
+<p>除了 React 元素树之外，框架始终有一个内部实例树（组件、DOM 节点等）用于保持状态。从版本 16 开始，React 推出了该内部实例树和算法的新实现管理它的代号为 Fiber。要了解 Fiber 架构带来的优势，请查看<a href="https://indepth.dev/posts/1007/the-how-and-why-on-reacts-usage-of-linked-list-in-fiber-to-walk-the-components-tree">React 在 Fiber 中使用链表的方式和原因。</a></p>
+<p>这是本系列的第一篇文章，旨在向您介绍 React 的内部架构。在本文中，我想深入概述与算法相关的重要概念和数据结构。一旦我们有了足够的背景知识，我们将探索用于遍历和处理 fiber 树的算法和主要函数。本系列的下一篇文章将演示 React 如何使用该算法来执行初始渲染和处理状态以及道具更新。从那里我们将继续讨论调度程序的细节、子协调过程和构建效果列表的机制。</p>
+<p>我要在这里给你一些非常高级的知识？我鼓励您阅读它以了解 Concurrent React 内部工作原理背后的魔力。如果您打算开始为 React 做贡献，本系列文章也将为您提供很好的指导。我坚信逆向工程，因此会有很多链接指向最新版本 16.6.0 的源代码。</p>
+<p>要吸收的东西肯定很多，所以如果您不能立即理解某些内容，请不要感到压力。一切都值得花时间。请注意，您无需了解任何内容即可使用 React。这篇文章是关于 React 内部如何工作的。</p>
+<h2 id="Setting-the-background"><a href="#Setting-the-background" class="headerlink" title="Setting the background"></a>Setting the background</h2><p>这是一个简单的应用程序，我将在整个系列中使用。我们有一个按钮，可以简单地增加屏幕上呈现的数字：</p>
+<p><img src="https://images.indepth.dev/images/2019/07/tmp1.gif" alt="https://images.indepth.dev/images/2019/07/tmp1.gif"></p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClickCounter</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.state = &#123; <span class="attr">count</span>: <span class="number">0</span> &#125;;</span><br><span class="line">    <span class="built_in">this</span>.handleClick = <span class="built_in">this</span>.handleClick.bind(<span class="built_in">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">handleClick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(<span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">count</span>: state.count + <span class="number">1</span> &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">key</span>=<span class="string">&quot;1&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;this.handleClick&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">        Update counter</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span>,</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">key</span>=<span class="string">&quot;2&quot;</span>&gt;</span>&#123;this.state.count&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>,</span><br><span class="line">    ];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可以在 <a href="https://stackblitz.com/edit/react-t4rdmh?file=index.js">这里</a> 玩。如您所见，它是一个简单的组件，从 render 方法返回两个子元素 button 和 span。只要单击按钮，组件的状态就会在处理程序中更新。这反过来会导致 span 元素的文本更新。</p>
+<p>React 在 <strong>reconciliation</strong> 期间执行各种活动。例如，在我们的简单应用程序中，这是 React 在第一次渲染期间和状态更新之后执行的高级操作：</p>
+<ul>
+<li>更新 ClickCounter 状态下的计数属性</li>
+<li>检索并比较 ClickCounter 的子项及其道具</li>
+<li>更新 span 元素的 props</li>
+</ul>
+<p>在<strong>reconciliation</strong>期间执行其他活动，例如调用生命周期方法或更新引用。所有这些活动在 Fiber 架构中统称为“work”。work 类型通常取决于 React 元素的类型。例如，对于类组件，React 需要创建一个实例，而对于功能组件则不需要。如你所知，我们在 React 中有很多种元素，例如类和功能组件、宿主组件（DOM 节点）、portals 等。React 元素的类型由 createElement 函数的第一个参数定义。这个函数一般用在 render 方法中创建一个元素。</p>
+<p>在我们开始探索 Activity 和主要的 Fiber 算法之前，让我们先熟悉一下 React 内部使用的数据结构。</p>
+<h2 id="From-React-Elements-to-Fiber-nodes"><a href="#From-React-Elements-to-Fiber-nodes" class="headerlink" title="From React Elements to Fiber nodes"></a>From React Elements to Fiber nodes</h2><p>React 中的每个组件都有一个 UI 表示，我们可以调用视图或从 render 方法返回的模板。这是我们的 ClickCounter 组件的模板：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&lt;button key=<span class="string">&quot;1&quot;</span> onClick=&#123;<span class="built_in">this</span>.onClick&#125;&gt;Update counter&lt;/button&gt;</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">key</span>=<span class="string">&quot;2&quot;</span>&gt;</span>&#123;this.state.count&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="React-Elements"><a href="#React-Elements" class="headerlink" title="React Elements"></a>React Elements</h2><p>一旦模板通过 JSX 编译器，你最终会得到一堆 React element。这是 React 组件的 render 方法真正返回的内容，而不是 HTML。因为我们不需要使用 JSX，所以我们的 ClickCounter 组件的 render 方法可以这样重写：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClickCounter</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            React.createElement(</span><br><span class="line">                <span class="string">&#x27;button&#x27;</span>,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">key</span>: <span class="string">&#x27;1&#x27;</span>,</span><br><span class="line">                    <span class="attr">onClick</span>: <span class="built_in">this</span>.onClick</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="string">&#x27;Update counter&#x27;</span></span><br><span class="line">            ),</span><br><span class="line">            React.createElement(</span><br><span class="line">                <span class="string">&#x27;span&#x27;</span>,</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">key</span>: <span class="string">&#x27;2&#x27;</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="built_in">this</span>.state.count</span><br><span class="line">            )</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 render 方法中调用 React.createElement 将创建两个数据结构，如下所示：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">$$typeof</span>: <span class="built_in">Symbol</span>(react.element),</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;button&#x27;</span>,</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;1&quot;</span>,</span><br><span class="line">        <span class="attr">props</span>: &#123;</span><br><span class="line">            <span class="attr">children</span>: <span class="string">&#x27;Update counter&#x27;</span>,</span><br><span class="line">            <span class="attr">onClick</span>: <span class="function">() =&gt;</span> &#123; ... &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">$$typeof</span>: <span class="built_in">Symbol</span>(react.element),</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;span&#x27;</span>,</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&quot;2&quot;</span>,</span><br><span class="line">        <span class="attr">props</span>: &#123;</span><br><span class="line">            <span class="attr">children</span>: <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>你可以看到 React 为这些对象添加了属性 $$typeof 以将它们唯一标识为 React 元素。然后我们有描述元素的属性 type、key 和 props。这些值取自您传递给 React.createElement 函数的内容。请注意 React 如何将文本内容表示为 span 和 button 节点的子节点。以及点击处理程序如何成为按钮元素道具的一部分。 React 元素上还有其他字段，例如 ref 字段，超出了本文的范围。</p>
+<p>ClickCounter 的 React 元素没有任何属性或键：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">$$typeof</span>: <span class="built_in">Symbol</span>(react.element),</span><br><span class="line">    <span class="attr">key</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">props</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">ref</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">type</span>: ClickCounter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Fiber-nodes"><a href="#Fiber-nodes" class="headerlink" title="Fiber nodes"></a>Fiber nodes</h2><p>在<strong>reconciliation</strong>期间，从 render 方法返回的每个 React 元素的数据被合并到 fiber 节点树中。每个 React 元素都有一个对应的 fiber 节点。与 React 元素不同，fiber 不会在每次渲染时重新创建。这些是可变数据结构，用于保存组件状态和 DOM。</p>
+<p>我们之前讨论过，根据 React 元素的类型，框架需要执行不同的活动。在我们的示例应用程序中，对于类组件 ClickCounter，它调用生命周期方法和渲染方法，而对于 span 宿主组件（DOM 节点），它执行 DOM 变异。所以每个 React 元素都被转换成对应类型的 Fiber 节点，描述需要完成的工作。</p>
+<p><strong>您可以将 fiber 视为一种数据结构，它代表一些要做的工作，或者换句话说，一个工作单元。 Fiber 的架构还提供了一种方便的方式来跟踪、安排、暂停和中止工作。</strong></p>
+<p>当 React 元素第一次被转换为 fiber 节点时，React 使用元素中的数据在 createFiberFromTypeAndProps 函数中创建一个 fiber。在随后的更新中，React 重用了 fiber 节点，并仅使用来自相应 React 元素的数据更新了必要的属性。如果相应的 React 元素不再从 render 方法返回，React 可能还需要根据 key prop 移动层次结构中的节点或将其删除。</p>
+<blockquote>
+<p>查看 ChildReconciler 函数以查看 React 为现有 fiber 节点执行的所有活动和相应函数的列表。</p>
+</blockquote>
+<p>因为 React 为每个 React 元素创建了一个 fiber，并且由于我们有一棵包含这些元素的树，所以我们将有一棵 fiber 节点树。在我们的示例应用程序中，它看起来像这样：</p>
+<p><img src="https://images.indepth.dev/images/2019/07/image-51.png" alt="https://images.indepth.dev/images/2019/07/image-51.png"></p>
+<p>所有 fiber 节点都通过链表连接，使用 fiber 节点上的以下属性：child、sibling 和 return。有关它为何以这种方式工作的更多详细信息，请查看我的文章 The how and why on React’s usage of linked list in Fiber 如果您还没有阅读过它。</p>
+<h2 id="Current-and-work-in-progress-trees"><a href="#Current-and-work-in-progress-trees" class="headerlink" title="Current and work in progress trees"></a>Current and work in progress trees</h2><p>在第一次渲染之后，React 最终得到一个 fiber 树，它反映了用于渲染 UI 的应用程序的状态。这棵树通常被称为 current。当 React 开始处理更新时，它会构建一个所谓的 workInProgress 树，它反映了要刷新到屏幕的未来状态。</p>
+<p>所有工作都在 workInProgress 树中的 fiber 上执行。当 React 遍历当前树时，它会为每个现有的 fiber 节点创建一个替代节点，该节点构成 workInProgress 树。该节点是使用 render 方法返回的 React 元素的数据创建的。一旦处理完更新并完成所有相关工作，React 将准备好备用树以刷新到屏幕上。一旦这个 workInProgress 树呈现在屏幕上，它就成为 current。</p>
+<p>React 的核心原则之一是一致性。 React 总是一口气更新 DOM - 它不会显示部分结果。 WorkInprogress 树是用户看不到的“草稿”，因此 React 可以首先处理所有组件，然后将其更改冲洗到屏幕上。</p>
+<p>在源代码中，您会看到许多函数从当前树和 workInProgress 树中获取 fiber 节点。这是一个这样的函数的签名：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateHostComponent</span>(<span class="params">current, workInProgress, renderExpirationTime</span>) </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个 fiber 节点都在 alternate 字段中保存对另一棵树的对应项的引用。当前树中的节点指向 workInProgress 树中的节点，反之亦然。</p>
+<h2 id="side-effects"><a href="#side-effects" class="headerlink" title="side effects"></a>side effects</h2><p>我们可以将 React 中的组件视为使用 state 和 props 来计算 UI 表示的函数。每个其他活动，如改变 DOM 或调用生命周期方法，都应被视为副作用，或者简称为效果。文档中还提到了效果：</p>
+<blockquote>
+<p>您之前可能已经从 React 组件执行过数据获取、订阅或手动更改 DOM。我们称这些操作为“side effects”（或简称为“effect”），因为它们会影响其他组件并且无法在渲染期间完成。</p>
+</blockquote>
+<p>您可以看到大多数状态和道具更新将如何导致副作用。由于应用效果是一种工作，因此 fiber 节点是一种除了更新之外还可以跟踪 effect 的便捷机制。每个 fiber 节点都可以有与之关联的 effect。它们在 <code>effectTag</code> 字段中编码。</p>
+<p>因此，Fiber 中的 effect 基本上定义了处理更新后实例需要完成的工作。对于宿主组件（DOM 元素），工作包括添加、更新或删除元素。对于类组件，React 可能需要更新 refs 并调用 <code>componentDidMount</code> 和 <code>componentDidUpdate</code> 生命周期方法。也有对应于其他类型 fiber 的其他作用。</p>
+<h2 id="effects-list"><a href="#effects-list" class="headerlink" title="effects list"></a>effects list</h2><p>React 处理更新非常快，为了达到这种性能水平，它采用了一些有趣的技术。其中之一是构建具有快速迭代效果的 fiber 节点线性列表。迭代线性列表比树快得多，并且无需在没有副作用的节点上花费时间。</p>
+<p>此列表的目标是标记具有 DOM 更新或与其关联的其他效果的节点。此列表是 <code>finishedWork</code> 树的子集，并使用 <code>nextEffect</code> 属性而不是 <code>current</code> 和 <code>workInProgress</code> 树中使用的子属性进行链接。</p>
+<p>Dan Abramov 为 effect list 提供了一个类比。他喜欢把它想象成一棵圣诞树，用“圣诞灯”将所有有效节点捆绑在一起。为了形象化这一点，让我们想象一下下面的 fiber 节点树，其中突出显示的节点有一些工作要做。例如，我们的更新导致 c2 被插入 DOM，d2 和 c1 改变属性，b2 触发生命周期方法。效果列表会将它们链接在一起，以便 React 稍后可以跳过其他节点：</p>
+<p><img src="https://images.indepth.dev/images/2019/07/image-52.png" alt="https://images.indepth.dev/images/2019/07/image-52.png"></p>
+<p>您可以看到具有 effects 的节点是如何链接在一起的。当遍历节点时，React 使用 firstEffect 指针来确定列表的开始位置。所以上图可以表示为这样的线性列表：</p>
+<p><img src="https://images.indepth.dev/images/2019/07/image-53.png" alt="https://images.indepth.dev/images/2019/07/image-53.png"></p>
+<h2 id="Root-of-the-fiber-tree"><a href="#Root-of-the-fiber-tree" class="headerlink" title="Root of the fiber tree"></a>Root of the fiber tree</h2><p>每个 React 应用程序都有一个或多个充当容器的 DOM 元素。在我们的例子中，它是带有 ID 容器的 div 元素。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">ReactDOM.render(React.createElement(ClickCounter), domContainer);</span><br></pre></td></tr></table></figure>
+
+<p>React 为每个 <code>container</code> (root 节点) 创建一个 fiber root 对象。您可以使用对 DOM 元素的引用来访问它：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fiberRoot = query(<span class="string">&quot;#container&quot;</span>)._reactRootContainer._internalRoot;</span><br></pre></td></tr></table></figure>
+
+<p>这个 fiber root 是 React 保存对 fiber tree 的引用的地方。它存储在 fiber root 的当前属性中：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> hostRootFiberNode = fiberRoot.current;</span><br></pre></td></tr></table></figure>
+
+<p>fiber 树以一种特殊类型的 fiber 节点开始，即 HostRoot。它是在内部创建的，并充当最顶层组件的父级。通过 stateNode 属性从 HostRoot fiber 节点返回到 FiberRoot 有一个链接：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">fiberRoot.current.stateNode === fiberRoot; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>您可以通过 fiber root 访问最顶层的 HostRoot fiber 节点来探索 fiber 树。或者您可以像这样从组件实例中获取单个 fiber 节点：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">compInstance._reactInternalFiber;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Fiber-node-structure"><a href="#Fiber-node-structure" class="headerlink" title="Fiber node structure"></a>Fiber node structure</h2><p>现在让我们看一下为 ClickCounter 组件创建的 fiber 节点的结构：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">stateNode</span>: <span class="keyword">new</span> ClickCounter,</span><br><span class="line">    <span class="attr">type</span>: ClickCounter,</span><br><span class="line">    <span class="attr">alternate</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">key</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">updateQueue</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">memoizedState</span>: &#123;<span class="attr">count</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="attr">pendingProps</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">memoizedProps</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">tag</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">effectTag</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">nextEffect</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>span DOM 元素：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">stateNode</span>: <span class="keyword">new</span> HTMLSpanElement,</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&quot;span&quot;</span>,</span><br><span class="line">    <span class="attr">alternate</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&quot;2&quot;</span>,</span><br><span class="line">    <span class="attr">updateQueue</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">memoizedState</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">pendingProps</span>: &#123;<span class="attr">children</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="attr">memoizedProps</span>: &#123;<span class="attr">children</span>: <span class="number">0</span>&#125;,</span><br><span class="line">    <span class="attr">tag</span>: <span class="number">5</span>,</span><br><span class="line">    <span class="attr">effectTag</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">nextEffect</span>: <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Fiber 节点上有相当多的字段。我在前面的部分中描述了字段 alternate、effectTag 和 nextEffect 的用途。现在让我们看看为什么我们需要其他人。</p>
+<h2 id="stateNode"><a href="#stateNode" class="headerlink" title="stateNode"></a>stateNode</h2><p>持有对组件类实例、DOM 节点或与 Fiber 节点关联的其他 React 元素类型的引用。一般来说，我们可以说这个属性用于保存与 fiber 相关的局部状态。</p>
+<h2 id="type"><a href="#type" class="headerlink" title="type"></a>type</h2><p>定义与此 fiber 关联的函数或类。对于类组件，它指向构造函数，对于 DOM 元素，它指定 HTML 标记。我经常使用这个字段来了解 fiber 节点与什么元素相关。</p>
+<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><p>定义 fiber 的类型。它在协调算法中用于确定需要完成的工作。如前所述，工作因 React 元素的类型而异。函数 createFiberFromTypeAndProps 将 React 元素映射到相应的 fiber 节点类型。在我们的应用程序中，ClickCounter 组件的属性标记为 <code>1</code>，表示一个 <code>ClassComponent</code>，对于 <code>span</code> 元素，它的属性标记为<code>5</code>，表示一个 <code>HostComponent</code>。</p>
+<h2 id="updateQueue"><a href="#updateQueue" class="headerlink" title="updateQueue"></a>updateQueue</h2><p>状态更新、回调和 DOM 更新队列。(A queue of state updates, callbacks and DOM updates.)</p>
+<h2 id="memoizedState"><a href="#memoizedState" class="headerlink" title="memoizedState"></a>memoizedState</h2><p>用于创建输出的 fiber 的状态。在处理更新时，它会反映当前在屏幕上呈现的状态。</p>
+<h2 id="memoizedProps"><a href="#memoizedProps" class="headerlink" title="memoizedProps"></a>memoizedProps</h2><p>在上一次渲染期间用于创建输出的 fiber 的 props。</p>
+<h2 id="pendingProps"><a href="#pendingProps" class="headerlink" title="pendingProps"></a>pendingProps</h2><p>已从 React 元素中的新数据更新并需要应用于子组件或 DOM 元素的道具。</p>
+<h2 id="key"><a href="#key" class="headerlink" title="key"></a>key</h2><p>带有一组孩子的唯一标识符，以帮助 React 确定哪些项目已更改，已添加或从列表中删除。它与此处描述的 React 的“列表和键”功能有关。<br>您可以在此处找到 fiber 节点的完整结构。我在上面的解释中省略了一堆字段。特别是，我跳过了构成我在上一篇文章中描述的树数据结构的指针 <code>child</code>、<code>sibling</code> 和 <code>return</code>。还有一类字段，如 <code>expirationTime</code>、<code>childExpirationTime</code> 和特定于 <code>Scheduler</code> 的模式。</p>
+<h2 id="General-algorithm"><a href="#General-algorithm" class="headerlink" title="General algorithm"></a>General algorithm</h2><p>React 在两个主要阶段执行工作： <strong>render</strong> 和 <strong>commit</strong>。</p>
+<p>在第一个 <code>render</code> 阶段，React 将更新应用到通过 setState 或 React.render 安排的组件，并确定 UI 中需要更新的内容。如果是初始渲染，React 会为从渲染方法返回的每个元素创建一个新的 fiber 节点。在接下来的更新中，现有 React 元素的 fiber 被重新使用和更新。<strong>该阶段的结果是标有副作用的 fiber 节点树。效果描述了在接下来的提交阶段需要完成的工作。</strong>在此阶段，React 获取标记有效果的 fiber 树并将它们应用于实例。它遍历效果列表并执行 DOM 更新和用户可见的其他更改。</p>
+<p><strong>重要的是要了解第一个 render 阶段的工作可以异步执行。</strong> React 可以根据可用时间处理一个或多个 fiber 节点，然后停止以存储完成的工作并 yield 于某个事件。然后它从停止的地方继续。但有时，它可能需要放弃已完成的工作并重新从头开始。这些暂停之所以成为可能，是因为在此阶段执行的工作不会导致任何用户可见的更改，例如 DOM 更新。相反，接下来的 <code>commit</code> 阶段总是同步的。<strong>这是因为在此阶段执行的工作会导致用户可见的更改</strong>，例如 DOM 更新。这就是为什么 React 需要一次完成它们。</p>
+<p>调用生命周期方法是 React 执行的一种工作。一些方法在 render 阶段调用，其他方法在 commit 阶段调用。这是在第一个渲染阶段工作时调用的生命周期列表：</p>
+<ul>
+<li>[UNSAFE_]componentWillMount (deprecated)</li>
+<li>[UNSAFE_]componentWillReceiveProps (deprecated)</li>
+<li>getDerivedStateFromProps</li>
+<li>shouldComponentUpdate</li>
+<li>[UNSAFE_]componentWillUpdate (deprecated)</li>
+<li>render</li>
+</ul>
+<p>如您所见，从 16.3 版本开始，一些在渲染阶段执行的遗留生命周期方法被标记为不安全。它们现在在文档中称为遗留生命周期。它们将在未来的 16.x 版本中被弃用，没有 UNSAFE 前缀的对应版本将在 17.0 中删除。您可以在此处阅读有关这些更改和建议的迁移路径的更多信息。</p>
+<p>你好奇这是什么原因吗？</p>
+<p>好吧，我们刚刚了解到，由于 render 阶段不会产生像 DOM 更新那样的副作用，因此 React 可以异步处理对组件的异步更新（甚至可能在多个线程中进行）。但是，标有 UNSAFE 的生命周期经常有被误解和巧妙地误用。<strong>开发人员倾向于将带有副作用的代码放在这些方法中，这可能会导致新的异步渲染方法出现问题。</strong>尽管只有没有 UNSAFE 前缀的对应项会被删除，但它们仍然可能会在即将到来的并发模式（您可以选择退出）中引起问题。</p>
+<p>下面是在第二个提交阶段执行的生命周期方法列表：</p>
+<ul>
+<li>getSnapshotBeforeUpdate</li>
+<li>componentDidMount</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount</li>
+</ul>
+<p>因为这些方法在同步 <code>commit</code> 阶段执行，所以它们可能包含副作用并触及 DOM。</p>
+<p>好的，现在我们了解了用于遍历树和执行工作的通用算法的背景知识。让我们开始吧。</p>
+<h2 id="Render-Phase"><a href="#Render-Phase" class="headerlink" title="Render Phase"></a>Render Phase</h2><p>协调算法始终使用 renderRoot 函数从最顶层的 HostRoot fiber 节点开始。但是，React 会跳出（跳过）已经处理过的 fiber 节点，直到它找到未完成工作的节点。例如，如果您在组件树深处调用 setState，React 将从顶部开始但会快速跳过父节点，直到它找到到调用了 setState 方法的组件。</p>
+<h2 id="Main-steps-of-the-work-loop"><a href="#Main-steps-of-the-work-loop" class="headerlink" title="Main steps of the work loop"></a>Main steps of the work loop</h2><p>所有 fiber 节点都在工作循环中处理。下面是循环同步部分的实现：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">workLoop</span>(<span class="params">isYield</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isYieldy) &#123;</span><br><span class="line">    <span class="keyword">while</span> (nextUnitOfWork !== <span class="literal">null</span>) &#123;</span><br><span class="line">      nextUnitOfWork = performUnitOfWork(nextUnitOfWork);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，nextUnitOfWork 持有对来自 workInProgress 树的 fiber 节点的引用，它有一些工作要做。当 React 遍历 Fibers 树时，它使用这个变量来了解是否有任何其他 fiber 节点有未完成的工作。当前 fiber 处理完成后，该变量将包含对树中下一个 fiber 节点的引用或空值。在这种情况下，React 退出工作循环并准备好提交更改。</p>
+<p>有 4 个主要函数用于遍历树并启动或完成工作：</p>
+<ul>
+<li>performUnitOfWork</li>
+<li>beginWork</li>
+<li>completeUnitOfWork</li>
+<li>completeWork</li>
+</ul>
+<p>为了演示如何使用它们，请看下面遍历 fiber 树的动画。我在演示中使用了这些功能的简化实现。每个函数都需要一个 fiber 节点来处理，随着 React 沿着树向下移动，您可以看到当前活动的 fiber 节点发生变化。您可以在视频中清楚地看到算法如何从一个分支转到另一个分支。它首先完成孩子的工作，然后再移交给父母。</p>
+<p><img src="https://images.indepth.dev/images/2019/08/tmp2.gif" alt="https://images.indepth.dev/images/2019/08/tmp2.gif"></p>
+<blockquote>
+<p>请注意，笔直的垂直连接表示兄弟姐妹，而弯曲的连接表示孩子，例如 b1 没有孩子，而 b2 有一个孩子 c1。</p>
+</blockquote>
+<p>这是视频的链接，您可以在其中暂停播放并检查当前节点和功能状态。从概念上讲，您可以将“开始”视为“步入”一个组件，将“完成”视为“走出”它。当我解释这些函数的作用时，您还可以尝试此处的示例和实现。</p>
+<p>让我们从前两个函数 performUnitOfWork 和 beginWork 开始：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">performUnitWork</span>(<span class="params">workInprogree</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> next = beginWork(workInProgress);</span><br><span class="line">  <span class="keyword">if</span> (next === <span class="literal">null</span>) &#123;</span><br><span class="line">    next = completeUnitOfWork(workInProgress);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">beginWork</span>(<span class="params">workInProgress</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;work performed for &quot;</span> + workInProgress.name);</span><br><span class="line">  <span class="keyword">return</span> workInProgress.child;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数 <code>performUnitOfWork</code> 从 <code>WorkInProgress</code> 树接收一个 fiber 节点，并通过调用 <code>BeginWork</code> 函数开始工作。这是启动所有需要为 fiber 执行的活动的功能。出于此演示的目的，我们简单地记录了 fiber 的名称，以表示工作已经完成。函数 <code>beginWork</code> 开始工作总是将指针返回下一个孩子以在循环或 null 中进行处理。</p>
+<p>如果有下一个孩子，它将被分配给 <code>workLoop</code> 函数中的变量 <code>nextUnitOfWork</code> 。然而，如果没有子节点，React 知道它到达了分支的末尾，因此它可以完成当前节点。<strong>一旦节点完成，它将需要为兄弟姐妹执行工作，然后回溯到父节点</strong>。这是在 <code>completeUnitOfWork</code> 函数中完成的：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">completeUnitOfWork</span>(<span class="params">workInProgress</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> returnFiber = workInProgress.return;</span><br><span class="line">    <span class="keyword">let</span> siblingFiber = workInProgress.sibling;</span><br><span class="line"></span><br><span class="line">    nextUnitOfWork = completeWork(workInProgress);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (siblingFiber !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">// If there is a sibling, return it</span></span><br><span class="line">      <span class="comment">// to perform work for this sibling</span></span><br><span class="line">      <span class="keyword">return</span> siblingFiber;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (returnFiber !== <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="comment">// If there&#x27;s no more work in this returnFiber,</span></span><br><span class="line">      <span class="comment">// continue the loop to complete the parent.</span></span><br><span class="line">      workInProgress = returnFiber;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// We&#x27;ve reached the root.</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">completeWork</span>(<span class="params">workInProgress</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;work completed for &quot;</span> + workInProgress.name);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>您可以看到该函数的要点是一个大的 while 循环。当 <code>workInProgress</code> 节点没有子节点时，React 会进入此函数。完成当前 fiber 的工作后，它会检查是否有兄弟节点。如果找到，React 退出该函数并返回指向 <code>sibling</code> 的指针。它将被分配给 <code>nextUnitOfWork</code> 变量，React 将执行从这个兄弟开始的分支的工作。<strong>重要的是要明白，此时 React 只完成了前面兄弟姐妹的工作。它尚未完成父节点的工作。只有从子节点开始的所有分支都完成后，它才完成父节点和回溯的工作。</strong></p>
+<p>从实现中可以看出，<code>completeUnitOfWork</code> 主要用于迭代目的，而主要活动发生在 <code>beginWork</code> 和 <code>completeWork</code> 函数中。在本系列的后续文章中，我们将了解当 React 进入 <code>beginWork</code> 和 <code>completeWork</code> 函数时，ClickCounter 组件和 span 节点会发生什么。</p>
+<h2 id="Commit-Phase"><a href="#Commit-Phase" class="headerlink" title="Commit Phase"></a>Commit Phase</h2><p>该阶段从函数 <code>completeRoot</code> 开始。这是 React 更新 DOM 并调用突变前后生命周期方法的地方。</p>
+<p>当 React 进入这个阶段时，它有 2 棵树和 effect 列表。第一棵树表示当前在屏幕上呈现的状态。然后在渲染阶段构建了一个 alternate 树。它在源代码中称为 <code>finishedWork</code> 或 <code>workInProgress</code> ，代表需要反映在屏幕上的状态。这个备用树通过 <code>child</code> 指针和 <code>sibling</code> 指针与当前树类似地链接。</p>
+<p>然后，有一个 effect 列表 - 通过 <code>nextEffect</code> 指针链接的 <code>finishedWork</code> 的一个节点子集。请记住，效果列表是运行渲染阶段的结果。<strong>渲染的全部要点是确定需要插入，更新或删除哪些节点，哪些组件需要调用其生命周期方法</strong>。这就是 effect list 告诉我们的。正是在 <code>commit</code> 阶段迭代的一组节点。</p>
+<blockquote>
+<p>出于调试目的，可以通过 fiber root 的当前属性访问 <code>cuurent</code> 树。可以通过当前树中 <code>HostFiber</code> 节点的 <code>alternate</code> 属性访问 <code>finishedWork</code> 树。</p>
+</blockquote>
+<p>在 commit<br>阶段运行的主要函数是 commitRoot。基本上，它执行以下操作：</p>
+<ul>
+<li>Calls the <code>getSnapshotBeforeUpdate</code> lifecycle method on nodes tagged with the Snapshot effect</li>
+<li>Calls the <code>componentWillUnmount</code> lifecycle method on nodes tagged with the Deletion effect</li>
+<li>Performs all the DOM insertions, updates and deletions<br>Sets the <code>finishedWork</code> tree as current</li>
+<li>Calls <code>componentDidMount</code> lifecycle method on nodes tagged with the Placement effect</li>
+<li>Calls <code>componentDidUpdate</code> lifecycle method on nodes tagged with the Update effect</li>
+</ul>
+<p>在调用 pre-mutation 方法 <code>getSnapshotBeforeUpdate</code> 之后，React 将所有副作用提交到树中。它分两次完成。第一遍执行所有 DOM（主机）插入、更新、删除和引用卸载。然后 React 将 <code>finishedWork</code> 树分配给 FiberRoot，将 <code>workInProgress</code> 树标记为当前树。这是在提交阶段的第一遍之后完成的，因此前一棵树在 <code>componentWillUnmount</code> 期间仍然是当前的，但在第二遍之前，因此完成的工作在 componentDidMount/Update 期间是当前的。在第二遍中，React 调用所有其他生命周期方法和 ref 回调。这些方法作为单独的传递执行，因此整个树中的所有放置、更新和删除都已被调用。</p>
+<p>这是运行上述步骤的功能的要旨：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">commitRoot</span>(<span class="params">root, finishedWork</span>) </span>&#123;</span><br><span class="line">  commitBeforeMutationLifecycles();</span><br><span class="line">  commitAllHostEffects();</span><br><span class="line">  root.current = finishedWork;</span><br><span class="line">  commitAllLifeCycles();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些子函数中的每一个都实现了一个循环，该循环遍历 effect 列表并检查效果的类型。当它找到与函数目的相关的效果时，它就会应用它。</p>
+<h2 id="Pre-mutation-lifecycle-methods"><a href="#Pre-mutation-lifecycle-methods" class="headerlink" title="Pre-mutation lifecycle methods"></a>Pre-mutation lifecycle methods</h2><p>例如，下面是遍历 effect 树并检查节点是否具有 <code>Snapshot</code> effect 的代码：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">commitBeforeMutationLifecycles</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (nextEffect !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> effectTag = nextEffect.effectTag;</span><br><span class="line">    <span class="keyword">if</span> (effectTag &amp; Snapshot) &#123;</span><br><span class="line">      <span class="keyword">const</span> current = nextEffect.alternate;</span><br><span class="line">      commitBeforeMutationLifeCycles(current, nextEffect);</span><br><span class="line">    &#125;</span><br><span class="line">    nextEffect = nextEffect.nextEffect;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于类组件，这种效果意味着调用 getSnapshotBeforeUpdate 生命周期方法。</p>
+<h2 id="DOM-updates"><a href="#DOM-updates" class="headerlink" title="DOM updates"></a>DOM updates</h2><p><code>commitAllHostEffects</code> 是 React 执行 DOM 更新的函数。该函数基本上定义了需要为节点完成的操作类型并执行它：</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">commitAllHostEffects</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (primaryEffectTag) &#123;</span><br><span class="line">        <span class="keyword">case</span> Placement: &#123;</span><br><span class="line">            commitPlacement(nextEffect);</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> PlacementAndUpdate: &#123;</span><br><span class="line">            commitPlacement(nextEffect);</span><br><span class="line">            commitWork(current, nextEffect);</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> Update: &#123;</span><br><span class="line">            commitWork(current, nextEffect);</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> Deletion: &#123;</span><br><span class="line">            commitDeletion(nextEffect);</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有趣的是，React 在 <code>commitDeletion</code> 函数中调用 <code>componentWillUnmount</code> 方法作为删除过程的一部分。</p>
+<h2 id="Post-mutation-lifecycle-methods"><a href="#Post-mutation-lifecycle-methods" class="headerlink" title="Post-mutation lifecycle methods"></a>Post-mutation lifecycle methods</h2><p>commitAllLifecycles 是 React 调用所有剩余生命周期方法 <code>componentDidUpdate</code> 和 <code>componentDidMount</code> 的函数。</p>
+<p>我们终于完成了。让我知道您对这篇文章的看法或在评论中提问。查看系列中的下一篇文章深入解释 React 中的状态和道具更新。我还有很多文章在为调度程序、子协调过程以及如何构建效果列表提供深入的解释。我还计划制作一个视频，展示如何以本文为基础调试应用程序。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>【译】Javascript 中的 CJS、AMD、UMD 和 ESM 到底是什么？</title>
+    <url>/2023/02/10/%E3%80%90%E8%AF%91%E3%80%91Javascript%20%E4%B8%AD%E7%9A%84%20CJS%E3%80%81AMD%E3%80%81UMD%20%E5%92%8C%20ESM%20%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/</url>
+    <content><![CDATA[<p>原文：<a href="https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm">https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm</a></p>
+<p>一开始，Javascript 没有导入/导出模块的方法。这是个问题。想象一下只在一个文件中编写您的应用程序——那将是一场噩梦！</p>
+<p>然后，比我聪明得多的人试图为 Javascript 添加模块化。其中一些是 CJS、AMD、UMD 和 ESM。您可能听说过其中一些方法（还有其他方法，但这些都是大玩家）。</p>
+<span id="more"></span>
+
+<h2 id="CJS"><a href="#CJS" class="headerlink" title="CJS"></a>CJS</h2><p>CJS 是 CommonJS 的缩写。这是它的样子：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//importing</span></span><br><span class="line"><span class="keyword">const</span> doSomething = <span class="built_in">require</span>(<span class="string">&quot;./doSomething.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//exporting</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>你们中的一些人可能立即会认为 CJS 语法来自于 nodejs。那是因为 nodejs 使用 CJS 模块格式。</li>
+<li>CJS 同步导入模块。</li>
+<li>您可以从库 node_modules 或本地目录导入。通过 <code>const myLocalModule = require(&#39;./some/local/file.js&#39;)</code> 或 <code>var React = require(&#39;react&#39;);</code></li>
+<li>当 CJS 导入时，它会给你一个导入对象的副本。相当于一个引用地址。</li>
+<li>CJS 将在浏览器中不起作用。它必须被 transpiled and bundled。</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ============ foo.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">foo</span>: <span class="string">&quot;from foo&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ============ bar.js</span></span><br><span class="line"><span class="keyword">const</span> foo = <span class="built_in">require</span>(<span class="string">&quot;./foo.js&quot;</span>);</span><br><span class="line"></span><br><span class="line">foo.foo = foo.foo + <span class="string">&quot; and from bar&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = foo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ============ index.js</span></span><br><span class="line"><span class="keyword">const</span> foo = <span class="built_in">require</span>(<span class="string">&quot;./foo.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;before require bar:&quot;</span>, foo); <span class="comment">// &#123;foo: &#x27;from foo&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = <span class="built_in">require</span>(<span class="string">&quot;./bar.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;after require bar:&quot;</span>, foo); <span class="comment">// &#123;foo: &#x27;from foo and from bar&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;definitely same memory address:&quot;</span>, bar === foo); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>AMD 代表异步模块定义。这是一个示例代码：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">define([<span class="string">&quot;dep1&quot;</span>, <span class="string">&quot;dep2&quot;</span>], <span class="function"><span class="keyword">function</span> (<span class="params">dep1, dep2</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//Define the module value by returning a value.</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// &quot;simplified CommonJS wrapping&quot; https://requirejs.org/docs/whyamd.html</span></span><br><span class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params"><span class="built_in">require</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dep1 = <span class="built_in">require</span>(<span class="string">&quot;dep1&quot;</span>),</span><br><span class="line">    dep2 = <span class="built_in">require</span>(<span class="string">&quot;dep2&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>AMD 异步导入模块（因此得名）。</li>
+<li>AMD 是为前端而生的（当它被提议时）（而 CJS 是后端）。</li>
+<li>AMD 语法不如 CJS 直观。我认为 AMD 与 CJS 完全相反.</li>
+</ul>
+<h2 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h2><p>UMD 代表通用模块定义.</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&quot;function&quot;</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">        define([<span class="string">&quot;jquery&quot;</span>, <span class="string">&quot;underscore&quot;</span>], factory);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">        <span class="built_in">module</span>.exports = factory(<span class="built_in">require</span>(<span class="string">&quot;jquery&quot;</span>), <span class="built_in">require</span>(<span class="string">&quot;underscore&quot;</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        root.Requester = factory(root.$, root._);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(<span class="built_in">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$, _</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// this is where I defined my module implementation</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> Requester = &#123; <span class="comment">// ... &#125;;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Requester;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>适用于前端和后端（因此得名 universal）。</li>
+<li>与 CJS 或 AMD 不同，UMD 更像是一种配置多个模块系统的模式。在<a href="https://github.com/umdjs/umd/">此处</a>查看更多模式。</li>
+<li>在使用 Rollup/Webpack 等打包器时，UMD 通常用作后备模块</li>
+</ul>
+<h2 id="ESM"><a href="#ESM" class="headerlink" title="ESM"></a>ESM</h2><p>ESM 代表 ES 模块。实现标准的模块系统是 Javascript 的提议。相信很多人都看过这个：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;foo, bar&#125; <span class="keyword">from</span> <span class="string">&#x27;./myLib&#x27;</span>;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// your Function</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="function"><span class="title">function1</span>(<span class="params"></span>)</span> &#123;...&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="function"><span class="title">function2</span>(<span class="params"></span>)</span> &#123;...&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>适用于许多现代浏览器</li>
+<li>它兼具两全其美：类似 CJS 的简单语法和 AMD 的异步</li>
+<li>Tree-shakeable，由于 ES6 的静态模块结构</li>
+<li>ESM 允许像 Rollup 这样的打包器删除不必要的代码，允许站点发送更少的代码以获得更快的加载。</li>
+<li>可以在 HTML 中调用，只需执行以下操作：(script 标签标注 type=’module’)，node 环境下可以在<code>package.json</code>中添加<code>type=&#39;module&#39;</code></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; func1 &#125; <span class="keyword">from</span> <span class="string">&quot;my-lib&quot;</span>;</span></span><br><span class="line"><span class="javascript">  func1();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>浏览器兼容性：</p>
+<ul>
+<li>Safari 10.1.</li>
+<li>Chrome 61.</li>
+<li>Firefox 60.</li>
+<li>Edge 16.</li>
+</ul>
+<h3 id="异步性"><a href="#异步性" class="headerlink" title="异步性"></a>异步性</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ========== foo.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">foo</span>: <span class="string">&quot;from foo&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== bar.js</span></span><br><span class="line"><span class="keyword">import</span> foo <span class="keyword">from</span> <span class="string">&quot;./foo.js&quot;</span>;</span><br><span class="line"></span><br><span class="line">foo.foo = foo.foo + <span class="string">&quot; and from bar.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> foo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== index.js</span></span><br><span class="line"><span class="keyword">import</span> foo <span class="keyword">from</span> <span class="string">&quot;./foo.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> bar <span class="keyword">from</span> <span class="string">&quot;./bar.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出（import bar from &#x27;./bar.js 提前了）</span></span><br><span class="line"><span class="comment">// bar: &#123; foo: &#x27;from foo and from bar.js&#x27; &#125;</span></span><br><span class="line"><span class="comment">// index: &#123; foo: &#x27;from foo and from bar.js&#x27; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>ESM 是最好的模块格式，这要归功于其简单的语法、异步特性和 tree-shakeability。</li>
+<li>UMD 无处不在，通常用作 ESM 不起作用时的后备方案。</li>
+<li>CJS 是同步的，适合后端。</li>
+<li>AMD 是异步的，适合前端。<br>感谢阅读，开发者！以后打算把每个模块都写的很深入，尤其是 ESM，因为里面有很多牛逼。敬请关注！<br>如果您发现任何错误，请告诉我。</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>【译】优化长任务 Optimize long tasks</title>
+    <url>/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/</url>
+    <content><![CDATA[<p>原文：<a href="https://web.dev/optimize-long-tasks/">https://web.dev/optimize-long-tasks/</a></p>
+<blockquote>
+<p>你曾被告诉过，不要阻塞主线程并且分解你的长任务，但是有想过这样做的意义吗？</p>
+</blockquote>
+<p>如果你读了很多关于网站性能的资料, 保持 JavasScript 应用程序快速运行的建议往往涉及以下的建议：</p>
+<ul>
+<li>不要阻塞主线程</li>
+<li>分解你的长任务</li>
+</ul>
+<p>那这些意味着什么？减少 JavaScript 是好的，但这是否自动等同在整个页面生命周期中更快速的用户界面？也许是，也许不是.</p>
+<span id="more"></span>
+
+<h2 id="一个-task-是什么样的？"><a href="#一个-task-是什么样的？" class="headerlink" title="一个 task 是什么样的？"></a>一个 task 是什么样的？</h2><p>一个 task 是浏览器所做的任何离散的工作，task 包括解析 HTML 和 CSS, 运行 JavaScript 代码, 以及一些你不能直接控制的事情。对于所有的这些，你所编写的并且部署到服务器的 JavaScript 是主要的任务来源。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.23.12.png" alt="img_1"></p>
+<p>Tasks 以多种方式影响性能。例如，当浏览器在启动时下载 js 文件时，浏览器将任务进行排队并且编译 js 以让其能被执行。然后在页面的生命周期中，（例如通过事件处理程序驱动交互、JavaScript 驱动的动画和后台活动（例如分析收集））启动任务。所有的这些东西，除了 web worker 和类似的 API 都发生在主线程上。</p>
+<h2 id="主线程是什么-？"><a href="#主线程是什么-？" class="headerlink" title="主线程是什么 ？"></a>主线程是什么 ？</h2><p>主线程是大多数任务在浏览器中运行的地方。它被称为主线程的原因是：它是您编写的几乎所有 JavaScript 都在这个线程中工作。</p>
+<p>主线程一次只能处理一个任务。当任务超出某个确定的点（准确来说是 50ms ）时,它们被归类为长任务。如果用户在长时间的任务运行时尝试与页面交互 — 或者如果需要进行重要的渲染更新 — 浏览器将延迟处理该工作。这会导致交互或渲染延迟。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.42.24.png" alt="img_2"></p>
+<p><em style="font-size:12px">Chrome浏览器的性能分析器中描述的长任务。长任务的角落里有一个红色的三角形，任务的阻塞部分用对角线的红色条纹填充</em></p>
+<p>你需要分解任务。这意味着将一个长任务划分为较小的任务，这些任务单独运行所需的时间更少。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/8Bhl9Ilki4tM0aC1nfn8.png?auto=format&w=1600" alt="img_3"></p>
+<p><em style="font-size:12px">单个长任务与同一任务分解为五个较短任务的可视化</em></p>
+<p>这很重要，因为当任务被分解时，浏览器有更多机会响应更高优先级的工作——包括用户交互。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0yV0ynwW7FujIwvCbCxQ.png?auto=format&w=1600" alt="img_3"></p>
+<p><em style="font-size:12px">当任务太长，浏览器不能对互动做出足够快的反应时，与将较长的任务分解成较小的任务时相比，互动会发生什么样的情况，这是一个可视化的结果</em></p>
+<p>如上图的上半部分所述，由用户交互排队的事件处理程序必须等待一个长任务才能运行。这延迟了交互的发生。在下半部分，事件处理程序有机会更快地运行。因为事件处理程序有机会在较小的任务之间运行。它运行得比它必须等待一个很长的任务完成要快。在上半部分中，用户可能已经感受到了延迟，在下半部分，交互可能是即时的。</p>
+<p>然而，问题在于 “分解你的长任务” 和 “不要阻塞主线程”的建议不够具体,除非你已经知道如何做这些事情，这就是本指南将要解释的内容。</p>
+<h2 id="任务管理策略"><a href="#任务管理策略" class="headerlink" title="任务管理策略"></a>任务管理策略</h2><p>在软件架构中，一个常见建议是将您的工作分解更小的功能。这为您提供了更好的代码可读性和项目可维护性的好处。这使得测试更容易编写。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  validateForm();</span><br><span class="line">  showSpinner();</span><br><span class="line">  saveToDatabase();</span><br><span class="line">  updateUI();</span><br><span class="line">  sendAnalytics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，这里的 saveSettings 函数，在它调用时，它调用了其他五个函数。从概念上讲，这是很好的架构，如果你需要调试这些函数中的一个，你可以便利项目树以弄清每个函数的作用。</p>
+<p>然而，问题在于 JavaScript 不会将这些函数中的每一个作为单独的任务运行，因为它们是在 savaSettings 函数中执行的。<strong>这意味着所有五个功能都作为单独任务运行。</strong></p>
+<blockquote>
+<p>JavaScript 以这种方式工作是因为它使用任务执行的运行到完成模型。这意味着每个任务将一直运行到完成，无论它阻塞主线程多长时间。</p>
+</blockquote>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0c61l5DCix9y0GBa3pFj.png?auto=format&w=1600" alt="img_4"></p>
+<p><em style="font-size:12px">调用五个函数的单个函数 saveSettings()。这项工作是作为一项长期的整体任务的一部分运行的</em></p>
+<p>在最好的情况下，即使只是这些功能中的一个，也可以为任务的总长度贡献50毫秒或更多。在最坏的情况下，更多的这些任务可以运行相当长的时间–特别是在资源有限的设备上。下面是一套策略，你可以用来分解和优先处理任务。</p>
+<h2 id="手动延迟代码执行"><a href="#手动延迟代码执行" class="headerlink" title="手动延迟代码执行"></a>手动延迟代码执行</h2><p>开发人员使用的一种将任务分解成小任务的方法涉及到 setTimeout(). 使用这种技术，你把函数传给 setTimeout 这将回调的执行推迟到一个单独的任务中，即时你指定的时间为 0。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 完成用户可见的关键工作:</span></span><br><span class="line">  validateForm();</span><br><span class="line">  showSpinner();</span><br><span class="line">  updateUI();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将用户不可见的工作推迟到单独的任务:</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    saveToDatabase();</span><br><span class="line">    sendAnalytics();</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果您有一系列需要按顺序运行的函数，这很有效，但您的代码可能并不总是以这种方式组织。例如，您可能有大量数据需要循环处理，如果您有数百万个项目，该任务可能需要很长时间。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processData</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> largeDataArray) &#123;</span><br><span class="line">    <span class="comment">// Process the individual item here.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 setTimeout 是存在问题的, 因为它的人机工程学（这是什么意思🤔，原文：ergonomics）使其难以实现，并且整个数据数组可能需要很长时间处理，即使每个项目都可以非常快速地处理。这一切加起来，setTimeout 不是合适的工具，至少在这样使用时不是。</p>
+<p>除了 setTimeout 之外，还有一些其他 API 允许您将代码执行推迟到后续任务。 一种方法是使用 postMessage 来加快超时。您也可以使用 requestIdleCallback() 来分解工作。 但是要注意 – requestIdleCallback() 以尽可能低的优先级安排任务，而且只在浏览器空闲时间内进行。当主线程拥挤时,用 requestIdleCallback() 安排的任务可能永远无法运行。</p>
+<h2 id="使用-async-await-yield-points"><a href="#使用-async-await-yield-points" class="headerlink" title="使用 async/await yield points"></a>使用 async/await yield points</h2><p>在本指南的其余部分，你会看到一个短语是 “yield to the main thread”，但是，这意味着什么？为什么你要这么做？你什么时候该这样做？</p>
+<blockquote>
+<p>当你 yield to the main thread，你会给它一个机会来处理比当前排队的任务更重要的任务。理想情况下（ideally），当你有一些关键的面向用户的工作，需要比 yield 更早地执行时，你应该 yield main thread，yield main thread 可以为关键工作创造机会，使其更快地运行。</p>
+</blockquote>
+<p>当任务被分解时，其他任务可以通过浏览器内部优先级方案更好地进行优先级排序。yield main thread 的方法涉及到使用一个 Promise 的组合，该组合与对 setTimeout() 进行的调用进行解析。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">yieldToMain</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, <span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>虽然这个代码实例返回了一个在调用 setTimeout 后解析的 Promise, 但负责在新任务中运行奇遇代码的并不是这个 Promise，而是 setTimeout 调用。Promise 回调作为微任务而不是任务运行，因此不会 yield main thread</p>
+</blockquote>
+<p>在 saveSettings() 函数中，如果在每次函数调用后 await yieldToMain() 函数，则可以在每次工作后 yield to the main</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create an array of functions to run:</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop over the tasks:</span></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Shift the first task off the tasks array:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Yield to the main thread:</span></span><br><span class="line">    <span class="keyword">await</span> yieldToMain();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>你不必在每次函数调用后都 yield。例如，如果你运行的两个函数会导致用户界面的关键性更新，你可能不想在它们之间 yield。如果可以的话，让这些 tast 先运行，然后考虑在那些不那么关键的或用户看不到的后台工作的函数之间进行 yield。</p>
+</blockquote>
+<p>结果是曾经单一的任务现在被分解为单独的任务</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/wg0FW6S29CzOCbbwk9kK.png?auto=format&w=1600" alt="img_5"></p>
+<p><em style="font-size:12px">saveSettings() 函数现在将其子函数作为单独的任务执行。</em></p>
+<p>使用基于 Promise 的方法来产生而不是手动使用 setTimeout() 的好处是更好的人体工程学。屈服点成为声明性的，因此更容易编写、阅读和理解。</p>
+<h2 id="仅在必要时-yield"><a href="#仅在必要时-yield" class="headerlink" title="仅在必要时 yield"></a>仅在必要时 yield</h2><p>如果您有一堆任务，但您只想在用户尝试与页面交互时让步怎么办？这就是 isInputPending() 的用途。</p>
+<p>isInputPending() 是一个您可以随时运行以确定用户是否正在尝试与页面元素交互的函数：对 isInputPending() 的调用将返回 true。否则返回 false。</p>
+<p>假设您可有一个需要运行的任务队列，但您不想妨碍任何输入。这段代码 — 它同时使用了 isInputPending() 函数 — 确保在用户尝试与页面交互时输入不会被延迟。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// A task queue of functions</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Yield to a pending user input:</span></span><br><span class="line">    <span class="keyword">if</span> (navigator.scheduling.isInputPending()) &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s a pending user input. Yield here:</span></span><br><span class="line">      <span class="keyword">await</span> yieldToMain();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// Shift the the task out of the queue:</span></span><br><span class="line">      <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Run the task:</span></span><br><span class="line">      task();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当 saveSettings() 运行时，它将遍历队列中的任务。如果 isInputPending() 在循环期间返回 true，则 saveSettings() 将调用 yieldToMain() 以便处理用户输入。否则，它将把下一个任务移出队列的前面并继续运行它。它将执行此操作，直到没有其他任务为止。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/snMl3kRlWyJjdbL0qsqM.png?auto=format&w=1600" alt="img_5"></p>
+<p><em style="font-size:12px">saveSettings()运行一个有五个任务的任务队列，但在第二个工作项运行时，用户已经点击打开了一个菜单。 isInputPending()让位于主线程来处理这个交互，并恢复运行其余的任务。</em></p>
+<blockquote>
+<p>isInputPending()不一定在用户输入后立即返回true。这是因为操作系统需要时间来告诉浏览器发生了交互。这意味着其他代码可能已经开始执行了（正如你在上面的截图中看到的saveToDatabase()函数）。即使你使用isInputPending()，你仍然要限制每个函数的工作量，这是至关重要的。</p>
+</blockquote>
+<p>将 isInputPending() 与让步机制结合使用是让浏览器停止其正在处理的任何任务以响应关键的面向用户的交互的好方法。这可以帮助提高您的页面在许多任务正在进行时在许多情况下响应用户的能力。</p>
+<p>另一种使用isInputPending()的方法–特别是如果你担心为不支持它的浏览器提供退路–是使用基于时间的方法与 可选链操作符 （?.）</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// A task queue of functions</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> deadline = performance.now() + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Optional chaining operator used here helps to avoid</span></span><br><span class="line">    <span class="comment">// errors in browsers that don&#x27;t support `isInputPending`:</span></span><br><span class="line">    <span class="keyword">if</span> (navigator.scheduling?.isInputPending() || performance.now() &gt;= deadline) &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s a pending user input, or the</span></span><br><span class="line">      <span class="comment">// deadline has been reached. Yield here:</span></span><br><span class="line">      <span class="keyword">await</span> yieldToMain();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Extend the deadline:</span></span><br><span class="line">      deadline += <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Stop the execution of the current loop and</span></span><br><span class="line">      <span class="comment">// move onto the next iteration:</span></span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Shift the the task out of the queue:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方法，你可以为不支持isInputPending()的浏览器提供一个后备方案，即使用（并调整）一个截止日期，以便在必要时将工作分开，无论是通过屈服于用户输入，还是在某个时间点之前。</p>
+<h2 id="当前-api-的差异"><a href="#当前-api-的差异" class="headerlink" title="当前 api 的差异"></a>当前 api 的差异</h2><p>到目前为止提到的API可以帮助你分解任务，但它们有一个显著的缺点：当你通过推迟代码在后续任务中运行而屈服于主线程时，该代码会被添加到任务队列的最末端。</p>
+<p>如果你控制了你页面上的所有代码，就有可能创建你自己的scheduler （参考 react 吗，😯），并能对任务进行优先排序，但第三方脚本不会使用你的调度器。实际上，在这样的环境中，你并不能真正地对工作进行优先排序。你只能把它分成几块，或者明确地屈从于用户的互动。</p>
+<p>幸运的是，目前有一个专门的调度器API正在开发中，可以解决这些问题。</p>
+<h2 id="一个专门的调度程序API"><a href="#一个专门的调度程序API" class="headerlink" title="一个专门的调度程序API"></a>一个专门的调度程序API</h2><p>调度器API目前提供了postTask()函数，在撰写本文时，该函数在Chromium浏览器和Firefox的一个标志后面可用。 postTask()允许对任务进行更精细的调度，是帮助浏览器确定工作优先级的一种方法，这样低优先级的任务就会让位于主线程。 postTask()使用 Promise，并接受一个优先级设置。</p>
+<p>postTask() API 具有三个可以使用的 priorities</p>
+<ul>
+<li>‘background’ : 最低优先级任务。</li>
+<li>‘user-visible’ : 中等优先级任务，“用户可见”，如果没有设置优先级，这是默认设置。</li>
+<li>‘user-blocking’: 用于需要高优先级运行的关键任务。</li>
+</ul>
+<p>以下面的代码为例，postTask()API被用来以尽可能高的优先级运行三个任务，并以尽可能低的优先级运行其余两个任务。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Validate the form at high priority</span></span><br><span class="line">  scheduler.postTask(validateForm, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Show the spinner at high priority:</span></span><br><span class="line">  scheduler.postTask(showSpinner, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update the database in the background:</span></span><br><span class="line">  scheduler.postTask(saveToDatabase, &#123;<span class="attr">priority</span>: <span class="string">&#x27;background&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update the user interface at high priority:</span></span><br><span class="line">  scheduler.postTask(updateUI, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Send analytics data in the background:</span></span><br><span class="line">  scheduler.postTask(sendAnalytics, &#123;<span class="attr">priority</span>: <span class="string">&#x27;background&#x27;</span>&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在这里，任务的优先级以浏览器优先级任务（例如用户交互）可以正常工作的方式安排。</p>
+<div style="color:red">子任务执行顺序差异</div>
+
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/ttvI1HqusI02CAdqhjWP.png?auto=format&w=1600" alt="img_6"></p>
+<p><em style="font-size:12px">当saveSettings()运行时，该函数使用postTask()对各个函数进行调度。面向用户的关键工作被安排在高优先级，而用户不知道的工作被安排在后台运行。这使得用户交互的执行速度更快，因为工作被分割开来并被适当地安排了优先次序。</em></p>
+<p>这是一个如何使用 postTask() 的简单示例。可以实例化不同的 TaskController 对象，这些对象可以在任务之间共享优先级，包括根据需要更改不同 TaskController 实例的优先级的能力。</p>
+<blockquote>
+<p>并非所有浏览器都支持 postTask()。您可以使用特征检测来查看它是否可用，或者考虑使用 polyfill</p>
+</blockquote>
+<h2 id="内置的-yield"><a href="#内置的-yield" class="headerlink" title="内置的 yield"></a>内置的 yield</h2><p>调度器API的一个拟议的部分，目前没有在任何浏览器中实现，就是一个内置的 yield 机制。它的使用类似于本文前面演示的 yieldToMain() 函数。</p>
+<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create an array of functions to run:</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop over the tasks:</span></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Shift the first task off the tasks array:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Yield to the main thread with the scheduler</span></span><br><span class="line">    <span class="comment">// API&#x27;s own yielding mechanism:</span></span><br><span class="line">    <span class="keyword">await</span> scheduler.yield();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>您会注意到，上面的代码非常熟悉，但是您没有使用 yieldToMain()，而是调用并等待 scheduler.yield()。</p>
+<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/fyuvJqAV0mLxfZDM9tAm.png?auto=format&w=1294" alt="img_7"></p>
+<p><em style="font-size:12px">一个没有yield、yield、yield 和 continuation 的任务执行的可视化图。当使用scheduler.yield()时，任务的执行甚至在屈服点之后还能继续执行。</em></p>
+<p>scheduler.yield() 的好处是continuation，这意味着如果你在一组任务中间yield，其他的计划任务会在yield点之后以同样的顺序继续执行。这可以避免第三方脚本中的代码篡夺您的代码执行顺序。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>管理任务是具有挑战性的，但这样做有助于你的页面对用户的互动作出更快速的反应。在管理和确定任务的优先次序方面，没有单一的建议。相反，它是一些不同的技术。重申一下，这些是你在管理任务时要考虑的主要事项。</p>
+<ul>
+<li><p>让给主线程以完成关键的、面向用户的任务。</p>
+</li>
+<li><p>当用户尝试与页面交互时，使用 isInputPending() 让步给主线程。</p>
+</li>
+<li><p>使用 postTask() 对任务进行优先级排序。</p>
+</li>
+<li><p>最后，在你的函数中做尽可能少的工作。</p>
+</li>
+</ul>
+<p>有了这些工具中的一个或多个，你应该能够在你的应用程序中构造工作，使其优先考虑用户的需求，同时确保不太关键的工作仍然能够完成。这将创造一个更好的用户体验，它的响应速度更快，使用起来更愉快。</p>
+<p>Special thanks to Philip Walton for his technical vetting of this article.</p>
+<p>Hero image sourced from Unsplash, courtesy of Amirali Mirhashemian.</p>
+]]></content>
   </entry>
   <entry>
     <title>svg基础</title>
@@ -821,212 +1196,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>【译】Javascript 中的 CJS、AMD、UMD 和 ESM 到底是什么？</title>
-    <url>/2023/02/10/%E3%80%90%E8%AF%91%E3%80%91Javascript%20%E4%B8%AD%E7%9A%84%20CJS%E3%80%81AMD%E3%80%81UMD%20%E5%92%8C%20ESM%20%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/</url>
-    <content><![CDATA[<p>原文：<a href="https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm">https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm</a></p>
-<p>一开始，Javascript 没有导入/导出模块的方法。这是个问题。想象一下只在一个文件中编写您的应用程序——那将是一场噩梦！</p>
-<p>然后，比我聪明得多的人试图为 Javascript 添加模块化。其中一些是 CJS、AMD、UMD 和 ESM。您可能听说过其中一些方法（还有其他方法，但这些都是大玩家）。</p>
-<span id="more"></span>
-
-<h2 id="CJS"><a href="#CJS" class="headerlink" title="CJS"></a>CJS</h2><p>CJS 是 CommonJS 的缩写。这是它的样子：</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//importing</span></span><br><span class="line"><span class="keyword">const</span> doSomething = <span class="built_in">require</span>(<span class="string">&quot;./doSomething.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//exporting</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// do something</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>你们中的一些人可能立即会认为 CJS 语法来自于 nodejs。那是因为 nodejs 使用 CJS 模块格式。</li>
-<li>CJS 同步导入模块。</li>
-<li>您可以从库 node_modules 或本地目录导入。通过 <code>const myLocalModule = require(&#39;./some/local/file.js&#39;)</code> 或 <code>var React = require(&#39;react&#39;);</code></li>
-<li>当 CJS 导入时，它会给你一个导入对象的副本。相当于一个引用地址。</li>
-<li>CJS 将在浏览器中不起作用。它必须被 transpiled and bundled。</li>
-</ul>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ============ foo.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">foo</span>: <span class="string">&quot;from foo&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ============ bar.js</span></span><br><span class="line"><span class="keyword">const</span> foo = <span class="built_in">require</span>(<span class="string">&quot;./foo.js&quot;</span>);</span><br><span class="line"></span><br><span class="line">foo.foo = foo.foo + <span class="string">&quot; and from bar&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = foo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ============ index.js</span></span><br><span class="line"><span class="keyword">const</span> foo = <span class="built_in">require</span>(<span class="string">&quot;./foo.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;before require bar:&quot;</span>, foo); <span class="comment">// &#123;foo: &#x27;from foo&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> bar = <span class="built_in">require</span>(<span class="string">&quot;./bar.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;after require bar:&quot;</span>, foo); <span class="comment">// &#123;foo: &#x27;from foo and from bar&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;definitely same memory address:&quot;</span>, bar === foo); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p>AMD 代表异步模块定义。这是一个示例代码：</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">define([<span class="string">&quot;dep1&quot;</span>, <span class="string">&quot;dep2&quot;</span>], <span class="function"><span class="keyword">function</span> (<span class="params">dep1, dep2</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//Define the module value by returning a value.</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>or</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// &quot;simplified CommonJS wrapping&quot; https://requirejs.org/docs/whyamd.html</span></span><br><span class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params"><span class="built_in">require</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dep1 = <span class="built_in">require</span>(<span class="string">&quot;dep1&quot;</span>),</span><br><span class="line">    dep2 = <span class="built_in">require</span>(<span class="string">&quot;dep2&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>AMD 异步导入模块（因此得名）。</li>
-<li>AMD 是为前端而生的（当它被提议时）（而 CJS 是后端）。</li>
-<li>AMD 语法不如 CJS 直观。我认为 AMD 与 CJS 完全相反.</li>
-</ul>
-<h2 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h2><p>UMD 代表通用模块定义.</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&quot;function&quot;</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">        define([<span class="string">&quot;jquery&quot;</span>, <span class="string">&quot;underscore&quot;</span>], factory);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">        <span class="built_in">module</span>.exports = factory(<span class="built_in">require</span>(<span class="string">&quot;jquery&quot;</span>), <span class="built_in">require</span>(<span class="string">&quot;underscore&quot;</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        root.Requester = factory(root.$, root._);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(<span class="built_in">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params">$, _</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// this is where I defined my module implementation</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> Requester = &#123; <span class="comment">// ... &#125;;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Requester;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>适用于前端和后端（因此得名 universal）。</li>
-<li>与 CJS 或 AMD 不同，UMD 更像是一种配置多个模块系统的模式。在<a href="https://github.com/umdjs/umd/">此处</a>查看更多模式。</li>
-<li>在使用 Rollup/Webpack 等打包器时，UMD 通常用作后备模块</li>
-</ul>
-<h2 id="ESM"><a href="#ESM" class="headerlink" title="ESM"></a>ESM</h2><p>ESM 代表 ES 模块。实现标准的模块系统是 Javascript 的提议。相信很多人都看过这个：</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;foo, bar&#125; <span class="keyword">from</span> <span class="string">&#x27;./myLib&#x27;</span>;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// your Function</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="function"><span class="title">function1</span>(<span class="params"></span>)</span> &#123;...&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="function"><span class="title">function2</span>(<span class="params"></span>)</span> &#123;...&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>适用于许多现代浏览器</li>
-<li>它兼具两全其美：类似 CJS 的简单语法和 AMD 的异步</li>
-<li>Tree-shakeable，由于 ES6 的静态模块结构</li>
-<li>ESM 允许像 Rollup 这样的打包器删除不必要的代码，允许站点发送更少的代码以获得更快的加载。</li>
-<li>可以在 HTML 中调用，只需执行以下操作：(script 标签标注 type=’module’)，node 环境下可以在<code>package.json</code>中添加<code>type=&#39;module&#39;</code></li>
-</ul>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123; func1 &#125; <span class="keyword">from</span> <span class="string">&quot;my-lib&quot;</span>;</span></span><br><span class="line"><span class="javascript">  func1();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>浏览器兼容性：</p>
-<ul>
-<li>Safari 10.1.</li>
-<li>Chrome 61.</li>
-<li>Firefox 60.</li>
-<li>Edge 16.</li>
-</ul>
-<h3 id="异步性"><a href="#异步性" class="headerlink" title="异步性"></a>异步性</h3><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ========== foo.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">foo</span>: <span class="string">&quot;from foo&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== bar.js</span></span><br><span class="line"><span class="keyword">import</span> foo <span class="keyword">from</span> <span class="string">&quot;./foo.js&quot;</span>;</span><br><span class="line"></span><br><span class="line">foo.foo = foo.foo + <span class="string">&quot; and from bar.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> foo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ========== index.js</span></span><br><span class="line"><span class="keyword">import</span> foo <span class="keyword">from</span> <span class="string">&quot;./foo.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> bar <span class="keyword">from</span> <span class="string">&quot;./bar.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出（import bar from &#x27;./bar.js 提前了）</span></span><br><span class="line"><span class="comment">// bar: &#123; foo: &#x27;from foo and from bar.js&#x27; &#125;</span></span><br><span class="line"><span class="comment">// index: &#123; foo: &#x27;from foo and from bar.js&#x27; &#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>ESM 是最好的模块格式，这要归功于其简单的语法、异步特性和 tree-shakeability。</li>
-<li>UMD 无处不在，通常用作 ESM 不起作用时的后备方案。</li>
-<li>CJS 是同步的，适合后端。</li>
-<li>AMD 是异步的，适合前端。<br>感谢阅读，开发者！以后打算把每个模块都写的很深入，尤其是 ESM，因为里面有很多牛逼。敬请关注！<br>如果您发现任何错误，请告诉我。</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>【译】优化长任务 Optimize long tasks</title>
-    <url>/2022/10/11/%E3%80%90%E8%AF%91%E3%80%91%E4%BC%98%E5%8C%96%E9%95%BF%E4%BB%BB%E5%8A%A1-Optimize-long-tasks/</url>
-    <content><![CDATA[<p>原文：<a href="https://web.dev/optimize-long-tasks/">https://web.dev/optimize-long-tasks/</a></p>
-<blockquote>
-<p>你曾被告诉过，不要阻塞主线程并且分解你的长任务，但是有想过这样做的意义吗？</p>
-</blockquote>
-<p>如果你读了很多关于网站性能的资料, 保持 JavasScript 应用程序快速运行的建议往往涉及以下的建议：</p>
-<ul>
-<li>不要阻塞主线程</li>
-<li>分解你的长任务</li>
-</ul>
-<p>那这些意味着什么？减少 JavaScript 是好的，但这是否自动等同在整个页面生命周期中更快速的用户界面？也许是，也许不是.</p>
-<span id="more"></span>
-
-<h2 id="一个-task-是什么样的？"><a href="#一个-task-是什么样的？" class="headerlink" title="一个 task 是什么样的？"></a>一个 task 是什么样的？</h2><p>一个 task 是浏览器所做的任何离散的工作，task 包括解析 HTML 和 CSS, 运行 JavaScript 代码, 以及一些你不能直接控制的事情。对于所有的这些，你所编写的并且部署到服务器的 JavaScript 是主要的任务来源。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.23.12.png" alt="img_1"></p>
-<p>Tasks 以多种方式影响性能。例如，当浏览器在启动时下载 js 文件时，浏览器将任务进行排队并且编译 js 以让其能被执行。然后在页面的生命周期中，（例如通过事件处理程序驱动交互、JavaScript 驱动的动画和后台活动（例如分析收集））启动任务。所有的这些东西，除了 web worker 和类似的 API 都发生在主线程上。</p>
-<h2 id="主线程是什么-？"><a href="#主线程是什么-？" class="headerlink" title="主线程是什么 ？"></a>主线程是什么 ？</h2><p>主线程是大多数任务在浏览器中运行的地方。它被称为主线程的原因是：它是您编写的几乎所有 JavaScript 都在这个线程中工作。</p>
-<p>主线程一次只能处理一个任务。当任务超出某个确定的点（准确来说是 50ms ）时,它们被归类为长任务。如果用户在长时间的任务运行时尝试与页面交互 — 或者如果需要进行重要的渲染更新 — 浏览器将延迟处理该工作。这会导致交互或渲染延迟。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/2022-10-11%2019.42.24.png" alt="img_2"></p>
-<p><em style="font-size:12px">Chrome浏览器的性能分析器中描述的长任务。长任务的角落里有一个红色的三角形，任务的阻塞部分用对角线的红色条纹填充</em></p>
-<p>你需要分解任务。这意味着将一个长任务划分为较小的任务，这些任务单独运行所需的时间更少。</p>
-<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/8Bhl9Ilki4tM0aC1nfn8.png?auto=format&w=1600" alt="img_3"></p>
-<p><em style="font-size:12px">单个长任务与同一任务分解为五个较短任务的可视化</em></p>
-<p>这很重要，因为当任务被分解时，浏览器有更多机会响应更高优先级的工作——包括用户交互。</p>
-<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0yV0ynwW7FujIwvCbCxQ.png?auto=format&w=1600" alt="img_3"></p>
-<p><em style="font-size:12px">当任务太长，浏览器不能对互动做出足够快的反应时，与将较长的任务分解成较小的任务时相比，互动会发生什么样的情况，这是一个可视化的结果</em></p>
-<p>如上图的上半部分所述，由用户交互排队的事件处理程序必须等待一个长任务才能运行。这延迟了交互的发生。在下半部分，事件处理程序有机会更快地运行。因为事件处理程序有机会在较小的任务之间运行。它运行得比它必须等待一个很长的任务完成要快。在上半部分中，用户可能已经感受到了延迟，在下半部分，交互可能是即时的。</p>
-<p>然而，问题在于 “分解你的长任务” 和 “不要阻塞主线程”的建议不够具体,除非你已经知道如何做这些事情，这就是本指南将要解释的内容。</p>
-<h2 id="任务管理策略"><a href="#任务管理策略" class="headerlink" title="任务管理策略"></a>任务管理策略</h2><p>在软件架构中，一个常见建议是将您的工作分解更小的功能。这为您提供了更好的代码可读性和项目可维护性的好处。这使得测试更容易编写。</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  validateForm();</span><br><span class="line">  showSpinner();</span><br><span class="line">  saveToDatabase();</span><br><span class="line">  updateUI();</span><br><span class="line">  sendAnalytics();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在这个例子中，这里的 saveSettings 函数，在它调用时，它调用了其他五个函数。从概念上讲，这是很好的架构，如果你需要调试这些函数中的一个，你可以便利项目树以弄清每个函数的作用。</p>
-<p>然而，问题在于 JavaScript 不会将这些函数中的每一个作为单独的任务运行，因为它们是在 savaSettings 函数中执行的。<strong>这意味着所有五个功能都作为单独任务运行。</strong></p>
-<blockquote>
-<p>JavaScript 以这种方式工作是因为它使用任务执行的运行到完成模型。这意味着每个任务将一直运行到完成，无论它阻塞主线程多长时间。</p>
-</blockquote>
-<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/0c61l5DCix9y0GBa3pFj.png?auto=format&w=1600" alt="img_4"></p>
-<p><em style="font-size:12px">调用五个函数的单个函数 saveSettings()。这项工作是作为一项长期的整体任务的一部分运行的</em></p>
-<p>在最好的情况下，即使只是这些功能中的一个，也可以为任务的总长度贡献50毫秒或更多。在最坏的情况下，更多的这些任务可以运行相当长的时间–特别是在资源有限的设备上。下面是一套策略，你可以用来分解和优先处理任务。</p>
-<h2 id="手动延迟代码执行"><a href="#手动延迟代码执行" class="headerlink" title="手动延迟代码执行"></a>手动延迟代码执行</h2><p>开发人员使用的一种将任务分解成小任务的方法涉及到 setTimeout(). 使用这种技术，你把函数传给 setTimeout 这将回调的执行推迟到一个单独的任务中，即时你指定的时间为 0。</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 完成用户可见的关键工作:</span></span><br><span class="line">  validateForm();</span><br><span class="line">  showSpinner();</span><br><span class="line">  updateUI();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将用户不可见的工作推迟到单独的任务:</span></span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    saveToDatabase();</span><br><span class="line">    sendAnalytics();</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果您有一系列需要按顺序运行的函数，这很有效，但您的代码可能并不总是以这种方式组织。例如，您可能有大量数据需要循环处理，如果您有数百万个项目，该任务可能需要很长时间。</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processData</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> largeDataArray) &#123;</span><br><span class="line">    <span class="comment">// Process the individual item here.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用 setTimeout 是存在问题的, 因为它的人机工程学（这是什么意思🤔，原文：ergonomics）使其难以实现，并且整个数据数组可能需要很长时间处理，即使每个项目都可以非常快速地处理。这一切加起来，setTimeout 不是合适的工具，至少在这样使用时不是。</p>
-<p>除了 setTimeout 之外，还有一些其他 API 允许您将代码执行推迟到后续任务。 一种方法是使用 postMessage 来加快超时。您也可以使用 requestIdleCallback() 来分解工作。 但是要注意 – requestIdleCallback() 以尽可能低的优先级安排任务，而且只在浏览器空闲时间内进行。当主线程拥挤时,用 requestIdleCallback() 安排的任务可能永远无法运行。</p>
-<h2 id="使用-async-await-yield-points"><a href="#使用-async-await-yield-points" class="headerlink" title="使用 async/await yield points"></a>使用 async/await yield points</h2><p>在本指南的其余部分，你会看到一个短语是 “yield to the main thread”，但是，这意味着什么？为什么你要这么做？你什么时候该这样做？</p>
-<blockquote>
-<p>当你 yield to the main thread，你会给它一个机会来处理比当前排队的任务更重要的任务。理想情况下（ideally），当你有一些关键的面向用户的工作，需要比 yield 更早地执行时，你应该 yield main thread，yield main thread 可以为关键工作创造机会，使其更快地运行。</p>
-</blockquote>
-<p>当任务被分解时，其他任务可以通过浏览器内部优先级方案更好地进行优先级排序。yield main thread 的方法涉及到使用一个 Promise 的组合，该组合与对 setTimeout() 进行的调用进行解析。</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">yieldToMain</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(resolve, <span class="number">0</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>虽然这个代码实例返回了一个在调用 setTimeout 后解析的 Promise, 但负责在新任务中运行奇遇代码的并不是这个 Promise，而是 setTimeout 调用。Promise 回调作为微任务而不是任务运行，因此不会 yield main thread</p>
-</blockquote>
-<p>在 saveSettings() 函数中，如果在每次函数调用后 await yieldToMain() 函数，则可以在每次工作后 yield to the main</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create an array of functions to run:</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop over the tasks:</span></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Shift the first task off the tasks array:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Yield to the main thread:</span></span><br><span class="line">    <span class="keyword">await</span> yieldToMain();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>你不必在每次函数调用后都 yield。例如，如果你运行的两个函数会导致用户界面的关键性更新，你可能不想在它们之间 yield。如果可以的话，让这些 tast 先运行，然后考虑在那些不那么关键的或用户看不到的后台工作的函数之间进行 yield。</p>
-</blockquote>
-<p>结果是曾经单一的任务现在被分解为单独的任务</p>
-<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/wg0FW6S29CzOCbbwk9kK.png?auto=format&w=1600" alt="img_5"></p>
-<p><em style="font-size:12px">saveSettings() 函数现在将其子函数作为单独的任务执行。</em></p>
-<p>使用基于 Promise 的方法来产生而不是手动使用 setTimeout() 的好处是更好的人体工程学。屈服点成为声明性的，因此更容易编写、阅读和理解。</p>
-<h2 id="仅在必要时-yield"><a href="#仅在必要时-yield" class="headerlink" title="仅在必要时 yield"></a>仅在必要时 yield</h2><p>如果您有一堆任务，但您只想在用户尝试与页面交互时让步怎么办？这就是 isInputPending() 的用途。</p>
-<p>isInputPending() 是一个您可以随时运行以确定用户是否正在尝试与页面元素交互的函数：对 isInputPending() 的调用将返回 true。否则返回 false。</p>
-<p>假设您可有一个需要运行的任务队列，但您不想妨碍任何输入。这段代码 — 它同时使用了 isInputPending() 函数 — 确保在用户尝试与页面交互时输入不会被延迟。</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// A task queue of functions</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Yield to a pending user input:</span></span><br><span class="line">    <span class="keyword">if</span> (navigator.scheduling.isInputPending()) &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s a pending user input. Yield here:</span></span><br><span class="line">      <span class="keyword">await</span> yieldToMain();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// Shift the the task out of the queue:</span></span><br><span class="line">      <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Run the task:</span></span><br><span class="line">      task();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当 saveSettings() 运行时，它将遍历队列中的任务。如果 isInputPending() 在循环期间返回 true，则 saveSettings() 将调用 yieldToMain() 以便处理用户输入。否则，它将把下一个任务移出队列的前面并继续运行它。它将执行此操作，直到没有其他任务为止。</p>
-<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/snMl3kRlWyJjdbL0qsqM.png?auto=format&w=1600" alt="img_5"></p>
-<p><em style="font-size:12px">saveSettings()运行一个有五个任务的任务队列，但在第二个工作项运行时，用户已经点击打开了一个菜单。 isInputPending()让位于主线程来处理这个交互，并恢复运行其余的任务。</em></p>
-<blockquote>
-<p>isInputPending()不一定在用户输入后立即返回true。这是因为操作系统需要时间来告诉浏览器发生了交互。这意味着其他代码可能已经开始执行了（正如你在上面的截图中看到的saveToDatabase()函数）。即使你使用isInputPending()，你仍然要限制每个函数的工作量，这是至关重要的。</p>
-</blockquote>
-<p>将 isInputPending() 与让步机制结合使用是让浏览器停止其正在处理的任何任务以响应关键的面向用户的交互的好方法。这可以帮助提高您的页面在许多任务正在进行时在许多情况下响应用户的能力。</p>
-<p>另一种使用isInputPending()的方法–特别是如果你担心为不支持它的浏览器提供退路–是使用基于时间的方法与 可选链操作符 （?.）</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// A task queue of functions</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> deadline = performance.now() + <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Optional chaining operator used here helps to avoid</span></span><br><span class="line">    <span class="comment">// errors in browsers that don&#x27;t support `isInputPending`:</span></span><br><span class="line">    <span class="keyword">if</span> (navigator.scheduling?.isInputPending() || performance.now() &gt;= deadline) &#123;</span><br><span class="line">      <span class="comment">// There&#x27;s a pending user input, or the</span></span><br><span class="line">      <span class="comment">// deadline has been reached. Yield here:</span></span><br><span class="line">      <span class="keyword">await</span> yieldToMain();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Extend the deadline:</span></span><br><span class="line">      deadline += <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Stop the execution of the current loop and</span></span><br><span class="line">      <span class="comment">// move onto the next iteration:</span></span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Shift the the task out of the queue:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过这种方法，你可以为不支持isInputPending()的浏览器提供一个后备方案，即使用（并调整）一个截止日期，以便在必要时将工作分开，无论是通过屈服于用户输入，还是在某个时间点之前。</p>
-<h2 id="当前-api-的差异"><a href="#当前-api-的差异" class="headerlink" title="当前 api 的差异"></a>当前 api 的差异</h2><p>到目前为止提到的API可以帮助你分解任务，但它们有一个显著的缺点：当你通过推迟代码在后续任务中运行而屈服于主线程时，该代码会被添加到任务队列的最末端。</p>
-<p>如果你控制了你页面上的所有代码，就有可能创建你自己的scheduler （参考 react 吗，😯），并能对任务进行优先排序，但第三方脚本不会使用你的调度器。实际上，在这样的环境中，你并不能真正地对工作进行优先排序。你只能把它分成几块，或者明确地屈从于用户的互动。</p>
-<p>幸运的是，目前有一个专门的调度器API正在开发中，可以解决这些问题。</p>
-<h2 id="一个专门的调度程序API"><a href="#一个专门的调度程序API" class="headerlink" title="一个专门的调度程序API"></a>一个专门的调度程序API</h2><p>调度器API目前提供了postTask()函数，在撰写本文时，该函数在Chromium浏览器和Firefox的一个标志后面可用。 postTask()允许对任务进行更精细的调度，是帮助浏览器确定工作优先级的一种方法，这样低优先级的任务就会让位于主线程。 postTask()使用 Promise，并接受一个优先级设置。</p>
-<p>postTask() API 具有三个可以使用的 priorities</p>
-<ul>
-<li>‘background’ : 最低优先级任务。</li>
-<li>‘user-visible’ : 中等优先级任务，“用户可见”，如果没有设置优先级，这是默认设置。</li>
-<li>‘user-blocking’: 用于需要高优先级运行的关键任务。</li>
-</ul>
-<p>以下面的代码为例，postTask()API被用来以尽可能高的优先级运行三个任务，并以尽可能低的优先级运行其余两个任务。</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Validate the form at high priority</span></span><br><span class="line">  scheduler.postTask(validateForm, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Show the spinner at high priority:</span></span><br><span class="line">  scheduler.postTask(showSpinner, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update the database in the background:</span></span><br><span class="line">  scheduler.postTask(saveToDatabase, &#123;<span class="attr">priority</span>: <span class="string">&#x27;background&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Update the user interface at high priority:</span></span><br><span class="line">  scheduler.postTask(updateUI, &#123;<span class="attr">priority</span>: <span class="string">&#x27;user-blocking&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Send analytics data in the background:</span></span><br><span class="line">  scheduler.postTask(sendAnalytics, &#123;<span class="attr">priority</span>: <span class="string">&#x27;background&#x27;</span>&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在这里，任务的优先级以浏览器优先级任务（例如用户交互）可以正常工作的方式安排。</p>
-<div style="color:red">子任务执行顺序差异</div>
-
-<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/ttvI1HqusI02CAdqhjWP.png?auto=format&w=1600" alt="img_6"></p>
-<p><em style="font-size:12px">当saveSettings()运行时，该函数使用postTask()对各个函数进行调度。面向用户的关键工作被安排在高优先级，而用户不知道的工作被安排在后台运行。这使得用户交互的执行速度更快，因为工作被分割开来并被适当地安排了优先次序。</em></p>
-<p>这是一个如何使用 postTask() 的简单示例。可以实例化不同的 TaskController 对象，这些对象可以在任务之间共享优先级，包括根据需要更改不同 TaskController 实例的优先级的能力。</p>
-<blockquote>
-<p>并非所有浏览器都支持 postTask()。您可以使用特征检测来查看它是否可用，或者考虑使用 polyfill</p>
-</blockquote>
-<h2 id="内置的-yield"><a href="#内置的-yield" class="headerlink" title="内置的 yield"></a>内置的 yield</h2><p>调度器API的一个拟议的部分，目前没有在任何浏览器中实现，就是一个内置的 yield 机制。它的使用类似于本文前面演示的 yieldToMain() 函数。</p>
-<figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">saveSettings</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Create an array of functions to run:</span></span><br><span class="line">  <span class="keyword">const</span> tasks = [</span><br><span class="line">    validateForm,</span><br><span class="line">    showSpinner,</span><br><span class="line">    saveToDatabase,</span><br><span class="line">    updateUI,</span><br><span class="line">    sendAnalytics</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Loop over the tasks:</span></span><br><span class="line">  <span class="keyword">while</span> (tasks.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Shift the first task off the tasks array:</span></span><br><span class="line">    <span class="keyword">const</span> task = tasks.shift();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Run the task:</span></span><br><span class="line">    task();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Yield to the main thread with the scheduler</span></span><br><span class="line">    <span class="comment">// API&#x27;s own yielding mechanism:</span></span><br><span class="line">    <span class="keyword">await</span> scheduler.yield();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>您会注意到，上面的代码非常熟悉，但是您没有使用 yieldToMain()，而是调用并等待 scheduler.yield()。</p>
-<p><img src="https://web-dev.imgix.net/image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/fyuvJqAV0mLxfZDM9tAm.png?auto=format&w=1294" alt="img_7"></p>
-<p><em style="font-size:12px">一个没有yield、yield、yield 和 continuation 的任务执行的可视化图。当使用scheduler.yield()时，任务的执行甚至在屈服点之后还能继续执行。</em></p>
-<p>scheduler.yield() 的好处是continuation，这意味着如果你在一组任务中间yield，其他的计划任务会在yield点之后以同样的顺序继续执行。这可以避免第三方脚本中的代码篡夺您的代码执行顺序。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>管理任务是具有挑战性的，但这样做有助于你的页面对用户的互动作出更快速的反应。在管理和确定任务的优先次序方面，没有单一的建议。相反，它是一些不同的技术。重申一下，这些是你在管理任务时要考虑的主要事项。</p>
-<ul>
-<li><p>让给主线程以完成关键的、面向用户的任务。</p>
-</li>
-<li><p>当用户尝试与页面交互时，使用 isInputPending() 让步给主线程。</p>
-</li>
-<li><p>使用 postTask() 对任务进行优先级排序。</p>
-</li>
-<li><p>最后，在你的函数中做尽可能少的工作。</p>
-</li>
-</ul>
-<p>有了这些工具中的一个或多个，你应该能够在你的应用程序中构造工作，使其优先考虑用户的需求，同时确保不太关键的工作仍然能够完成。这将创造一个更好的用户体验，它的响应速度更快，使用起来更愉快。</p>
-<p>Special thanks to Philip Walton for his technical vetting of this article.</p>
-<p>Hero image sourced from Unsplash, courtesy of Amirali Mirhashemian.</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>一封阿里云的喝茶邮件</title>
-    <url>/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/</url>
-    <content><![CDATA[<p>事情是这样的，就在今天早上，收到了一封来自阿里云的【喝茶（核查）通知】。一看邮件，很明显就是域名没有解析到内地节点的服务器上面呢。回想一下自己的解析，它说的对！。。。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081154.png" alt="why"></p>
-<span id="more"></span>
-
-<h2 id="原由"><a href="#原由" class="headerlink" title="原由"></a>原由</h2><p>在老早以前了，我用 hexo 部署 blog 在 GitHub Page 上面，然后解析了自己的域名在 gh-page 上，显然，GitHub Page 的服务器不在内地。我为了访问速度能快那么一丁点，就继续使用了 cloudflare 的 cdn 加速，因此也在上面设置了 DNS，但是我在 DNS 上也解析了一个二级域名到了阿里云的服务器上啊。按照网上的说法，设置一个二级域名解析到内地服务器就行了呢，然后点击复查连接后还是检查有问题。</p>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过原由的分析，我这次将问题放在了 cloudflare 上面，看了一下 DNS 设置。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081207.png" alt="dns setting"><br>看到上面的代理状态了吗，我就开始怀疑是这个的问题，ok,查查什么意思。看到了下面的一个问题。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081210.png" alt="Q&amp;A proxy"><br>按照上面的说法，显然 proxy 就是一个代理，访问域名时，如果设置了代理，那么就会走代理，而不是直接走解析地址。<br>那我们来 ping 一下看看。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081213.png" alt="ping res"><br>上面的两个域名其实是同一个 ip,但是 ping 出来响应的不一样，因此，确实是有代理的存在。<br>我自己的服务器 ip 是 47 开始的，上面的 ping 结果一个是 cloudflare 代理的服务器，一个是 gh-page 的服务器。<br>那么关闭代理就可以了吗？<br>是的，可以了。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081229.jpg" alt="pre|left|350*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081231.png" alt="|right|250*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081217.png" alt="result"></p>
-]]></content>
-      <categories>
-        <category>一些趣事的🌟</category>
-      </categories>
-  </entry>
-  <entry>
     <title>一次base64指令的powershell</title>
     <url>/2021/11/18/%E4%B8%80%E6%AC%A1base64%E6%8C%87%E4%BB%A4%E7%9A%84powershell/</url>
     <content><![CDATA[<p><strong>事情发生是在一个月黑风高的晚上。。。。不好意思搞错了 😬。</strong><br><strong>事情是这样的，今天在使用 webpack-dev-middleware 构建开发环境的时候，想要使用 node 启动浏览器并自动打开相关的本地网址。于是就发生了下面的一幕。</strong><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/u=1178727920,923148390&fm=26&fmt=auto.webp"></p>
@@ -1229,6 +1398,19 @@
 ]]></content>
       <categories>
         <category>web</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>一封阿里云的喝茶邮件</title>
+    <url>/2022/02/08/%E4%B8%80%E5%B0%81%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E5%96%9D%E8%8C%B6%E9%82%AE%E4%BB%B6/</url>
+    <content><![CDATA[<p>事情是这样的，就在今天早上，收到了一封来自阿里云的【喝茶（核查）通知】。一看邮件，很明显就是域名没有解析到内地节点的服务器上面呢。回想一下自己的解析，它说的对！。。。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081154.png" alt="why"></p>
+<span id="more"></span>
+
+<h2 id="原由"><a href="#原由" class="headerlink" title="原由"></a>原由</h2><p>在老早以前了，我用 hexo 部署 blog 在 GitHub Page 上面，然后解析了自己的域名在 gh-page 上，显然，GitHub Page 的服务器不在内地。我为了访问速度能快那么一丁点，就继续使用了 cloudflare 的 cdn 加速，因此也在上面设置了 DNS，但是我在 DNS 上也解析了一个二级域名到了阿里云的服务器上啊。按照网上的说法，设置一个二级域名解析到内地服务器就行了呢，然后点击复查连接后还是检查有问题。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>通过原由的分析，我这次将问题放在了 cloudflare 上面，看了一下 DNS 设置。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081207.png" alt="dns setting"><br>看到上面的代理状态了吗，我就开始怀疑是这个的问题，ok,查查什么意思。看到了下面的一个问题。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081210.png" alt="Q&amp;A proxy"><br>按照上面的说法，显然 proxy 就是一个代理，访问域名时，如果设置了代理，那么就会走代理，而不是直接走解析地址。<br>那我们来 ping 一下看看。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081213.png" alt="ping res"><br>上面的两个域名其实是同一个 ip,但是 ping 出来响应的不一样，因此，确实是有代理的存在。<br>我自己的服务器 ip 是 47 开始的，上面的 ping 结果一个是 cloudflare 代理的服务器，一个是 gh-page 的服务器。<br>那么关闭代理就可以了吗？<br>是的，可以了。<br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081229.jpg" alt="pre|left|350*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081231.png" alt="|right|250*0"><br><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202202081217.png" alt="result"></p>
+]]></content>
+      <categories>
+        <category>一些趣事的🌟</category>
       </categories>
   </entry>
 </search>
