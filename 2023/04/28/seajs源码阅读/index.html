@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jealh.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false,"width":280},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="介绍：js 模块加载器。这个开源项目应该是多年前的了，最新版本也是在 2014-03-06 的 2.2.0 版本了。所以，对于现在的浏览器，使用 script 标签的 type&#x3D;”module” es6-in-depth-modules,便可以使用模块化了。  这篇起因是刷到了玉伯大佬离职的消息，了解到 seajs 这个模块加载器是他写的，所以就阅读了一手，如有冒犯，恳请原谅。  依旧延续上次的方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="seajs源码阅读">
+<meta property="og:url" content="https://jealh.xyz/2023/04/28/seajs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Jealh&#39;s Blog">
+<meta property="og:description" content="介绍：js 模块加载器。这个开源项目应该是多年前的了，最新版本也是在 2014-03-06 的 2.2.0 版本了。所以，对于现在的浏览器，使用 script 标签的 type&#x3D;”module” es6-in-depth-modules,便可以使用模块化了。  这篇起因是刷到了玉伯大佬离职的消息，了解到 seajs 这个模块加载器是他写的，所以就阅读了一手，如有冒犯，恳请原谅。  依旧延续上次的方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202305040833.png">
+<meta property="article:published_time" content="2023-04-28T06:56:41.000Z">
+<meta property="article:modified_time" content="2023-05-19T09:07:29.789Z">
+<meta property="article:author" content="Jealh">
+<meta property="article:tag" content="源码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202305040833.png">
+
+<link rel="canonical" href="https://jealh.xyz/2023/04/28/seajs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>seajs源码阅读 | Jealh's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jealh's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+
+  <div class="theme-toggle"></div>
+  
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jealh's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">𝓣𝓱𝓲𝓼 𝓲𝓼 𝓪 𝓫𝓮𝓪𝓾𝓽𝓲𝓯𝓾𝓵 𝓼𝓾𝓫𝓽𝓲𝓽𝓵𝓮</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">19</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-address-card fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-links">
+
+    <a href="/friendsLinks/" rel="section"><i class="fa fa-address-book fa-fw"></i>links</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jealh.xyz/2023/04/28/seajs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Jealh">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jealh's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          seajs源码阅读
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-28 14:56:41" itemprop="dateCreated datePublished" datetime="2023-04-28T14:56:41+08:00">2023-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-19 17:07:29" itemprop="dateModified" datetime="2023-05-19T17:07:29+08:00">2023-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">源码阅读</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2023/04/28/seajs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2023/04/28/seajs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>13 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>介绍：js 模块加载器。这个开源项目应该是多年前的了，最新版本也是在 2014-03-06 的 2.2.0 版本了。所以，对于现在的浏览器，使用 script 标签的 type=”module” <a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2015/08/es6-in-depth-modules/">es6-in-depth-modules</a>,便可以使用模块化了。</p>
+<blockquote>
+<p>这篇起因是刷到了玉伯大佬离职的消息，了解到 seajs 这个模块加载器是他写的，所以就阅读了一手，如有冒犯，恳请原谅。</p>
+</blockquote>
+<p>依旧延续上次的方法，我们先从使用方式开始。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义模块</span></span><br><span class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params"><span class="built_in">require</span>, <span class="built_in">exports</span>, <span class="built_in">module</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> $ = <span class="built_in">require</span>(<span class="string">&quot;jquery&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> Spinning = <span class="built_in">require</span>(<span class="string">&quot;./spinning&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">exports</span>.moduleParam = <span class="string">&quot;param&quot;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面就是 Sea.js 推荐的 CMD 模块书写格式。如果你有使用过 Node.js，一切都很自然。</p>
+<h2 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h2><p>内部使用了封装的 seatools npm 包，使用的是 Grunt 打包，使用了其中的 contact file 功能。其会进行文件合并操作，所以会见到源码的 intro.js 与 outro.js 那种不完整的写法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">concat: &#123;</span><br><span class="line">      <span class="attr">dist</span>: &#123;</span><br><span class="line">        <span class="attr">src</span>: [</span><br><span class="line">          <span class="string">&#x27;src/intro.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/sea.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/util-lang.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/util-events.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/util-path.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/util-request.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/util-cs.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/util-deps.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/module.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/config.js&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;src/outro.js&#x27;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">dest</span>: <span class="string">&#x27;dist/sea-debug.js&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h2><p>seajs 使用了发布订阅模式，内置了如下事件：</p>
+<ul>
+<li>config</li>
+<li>load</li>
+<li>exec</li>
+<li>fetch</li>
+<li>request</li>
+<li>resolve</li>
+<li>define</li>
+<li>save</li>
+<li>error</li>
+</ul>
+<p>如需要处理这些事件，可以使用 <code>seajs.on</code> 添加对应事件回调。这些事件会在特定的时机触发，如 config，会在 seajs.config 函数里触发。<strong>这种非常适合插件系统</strong></p>
+<h2 id="seajs-全局对象"><a href="#seajs-全局对象" class="headerlink" title="seajs 全局对象"></a>seajs 全局对象</h2><p><img src="https://cdn.jsdelivr.net/gh/PancakeDogLLL/imageBed/img/202305040833.png" alt="img"></p>
+<h3 id="seajs-config"><a href="#seajs-config" class="headerlink" title="seajs.config"></a>seajs.config</h3><p>进行配置，配置的属性会保留在 seajs.data 上面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">seajs.config(&#123;</span><br><span class="line">  <span class="comment">// 设置路径，方便跨目录调用</span></span><br><span class="line">  <span class="attr">paths</span>: &#123;</span><br><span class="line">    <span class="attr">arale</span>: <span class="string">&quot;https://a.alipayobjects.com/arale&quot;</span>,</span><br><span class="line">    <span class="attr">jquery</span>: <span class="string">&quot;https://a.alipayobjects.com/jquery&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置别名，方便调用</span></span><br><span class="line">  <span class="attr">alias</span>: &#123;</span><br><span class="line">    <span class="attr">class</span>: <span class="string">&quot;arale/class/1.0.0/class&quot;</span>,</span><br><span class="line">    <span class="attr">jquery</span>: <span class="string">&quot;jquery/jquery/1.10.1/jquery&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="seajs-request"><a href="#seajs-request" class="headerlink" title="seajs.request"></a>seajs.request</h3><p>分为 webWorker 与 非 webWorker 环境,通过<code>importScripts</code>判断是否是 webWorker 环境</p>
+<ul>
+<li>非 webWorker</li>
+</ul>
+<p>非 worker 环境使用 script 标签导入。 并使用 async 属性并行请求脚本。同时添加 onload 事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doc = <span class="built_in">document</span>;</span><br><span class="line"><span class="keyword">var</span> head =</span><br><span class="line">  doc.head || doc.getElementsByTagName(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>] || doc.documentElement;</span><br><span class="line"><span class="keyword">var</span> baseElement = head.getElementsByTagName(<span class="string">&quot;base&quot;</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">url, callback, charset, crossorigin</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> node = doc.createElement(<span class="string">&quot;script&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (charset) &#123;</span><br><span class="line">    node.charset = charset;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!isUndefined(crossorigin)) &#123;</span><br><span class="line">    node.setAttribute(<span class="string">&quot;crossorigin&quot;</span>, crossorigin);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  addOnload(node, callback, url);</span><br><span class="line"></span><br><span class="line">  node.async = <span class="literal">true</span>;</span><br><span class="line">  node.src = url;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// For some cache cases in IE 6-8, the script executes IMMEDIATELY after</span></span><br><span class="line">  <span class="comment">// the end of the insert execution, so use `currentlyAddingScript` to</span></span><br><span class="line">  <span class="comment">// hold current node, for deriving url in `define` call</span></span><br><span class="line">  currentlyAddingScript = node;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ref: #185 &amp; http://dev.jquery.com/ticket/2709</span></span><br><span class="line">  baseElement ? head.insertBefore(node, baseElement) : head.appendChild(node);</span><br><span class="line"></span><br><span class="line">  currentlyAddingScript = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addOnload</span>(<span class="params">node, callback, url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> supportOnload = <span class="string">&quot;onload&quot;</span> <span class="keyword">in</span> node;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (supportOnload) &#123;</span><br><span class="line">    node.onload = onload;</span><br><span class="line">    node.onerror = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      emit(<span class="string">&quot;error&quot;</span>, &#123; <span class="attr">uri</span>: url, <span class="attr">node</span>: node &#125;);</span><br><span class="line">      onload(<span class="literal">true</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    node.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="regexp">/loaded|complete/</span>.test(node.readyState)) &#123;</span><br><span class="line">        onload();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">onload</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Ensure only run once and handle memory leak in IE</span></span><br><span class="line">    node.onload = node.onerror = node.onreadystatechange = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Remove the script to reduce memory leak</span></span><br><span class="line">    <span class="keyword">if</span> (!data.debug) &#123;</span><br><span class="line">      head.removeChild(node);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Dereference the node</span></span><br><span class="line">    node = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    callback(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>webWorker</li>
+</ul>
+<p>webWorker 环境下，使用 importScripts 导入 js 脚本</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">requestFromWebWorker</span>(<span class="params">url, callback, charset, crossorigin</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Load with importScripts</span></span><br><span class="line">  <span class="keyword">var</span> error;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    importScripts(url);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    error = e;</span><br><span class="line">  &#125;</span><br><span class="line">  callback(error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="seajs-data"><a href="#seajs-data" class="headerlink" title="seajs.data"></a>seajs.data</h3><p>一个对象，存放一些路径、charset 等信息。</p>
+<ul>
+<li>base: root path for id2url</li>
+<li>dir: loader’s full path</li>
+<li>cwd: current working directory</li>
+<li>charset: charset for requesting files</li>
+<li>crossorigin: The CORS options, Don’t set CORS on default.</li>
+<li>alias: An object containing shorthands of module id</li>
+<li>paths: An object containing path shorthands in module id</li>
+<li>vars: The {xxx} variables in module id</li>
+<li>map: An array containing rules to map module uri</li>
+<li>debug: Debug mode. The default value is false</li>
+</ul>
+<h3 id="seajs-resolve"><a href="#seajs-resolve" class="headerlink" title="seajs.resolve"></a>seajs.resolve</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">id2Uri</span>(<span class="params">id, refUri</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!id) <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">  id = parseAlias(id); <span class="comment">// 如果有 Alias, 就使用 alias 中的路径</span></span><br><span class="line">  id = parsePaths(id); <span class="comment">// 如果 data.paths 中有，则使用 paths 中的路径</span></span><br><span class="line">  id = parseAlias(id);</span><br><span class="line">  id = parseVars(id);</span><br><span class="line">  id = parseAlias(id);</span><br><span class="line">  id = normalize(id);</span><br><span class="line">  id = parseAlias(id);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> uri = addBase(id, refUri);</span><br><span class="line">  uri = parseAlias(uri);</span><br><span class="line">  uri = parseMap(uri);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="define"><a href="#define" class="headerlink" title="define"></a>define</h2><p>由开始的例子我们可以看到，全局定义了 define 方法，其作用是用来定义模块。那我们就从 define 开始。在谈 define 前，我们要先看看 Module 对象，因为 define 取的是 Module 的 define 方法 😂。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 赋值到window</span></span><br><span class="line"><span class="built_in">global</span>.define = Module.define;</span><br><span class="line"></span><br><span class="line"><span class="comment">// define 模块</span></span><br><span class="line">Module.define = <span class="function"><span class="keyword">function</span> (<span class="params">id, deps, factory</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> argsLen = <span class="built_in">arguments</span>.length;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// define(factory)</span></span><br><span class="line">  <span class="keyword">if</span> (argsLen === <span class="number">1</span>) &#123;</span><br><span class="line">    factory = id;</span><br><span class="line">    id = <span class="literal">undefined</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (argsLen === <span class="number">2</span>) &#123;</span><br><span class="line">    factory = deps;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// define(deps, factory)</span></span><br><span class="line">    <span class="keyword">if</span> (isArray(id)) &#123;</span><br><span class="line">      deps = id;</span><br><span class="line">      id = <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// define(id, factory)</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      deps = <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Parse dependencies according to the module factory code</span></span><br><span class="line">  <span class="keyword">if</span> (!isArray(deps) &amp;&amp; isFunction(factory)) &#123;</span><br><span class="line">    deps =</span><br><span class="line">      <span class="keyword">typeof</span> parseDependencies === <span class="string">&quot;undefined&quot;</span></span><br><span class="line">        ? []</span><br><span class="line">        : parseDependencies(factory.toString());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> meta = &#123;</span><br><span class="line">    <span class="attr">id</span>: id,</span><br><span class="line">    <span class="attr">uri</span>: Module.resolve(id),</span><br><span class="line">    <span class="attr">deps</span>: deps,</span><br><span class="line">    <span class="attr">factory</span>: factory,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Try to derive uri in IE6-9 for anonymous modules</span></span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    !isWebWorker &amp;&amp;</span><br><span class="line">    !meta.uri &amp;&amp;</span><br><span class="line">    doc.attachEvent &amp;&amp;</span><br><span class="line">    <span class="keyword">typeof</span> getCurrentScript !== <span class="string">&quot;undefined&quot;</span></span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">var</span> script = getCurrentScript();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (script) &#123;</span><br><span class="line">      meta.uri = script.src;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// <span class="doctag">NOTE:</span> If the id-deriving methods above is failed, then falls back</span></span><br><span class="line">    <span class="comment">// to use onload event to get the uri</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Emit `define` event, used in nocache plugin, seajs node version etc</span></span><br><span class="line">  emit(<span class="string">&quot;define&quot;</span>, meta);</span><br><span class="line"></span><br><span class="line">  meta.uri</span><br><span class="line">    ? Module.save(meta.uri, meta)</span><br><span class="line">    : <span class="comment">// Save information for &quot;saving&quot; work in the script onload event</span></span><br><span class="line">      (anonymousMeta = meta);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>define 支持多种参数，其判断依据是根据参数长度</p>
+<ul>
+<li>define(factory)</li>
+<li>define(deps, factory)</li>
+<li>define(id, factory)</li>
+</ul>
+<p>在 deps 不为数组时，会使用 parseDependencies 方法将 factory 里的 require 依赖的提取出来。</p>
+<p>在 Module.resolve 中，使用 <a href="#seajsresolve">seajs.resolve</a> 转换路径。同时创建 meta 对象，保存模块的 id, uri, deps, factory。然后执行 <a href="#modulesave">Module.save</a> 方法，将 mod 保存在 cachedMods 对象里边。 那 factory 会在什么时候执行呢，继续看。</p>
+<blockquote>
+<p>当我们定义好模块后，那接下来我们就应该去使用模块了。</p>
+</blockquote>
+<h2 id="seajs-use"><a href="#seajs-use" class="headerlink" title="seajs.use"></a>seajs.use</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">seajs.use = <span class="function"><span class="keyword">function</span> (<span class="params">ids, callback</span>) </span>&#123;</span><br><span class="line">  Module.use(ids, callback, data.cwd + <span class="string">&quot;_use_&quot;</span> + cid());</span><br><span class="line">  <span class="keyword">return</span> seajs;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>内部调用 <a href="#moduleuse">Module.use</a> 静态方法, 传入 ids, callback, uri。</p>
+<h2 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h2><p>一个模块对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Module</span>(<span class="params">uri, deps</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.uri = uri;</span><br><span class="line">  <span class="built_in">this</span>.dependencies = deps || [];</span><br><span class="line">  <span class="built_in">this</span>.deps = &#123;&#125;; <span class="comment">// Ref the dependence modules</span></span><br><span class="line">  <span class="built_in">this</span>.status = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">this</span>._entry = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其提供了如下静态方法：</p>
+<ul>
+<li>resolve</li>
+<li>define</li>
+<li>save</li>
+<li>get</li>
+<li>use</li>
+</ul>
+<p>那什么时候去创建 Module 实例呢，是在 seajs.use 时。</p>
+<h3 id="Module-use"><a href="#Module-use" class="headerlink" title="Module.use"></a>Module.use</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Module.use = <span class="function"><span class="keyword">function</span> (<span class="params">ids, callback, uri</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = Module.get(uri, isArray(ids) ? ids : [ids]);</span><br><span class="line"></span><br><span class="line">  mod._entry.push(mod);</span><br><span class="line">  mod.history = &#123;&#125;;</span><br><span class="line">  mod.remain = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  mod.callback = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">exports</span> = [];</span><br><span class="line">    <span class="keyword">var</span> uris = mod.resolve();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = uris.length; i &lt; len; i++) &#123;</span><br><span class="line">      <span class="built_in">exports</span>[i] = cachedMods[uris[i]].exec();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">      callback.apply(<span class="built_in">global</span>, <span class="built_in">exports</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> mod.callback;</span><br><span class="line">    <span class="keyword">delete</span> mod.history;</span><br><span class="line">    <span class="keyword">delete</span> mod.remain;</span><br><span class="line">    <span class="keyword">delete</span> mod._entry;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  mod.load();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <a href="#moduleget">Module.get</a> 从 cachedMods 获取 module。将自身添加到 _entry 里，最后执行 mod 的 load 方法， 也就是 <a href="#moduleprototypeload">Module.prototype.load</a></p>
+<h3 id="Module-save"><a href="#Module-save" class="headerlink" title="Module.save"></a>Module.save</h3><p>将 meta 对象数据保存在 cachedMods 里。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Module.save = <span class="function"><span class="keyword">function</span> (<span class="params">uri, meta</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = Module.get(uri);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Do NOT override already saved modules</span></span><br><span class="line">  <span class="keyword">if</span> (mod.status &lt; STATUS.SAVED) &#123;</span><br><span class="line">    mod.id = meta.id || uri;</span><br><span class="line">    mod.dependencies = meta.deps || [];</span><br><span class="line">    mod.factory = meta.factory;</span><br><span class="line">    mod.status = STATUS.SAVED;</span><br><span class="line"></span><br><span class="line">    emit(<span class="string">&quot;save&quot;</span>, mod);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Module-get"><a href="#Module-get" class="headerlink" title="Module.get"></a>Module.get</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Module.get = <span class="function"><span class="keyword">function</span> (<span class="params">uri, deps</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> cachedMods[uri] || (cachedMods[uri] = <span class="keyword">new</span> Module(uri, deps));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Module-resolve"><a href="#Module-resolve" class="headerlink" title="Module.resolve"></a>Module.resolve</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Resolve id to uri</span></span><br><span class="line">Module.resolve = <span class="function"><span class="keyword">function</span> (<span class="params">id, refUri</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Emit `resolve` event for plugins such as text plugin</span></span><br><span class="line">  <span class="keyword">var</span> emitData = &#123; <span class="attr">id</span>: id, <span class="attr">refUri</span>: refUri &#125;;</span><br><span class="line">  emit(<span class="string">&quot;resolve&quot;</span>, emitData);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> emitData.uri || seajs.resolve(emitData.id, refUri);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Module-prototype-load"><a href="#Module-prototype-load" class="headerlink" title="Module.prototype.load"></a>Module.prototype.load</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Load module.dependencies and fire onload when all done</span></span><br><span class="line">Module.prototype.load = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// If the module is being loaded, just wait it onload call</span></span><br><span class="line">  <span class="keyword">if</span> (mod.status &gt;= STATUS.LOADING) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  mod.status = STATUS.LOADING;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Emit `load` event for plugins such as combo plugin</span></span><br><span class="line">  <span class="keyword">var</span> uris = mod.resolve();</span><br><span class="line">  emit(<span class="string">&quot;load&quot;</span>, uris);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = uris.length; i &lt; len; i++) &#123;</span><br><span class="line">    mod.deps[mod.dependencies[i]] = Module.get(uris[i]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Pass entry to it&#x27;s dependencies</span></span><br><span class="line">  mod.pass();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// If module has entries not be passed, call onload</span></span><br><span class="line">  <span class="keyword">if</span> (mod._entry.length) &#123;</span><br><span class="line">    mod.onload();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Begin parallel loading</span></span><br><span class="line">  <span class="keyword">var</span> requestCache = &#123;&#125;;</span><br><span class="line">  <span class="keyword">var</span> m;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">    m = cachedMods[uris[i]];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (m.status &lt; STATUS.FETCHING) &#123;</span><br><span class="line">      m.fetch(requestCache);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (m.status === STATUS.SAVED) &#123;</span><br><span class="line">      m.load();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Send all requests at last to avoid cache bug in IE6-9. Issues#808</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> requestUri <span class="keyword">in</span> requestCache) &#123;</span><br><span class="line">    <span class="keyword">if</span> (requestCache.hasOwnProperty(requestUri)) &#123;</span><br><span class="line">      requestCache[requestUri]();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>先判断 mod 的 status 是否是加载中，如果是，就由 emit 事件处理。然后通过 <a href="#moduleprototyperesolve">Module.prototype.resolve</a> 获取依赖模块的 uri 列表。赋值给 mod.deps。mod.dependencies 在 factory 函数就会通过正则获取依赖。mod.deps 就形如 <code>&#123;&quot;jquery&quot;: Module &#125;</code>。接下来就调用 <a href="#moduleprototypepass">Module.prototype.pass</a> 进行 entry 到 dependence 的转换。如果 dependence 里面都 loaded 了，就触发 <a href="Module.prototype.onload">Module.prototype.onload</a>。最后判断 cachedMods 的状态，如果 小于 FETCHING 就开始并行加载，调用 <a href="#moduleprototypefetch">Module.prototype.fetch</a>,如果状态等于 SAVED 就调用 <a href="#moduleprototypeload">Module.prototype.load</a></p>
+<h3 id="Module-prototype-resolve"><a href="#Module-prototype-resolve" class="headerlink" title="Module.prototype.resolve"></a>Module.prototype.resolve</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Resolve module.dependencies</span></span><br><span class="line">Module.prototype.resolve = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">var</span> ids = mod.dependencies;</span><br><span class="line">  <span class="keyword">var</span> uris = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = ids.length; i &lt; len; i++) &#123;</span><br><span class="line">    uris[i] = Module.resolve(ids[i], mod.uri);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> uris;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>获取 dependencies 的 uri</p>
+<h3 id="Module-prototype-pass"><a href="#Module-prototype-pass" class="headerlink" title="Module.prototype.pass"></a>Module.prototype.pass</h3><p>将当前 mod 的 _entry 添加到 dependcies 的_entry 里边。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Module.prototype.pass = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> len = mod.dependencies.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; mod._entry.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> entry = mod._entry[i];</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; len; j++) &#123;</span><br><span class="line">      <span class="keyword">var</span> m = mod.deps[mod.dependencies[j]];</span><br><span class="line">      <span class="comment">// If the module is unload and unused in the entry, pass entry to it</span></span><br><span class="line">      <span class="keyword">if</span> (m.status &lt; STATUS.LOADED &amp;&amp; !entry.history.hasOwnProperty(m.uri)) &#123;</span><br><span class="line">        entry.history[m.uri] = <span class="literal">true</span>;</span><br><span class="line">        count++;</span><br><span class="line">        m._entry.push(entry);</span><br><span class="line">        <span class="keyword">if</span> (m.status === STATUS.LOADING) &#123;</span><br><span class="line">          m.pass();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// If has passed the entry to it&#x27;s dependencies, modify the entry&#x27;s count and del it in the module</span></span><br><span class="line">    <span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      entry.remain += count - <span class="number">1</span>;</span><br><span class="line">      mod._entry.shift();</span><br><span class="line">      i--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码先获取<code>mod.dependencies.length</code>。然后遍历 <code>mod._entry</code>, 二层循环遍历 <code>mod.dependencies</code>，如果 dependencies 里有未加载的且 entry.history 没有保留，那么就将 entry push 到当前 dependence 的 _entry 里，如果当前 dependence 的状态是 loading, 就 递归 pass。</p>
+<h3 id="Module-prototype-onload"><a href="#Module-prototype-onload" class="headerlink" title="Module.prototype.onload"></a>Module.prototype.onload</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Call this method when module is loaded</span></span><br><span class="line">Module.prototype.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = <span class="built_in">this</span>;</span><br><span class="line">  mod.status = STATUS.LOADED;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// When sometimes cached in IE, exec will occur before onload, make sure len is an number</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = (mod._entry || []).length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> entry = mod._entry[i];</span><br><span class="line">    <span class="keyword">if</span> (--entry.remain === <span class="number">0</span>) &#123;</span><br><span class="line">      entry.callback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> mod._entry;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>将 mod 的 status 变成 STATUS.LOADED。在 mod.remain 为 1 时，也就是只有 mod 自己时，执行 mod.callback</p>
+<h3 id="Module-prototype-exec"><a href="#Module-prototype-exec" class="headerlink" title="Module.prototype.exec"></a>Module.prototype.exec</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">Module.prototype.exec = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// When module is executed, DO NOT execute it again. When module</span></span><br><span class="line">  <span class="comment">// is being executed, just return `module.exports` too, for avoiding</span></span><br><span class="line">  <span class="comment">// circularly calling</span></span><br><span class="line">  <span class="keyword">if</span> (mod.status &gt;= STATUS.EXECUTING) &#123;</span><br><span class="line">    <span class="keyword">return</span> mod.exports;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  mod.status = STATUS.EXECUTING;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (mod._entry &amp;&amp; !mod._entry.length) &#123;</span><br><span class="line">    <span class="keyword">delete</span> mod._entry;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//non-cmd module has no property factory and exports</span></span><br><span class="line">  <span class="keyword">if</span> (!mod.hasOwnProperty(<span class="string">&quot;factory&quot;</span>)) &#123;</span><br><span class="line">    mod.non = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Create require</span></span><br><span class="line">  <span class="keyword">var</span> uri = mod.uri;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">require</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> m = mod.deps[id] || Module.get(<span class="built_in">require</span>.resolve(id));</span><br><span class="line">    <span class="keyword">if</span> (m.status == STATUS.ERROR) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&quot;module was broken: &quot;</span> + m.uri);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> m.exec();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">require</span>.resolve = <span class="function"><span class="keyword">function</span> (<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Module.resolve(id, uri);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">require</span>.async = <span class="function"><span class="keyword">function</span> (<span class="params">ids, callback</span>) </span>&#123;</span><br><span class="line">    Module.use(ids, callback, uri + <span class="string">&quot;_async_&quot;</span> + cid());</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Exec factory</span></span><br><span class="line">  <span class="keyword">var</span> factory = mod.factory;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> <span class="built_in">exports</span> = isFunction(factory)</span><br><span class="line">    ? factory.call((mod.exports = &#123;&#125;), <span class="built_in">require</span>, mod.exports, mod)</span><br><span class="line">    : factory;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">exports</span> === <span class="literal">undefined</span>) &#123;</span><br><span class="line">    <span class="built_in">exports</span> = mod.exports;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Reduce memory leak</span></span><br><span class="line">  <span class="keyword">delete</span> mod.factory;</span><br><span class="line"></span><br><span class="line">  mod.exports = <span class="built_in">exports</span>;</span><br><span class="line">  mod.status = STATUS.EXECUTED;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Emit `exec` event</span></span><br><span class="line">  emit(<span class="string">&quot;exec&quot;</span>, mod);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> mod.exports;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>执行 factory 函数，返回一个对象，包含 factory 中 exports 的变量。<br>在 exec 中，会判断 mod 的状态如果是 EXECUTING 或者 EXECUTED，就直接返回 mod.exports， 避免了重复执行。再次判断 mod._entry, 如果为空就 delete 掉。这里会将 mod.exports 与 factory 中改变的 exports 进行一个同步。</p>
+<h3 id="Module-prototype-fetch"><a href="#Module-prototype-fetch" class="headerlink" title="Module.prototype.fetch"></a>Module.prototype.fetch</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fetch a module</span></span><br><span class="line">Module.prototype.fetch = <span class="function"><span class="keyword">function</span> (<span class="params">requestCache</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mod = <span class="built_in">this</span>;</span><br><span class="line">  <span class="keyword">var</span> uri = mod.uri;</span><br><span class="line"></span><br><span class="line">  mod.status = STATUS.FETCHING;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Emit `fetch` event for plugins such as combo plugin</span></span><br><span class="line">  <span class="keyword">var</span> emitData = &#123; <span class="attr">uri</span>: uri &#125;;</span><br><span class="line">  emit(<span class="string">&quot;fetch&quot;</span>, emitData);</span><br><span class="line">  <span class="keyword">var</span> requestUri = emitData.requestUri || uri;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Empty uri or a non-CMD module</span></span><br><span class="line">  <span class="keyword">if</span> (!requestUri || fetchedList.hasOwnProperty(requestUri)) &#123;</span><br><span class="line">    mod.load();</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (fetchingList.hasOwnProperty(requestUri)) &#123;</span><br><span class="line">    callbackList[requestUri].push(mod);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fetchingList[requestUri] = <span class="literal">true</span>;</span><br><span class="line">  callbackList[requestUri] = [mod];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Emit `request` event for plugins such as text plugin</span></span><br><span class="line">  emit(</span><br><span class="line">    <span class="string">&quot;request&quot;</span>,</span><br><span class="line">    (emitData = &#123;</span><br><span class="line">      <span class="attr">uri</span>: uri,</span><br><span class="line">      <span class="attr">requestUri</span>: requestUri,</span><br><span class="line">      <span class="attr">onRequest</span>: onRequest,</span><br><span class="line">      <span class="attr">charset</span>: isFunction(data.charset)</span><br><span class="line">        ? data.charset(requestUri)</span><br><span class="line">        : data.charset,</span><br><span class="line">      <span class="attr">crossorigin</span>: isFunction(data.crossorigin)</span><br><span class="line">        ? data.crossorigin(requestUri)</span><br><span class="line">        : data.crossorigin,</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!emitData.requested) &#123;</span><br><span class="line">    requestCache</span><br><span class="line">      ? (requestCache[emitData.requestUri] = sendRequest)</span><br><span class="line">      : sendRequest();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sendRequest</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    seajs.request(</span><br><span class="line">      emitData.requestUri,</span><br><span class="line">      emitData.onRequest,</span><br><span class="line">      emitData.charset,</span><br><span class="line">      emitData.crossorigin</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">onRequest</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> fetchingList[requestUri];</span><br><span class="line">    fetchedList[requestUri] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Save meta data of anonymous module</span></span><br><span class="line">    <span class="keyword">if</span> (anonymousMeta) &#123;</span><br><span class="line">      Module.save(uri, anonymousMeta);</span><br><span class="line">      anonymousMeta = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Call callbacks</span></span><br><span class="line">    <span class="keyword">var</span> m,</span><br><span class="line">      mods = callbackList[requestUri];</span><br><span class="line">    <span class="keyword">delete</span> callbackList[requestUri];</span><br><span class="line">    <span class="keyword">while</span> ((m = mods.shift())) &#123;</span><br><span class="line">      <span class="comment">// When 404 occurs, the params error will be true</span></span><br><span class="line">      <span class="keyword">if</span> (error === <span class="literal">true</span>) &#123;</span><br><span class="line">        m.error();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        m.load();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>根据 mod.uri 进行 fetch 操作，如果 uri 为空或者， fetchedList 已经 fetch 了，就执行 mod.load。这里的 request 就直接执行 <a href="#seajsrequest">seajs.request</a>。进行脚本请求。最后执行 <a href="#moduleprototypeload">Module.prototype.load</a></p>
+<h2 id="mod-callback"><a href="#mod-callback" class="headerlink" title="mod.callback"></a>mod.callback</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mod.callback = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="built_in">exports</span> = [];</span><br><span class="line">  <span class="keyword">var</span> uris = mod.resolve();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = uris.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="built_in">exports</span>[i] = cachedMods[uris[i]].exec();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">    callback.apply(<span class="built_in">global</span>, <span class="built_in">exports</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> mod.callback;</span><br><span class="line">  <span class="keyword">delete</span> mod.history;</span><br><span class="line">  <span class="keyword">delete</span> mod.remain;</span><br><span class="line">  <span class="keyword">delete</span> mod._entry;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>调用每个依赖模块的 <a href="#moduleprototypeexec">exec</a> 方法。如果 seajs.use 传入了 callback, 那么会传入 exports 的对象为 callback 的参数。删除 callback, history, remain, _entry 属性，减少内存。</p>
+
+    </div>
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/Jealh-h">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">github</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BA%90%E7%A0%81/" rel="tag"># 源码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/10/koa%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" rel="prev" title="koa源码阅读">
+      <i class="fa fa-chevron-left"></i> koa源码阅读
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">文件目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85"><span class="nav-number">2.</span> <span class="nav-text">发布订阅</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seajs-%E5%85%A8%E5%B1%80%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">seajs 全局对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#seajs-config"><span class="nav-number">3.1.</span> <span class="nav-text">seajs.config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seajs-request"><span class="nav-number">3.2.</span> <span class="nav-text">seajs.request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seajs-data"><span class="nav-number">3.3.</span> <span class="nav-text">seajs.data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seajs-resolve"><span class="nav-number">3.4.</span> <span class="nav-text">seajs.resolve</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#define"><span class="nav-number">4.</span> <span class="nav-text">define</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#seajs-use"><span class="nav-number">5.</span> <span class="nav-text">seajs.use</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Module"><span class="nav-number">6.</span> <span class="nav-text">Module</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-use"><span class="nav-number">6.1.</span> <span class="nav-text">Module.use</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-save"><span class="nav-number">6.2.</span> <span class="nav-text">Module.save</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-get"><span class="nav-number">6.3.</span> <span class="nav-text">Module.get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-resolve"><span class="nav-number">6.4.</span> <span class="nav-text">Module.resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-prototype-load"><span class="nav-number">6.5.</span> <span class="nav-text">Module.prototype.load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-prototype-resolve"><span class="nav-number">6.6.</span> <span class="nav-text">Module.prototype.resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-prototype-pass"><span class="nav-number">6.7.</span> <span class="nav-text">Module.prototype.pass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-prototype-onload"><span class="nav-number">6.8.</span> <span class="nav-text">Module.prototype.onload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-prototype-exec"><span class="nav-number">6.9.</span> <span class="nav-text">Module.prototype.exec</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Module-prototype-fetch"><span class="nav-number">6.10.</span> <span class="nav-text">Module.prototype.fetch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mod-callback"><span class="nav-number">7.</span> <span class="nav-text">mod.callback</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jealh"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Jealh</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Jealh-h" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Jealh-h" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1620175472@qq.com" title="E-Mail → mailto:1620175472@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hu.supreme" title="Instagram → https:&#x2F;&#x2F;instagram.com&#x2F;hu.supreme" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/438345456" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;438345456" rel="noopener" target="_blank"><i class="fa-brands fa-bilibili fa-fw"></i>BiliBili</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">蜀ICP备2021006217号-1 </a>
+      <img src="/images/beian.png" style="display: inline-block;">
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jealh</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">92k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:23</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="200" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-ribbon@1/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.8/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '06Q5US9u81vpeARmCf4LIxPm-gzGzoHsz',
+      appKey     : 'MU9IGOYetUaGvt99dzlmgQTm',
+      placeholder: "说一句吧",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+   <script type="text/javascript" src="/js/fireworks.js"></script>
+  
+<!-- hexo injector body_end start -->
+<script src="/js/theme.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
